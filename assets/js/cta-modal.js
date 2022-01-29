@@ -15,6 +15,7 @@
 	// Constants.
 	// ==========
 
+	const ACTIVE = 'active';
 	const CLICK = 'click';
 	const FOCUSIN = 'focusin';
 	const KEYDOWN = 'keydown';
@@ -182,7 +183,7 @@
 			super();
 
 			// Get flag.
-			const isActive = this.getAttribute('active') === 'true';
+			const isActive = this.getAttribute(ACTIVE) === 'true';
 
 			// Set flag.
 			this.isActive = isActive;
@@ -208,6 +209,25 @@
 
 			// Set display.
 			this.toggleModalDisplay();
+		}
+
+		// Observable attributes.
+		static get observedAttributes() {
+			return [ACTIVE];
+		}
+
+		// Attributes changed.
+		attributeChangedCallback(name, oldValue, newValue) {
+			// Get flag.
+			const isActive = newValue === 'true';
+
+			if (name === ACTIVE && oldValue !== newValue) {
+				// Set flag.
+				this.isActive = isActive;
+
+				// Set display.
+				this.toggleModalDisplay();
+			}
 		}
 
 		// Mount.
@@ -245,6 +265,9 @@
 
 		// Helper: toggle modal.
 		toggleModalDisplay() {
+			// Set attribute.
+			this.setAttribute('active', this.isActive);
+
 			// Show or hide?
 			this.modalOverlay.style.display = this.isActive ? 'block' : 'none';
 
@@ -262,7 +285,7 @@
 			}
 
 			// Get DOM elements.
-			let childList = document.querySelectorAll('cta-modal[active="true"] *');
+			let childList = this.querySelectorAll('*');
 			childList = Array.from(childList);
 
 			// Get shadow elements.
@@ -297,7 +320,6 @@
 		handleClickToggle() {
 			// Set flag.
 			this.isActive = !this.isActive;
-			this.setAttribute('active', this.isActive);
 
 			// Set display.
 			this.toggleModalDisplay();
