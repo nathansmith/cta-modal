@@ -221,6 +221,7 @@
 			// Get flag.
 			const isActive = newValue === String(true);
 
+			// Changed active="…" value?
 			if (name === ACTIVE && oldValue !== newValue) {
 				// Set flag.
 				this.isActive = isActive;
