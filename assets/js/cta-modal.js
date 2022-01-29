@@ -284,20 +284,12 @@
 				return false;
 			}
 
-			// Get DOM elements.
-			let childList = this.querySelectorAll('*');
-			childList = Array.from(childList);
-
-			// Get shadow elements.
-			let shadowList = this.shadowRoot.querySelectorAll('*');
-			shadowList = Array.from(shadowList);
-
-			// Total list.
-			const totalList = childList.concat(shadowList);
+			// Has element?
+			const hasElement = this.contains(element) || this.shadowRoot.contains(element);
 
 			// Get boolean.
 			const bool =
-				!totalList.includes(element) ||
+				!hasElement ||
 				element.classList.contains('cta-modal__focus-trap') ||
 				element.classList.contains('cta-modal__toggle');
 
