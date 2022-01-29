@@ -183,7 +183,7 @@
 			super();
 
 			// Get flag.
-			const isActive = this.getAttribute(ACTIVE) === 'true';
+			const isActive = this.getAttribute(ACTIVE) === String(true);
 
 			// Set flag.
 			this.isActive = isActive;
@@ -219,7 +219,7 @@
 		// Attributes changed.
 		attributeChangedCallback(name, oldValue, newValue) {
 			// Get flag.
-			const isActive = newValue === 'true';
+			const isActive = newValue === String(true);
 
 			if (name === ACTIVE && oldValue !== newValue) {
 				// Set flag.
