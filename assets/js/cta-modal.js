@@ -172,7 +172,7 @@
 			this.buttonToggle.textContent = this.getAttribute('text') || 'Toggle modal';
 
 			// Set display.
-			this.setDisplay();
+			this.toggleModalDisplay();
 		}
 
 		// Mount.
@@ -208,8 +208,8 @@
 			this.modalOverlay.removeEventListener(CLICK, this.handleClickOverlay);
 		}
 
-		// Set display.
-		setDisplay() {
+		// Toggle modal.
+		toggleModalDisplay() {
 			// Show or hide?
 			this.modalOverlay.style.display = this.isActive ? 'block' : 'none';
 
@@ -238,7 +238,7 @@
 			this.isActive = !this.isActive;
 
 			// Set display.
-			this.setDisplay();
+			this.toggleModalDisplay();
 		}
 
 		// Event: focus in document.
