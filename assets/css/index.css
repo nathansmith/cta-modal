@@ -1,0 +1,73 @@
+/*
+    NOTE:
+
+    - These styles are for the demo page.
+
+    - They are not needed for the modal.
+*/
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	color: #333;
+	background-color: #fff;
+	font-family: sans-serif;
+	line-height: 1.5;
+}
+
+body {
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin-bottom: 20px;
+}
+
+a {
+	color: blue;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+button {
+	appearance: none;
+	color: #333;
+	background-color: #eee;
+	border: 0;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: bold;
+	line-height: 1;
+	padding: 0.5em;
+}
+
+input {
+	color: #333;
+	background-color: #fff;
+
+	border-color: #999;
+	border-style: solid;
+	border-width: 1px;
+
+	font-family: inherit;
+	font-size: inherit;
+	line-height: 1;
+	padding: 0.5em;
+
+	width: 100%;
+}
