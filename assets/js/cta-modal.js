@@ -86,10 +86,6 @@
 				position: relative;
 			}
 
-			.cta-modal > *:last-child {
-				margin-bottom: 0;
-			}
-
 			.cta-modal__close {
 				appearance: none;
 				border: 0;
@@ -157,7 +153,7 @@
 			<button class="cta-modal__toggle" type="button"></button>
 		</p>
 
-		<div class="cta-modal__scroll">
+		<div class="cta-modal__scroll" style="display:none">
 			${focusTrap}
 
 			<div class="cta-modal__overlay">
@@ -220,7 +216,8 @@
 			this.buttonToggle = this.shadowRoot.querySelector('.cta-modal__toggle');
 
 			this.modal = this.shadowRoot.querySelector('.cta-modal');
-			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__scroll');
+			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll');
+			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
 
 			// Set button text.
 			this.buttonToggle.textContent = this.getAttribute('text') || 'Toggle modal';
@@ -349,7 +346,7 @@
 			this.setAttribute('active', this.isActive);
 
 			// Show or hide?
-			this.modalOverlay.style.display = this.isActive ? 'block' : 'none';
+			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
 		}
 
 		// =====================
@@ -411,12 +408,12 @@
 
 			// Modal active?
 			if (this.isActive) {
-				// Close modal?
+				// Escape key?
 				if (key === ESCAPE) {
 					this.handleClickToggle();
 				}
 
-				// Focus trap?
+				// Tab key?
 				if (key === TAB) {
 					this.handleFocusIn();
 				}
