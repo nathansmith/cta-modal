@@ -13,29 +13,31 @@
 		<cta-modal text="Button text here" active="false">
 			<div slot="button">
 				<p>
-					<button data-cta-modal="toggle" type="button"> Toggle modal </button>
+					<a data-cta-modal="toggle" role="button" tabindex="0">Toggle modal</a>
 				</p>
 
 				<p>
-					<a data-cta-modal="toggle" role="button" tabindex="0"> Toggle modal </a>
+					<button data-cta-modal="toggle" type="button">Toggle modal</button>
 				</p>
 			</div>
 
 			<div slot="modal">
-				<h2> Hello world? </h2>
+				<h2>Hello world</h2>
 
 				<p>
-					<input type="text" />
+					<label for="input-name">Name</label>
+					<input type="text" id="input-name" />
 				</p>
 
 				<p>
-					<input type="text" />
+					<label for="input-email">Email</label>
+					<input type="text" id="input-email" />
 				</p>
 
 				<p>
-					<button type="button"> Submit </button>
-
-					<button type="button" data-cta-modal="toggle"> Cancel </button>
+					<button type="button">Submit</button>
+					&nbsp;
+					<a data-cta-modal="toggle" role="button" tabindex="0">Cancel</a>
 				</p>
 			</div>
 		</cta-modal>

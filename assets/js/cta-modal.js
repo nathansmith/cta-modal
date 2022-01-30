@@ -214,9 +214,13 @@
 			// Get elements.
 			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close');
 			this.buttonToggleList = this.querySelectorAll('[data-cta-modal="toggle"]');
+			this.heading = this.querySelector('h1, h2, h3, h4, h5, h6');
 			this.modal = this.shadowRoot.querySelector('.cta-modal');
 			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll');
 			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
+
+			// Add heading ID.
+			this.addHeadingId();
 
 			// Set display.
 			this.toggleModalDisplay();
@@ -323,6 +327,22 @@
 			});
 		}
 
+		// =======================
+		// Helper: add heading ID.
+		// =======================
+
+		addHeadingId() {
+			// Add a11y heading.
+			if (this.heading) {
+				// Get ID.
+				const id = this.heading.id || 'CTA_MODAL_HEADING_ID';
+
+				// Set ID.
+				this.heading.setAttribute('id', id);
+				this.modal.setAttribute('aria-labelledby', id);
+			}
+		}
+
 		// =============================
 		// Helper: detect outside modal.
 		// =============================
@@ -353,6 +373,11 @@
 
 			// Show or hide?
 			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
+
+			// Cache active element?
+			if (this.isActive && document.activeElement) {
+				this.activeElement = document.activeElement;
+			}
 		}
 
 		// =====================
@@ -397,16 +422,13 @@
 			// Set display.
 			this.toggleModalDisplay();
 
-			// Get button.
-			const button = this.buttonToggleList[0];
-
 			// Focus modal?
 			if (this.isActive) {
 				this.modal.focus();
 
 				// Focus button?
-			} else if (button) {
-				button.focus();
+			} else if (this.activeElement) {
+				this.activeElement.focus();
 			}
 		}
 
