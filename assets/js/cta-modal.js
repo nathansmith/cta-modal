@@ -17,9 +17,11 @@
 
 	const ACTIVE = 'active';
 	const CLICK = 'click';
+	const ENTER = 'enter';
 	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
 	const KEYDOWN = 'keydown';
+	const SPACE = ' ';
 	const TAB = 'tab';
 
 	// ======
@@ -149,9 +151,7 @@
 	`;
 
 	const modal = `
-		<p>
-			<button class="cta-modal__toggle" type="button"></button>
-		</p>
+		<slot name="button"></slot>
 
 		<div class="cta-modal__scroll" style="display:none">
 			${focusTrap}
@@ -169,7 +169,7 @@
 						type="button"
 					>&times;</button>
 
-					<slot />
+					<slot name="modal"></slot>
 				</div>
 			</div>
 
@@ -213,14 +213,10 @@
 
 			// Get elements.
 			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close');
-			this.buttonToggle = this.shadowRoot.querySelector('.cta-modal__toggle');
-
+			this.buttonToggleList = this.querySelectorAll('[data-cta-modal="toggle"]');
 			this.modal = this.shadowRoot.querySelector('.cta-modal');
 			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll');
 			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
-
-			// Set button text.
-			this.buttonToggle.textContent = this.getAttribute('text') || 'Toggle modal';
 
 			// Set display.
 			this.toggleModalDisplay();
@@ -300,8 +296,13 @@
 			document.addEventListener(KEYDOWN, this.handleKeyDown);
 
 			this.buttonClose.addEventListener(CLICK, this.handleClickToggle);
-			this.buttonToggle.addEventListener(CLICK, this.handleClickToggle);
 			this.modalOverlay.addEventListener(CLICK, this.handleClickOverlay);
+
+			// Loop through.
+			this.buttonToggleList.forEach((button) => {
+				button.addEventListener(CLICK, this.handleClickToggle);
+				button.addEventListener(KEYDOWN, this.handleClickToggle);
+			});
 		}
 
 		// =========================
@@ -313,8 +314,13 @@
 			document.removeEventListener(KEYDOWN, this.handleKeyDown);
 
 			this.buttonClose.removeEventListener(CLICK, this.handleClickToggle);
-			this.buttonToggle.removeEventListener(CLICK, this.handleClickToggle);
 			this.modalOverlay.removeEventListener(CLICK, this.handleClickOverlay);
+
+			// Loop through.
+			this.buttonToggleList.forEach((button) => {
+				button.removeEventListener(CLICK, this.handleClickToggle);
+				button.removeEventListener(KEYDOWN, this.handleClickToggle);
+			});
 		}
 
 		// =============================
@@ -367,20 +373,40 @@
 		// Event: toggle modal.
 		// ====================
 
-		handleClickToggle() {
+		handleClickToggle(event = {}) {
+			// Get key.
+			let { key = '' } = event;
+			key = key.toLowerCase();
+
+			// Key event?
+			if (key) {
+				// Active key?
+				if ([ENTER, SPACE].includes(key)) {
+					// Prevent scroll.
+					event.preventDefault();
+
+					// Early exit.
+				} else {
+					return;
+				}
+			}
+
 			// Set flag.
 			this.isActive = !this.isActive;
 
 			// Set display.
 			this.toggleModalDisplay();
 
+			// Get button.
+			const button = this.buttonToggleList[0];
+
 			// Focus modal?
 			if (this.isActive) {
 				this.modal.focus();
 
-				// Focus button.
-			} else {
-				this.buttonToggle.focus();
+				// Focus button?
+			} else if (button) {
+				button.focus();
 			}
 		}
 
