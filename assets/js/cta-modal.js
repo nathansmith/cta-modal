@@ -17,8 +17,10 @@
 
 	const ACTIVE = 'active';
 	const CLICK = 'click';
+	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
 	const KEYDOWN = 'keydown';
+	const TAB = 'tab';
 
 	// ======
 	// Style.
@@ -46,14 +48,12 @@
 				left: 0;
 			}
 
-			.cta-modal__overlay {
-				background-color: rgba(0, 0, 0, 0.5);
+			.cta-modal__scroll {
+				overflow-x: hidden;
+				overflow-y: auto;
 
 				width: 100%;
 				height: 100%;
-
-				overflow-x: hidden;
-				overflow-y: auto;
 
 				position: fixed;
 				top: 0;
@@ -61,7 +61,9 @@
 				z-index: 2;
 			}
 
-			.cta-modal__scroll {
+			.cta-modal__overlay {
+				background-color: rgba(0, 0, 0, 0.5);
+
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -120,10 +122,20 @@
 				box-shadow: 0 0 0 1px #000;
 			}
 
-			.cta-modal__close:focus-visible {
-				color: #000;
-				background-color: #fff;
-				box-shadow: 0 0 0 1px #000;
+			@supports selector(:focus-visible) {
+				.cta-modal__close:focus-visible {
+					color: #000;
+					background-color: #fff;
+					box-shadow: 0 0 0 1px #000;
+				}
+			}
+
+			@supports not selector(:focus-visible) {
+				.cta-modal__close:focus {
+					color: #000;
+					background-color: #fff;
+					box-shadow: 0 0 0 1px #000;
+				}
 			}
 		</style>
 	`;
@@ -145,10 +157,10 @@
 			<button class="cta-modal__toggle" type="button"></button>
 		</p>
 
-		${focusTrap}
+		<div class="cta-modal__scroll">
+			${focusTrap}
 
-		<div class="cta-modal__overlay">
-			<div class="cta-modal__scroll">
+			<div class="cta-modal__overlay">
 				<div
 					aria-modal="true"
 					class="cta-modal"
@@ -164,9 +176,9 @@
 					<slot />
 				</div>
 			</div>
-		</div>
 
-		${focusTrap}
+			${focusTrap}
+		</div>
 	`;
 
 	const markup = [style, modal].join('').trim().replace(/\s+/g, ' ');
@@ -178,9 +190,15 @@
 	// ==========
 
 	class CtaModal extends HTMLElement {
+		// ============
 		// Constructor.
+		// ============
+
 		constructor() {
 			super();
+
+			// Bind context.
+			this.bind();
 
 			// Get flag.
 			const isActive = this.getAttribute(ACTIVE) === String(true);
@@ -202,7 +220,7 @@
 			this.buttonToggle = this.shadowRoot.querySelector('.cta-modal__toggle');
 
 			this.modal = this.shadowRoot.querySelector('.cta-modal');
-			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
+			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__scroll');
 
 			// Set button text.
 			this.buttonToggle.textContent = this.getAttribute('text') || 'Toggle modal';
@@ -211,12 +229,18 @@
 			this.toggleModalDisplay();
 		}
 
-		// Observable attributes.
+		// ============================
+		// Lifecycle: watch attributes.
+		// ============================
+
 		static get observedAttributes() {
 			return [ACTIVE];
 		}
 
-		// Attributes changed.
+		// ==============================
+		// Lifecycle: attributes changed.
+		// ==============================
+
 		attributeChangedCallback(name, oldValue, newValue) {
 			// Get flag.
 			const isActive = newValue === String(true);
@@ -231,30 +255,62 @@
 			}
 		}
 
-		// Mount.
+		// ===============================
+		// Lifecycle: bind `this` context.
+		// ===============================
+
+		bind() {
+			// Get property names.
+			const propertyNames = Object.getOwnPropertyNames(
+				// Get prototype.
+				Object.getPrototypeOf(this)
+			);
+
+			// Loop through.
+			propertyNames.forEach((name) => {
+				// Bind functions.
+				if (typeof this[name] === 'function') {
+					this[name] = this[name].bind(this);
+				}
+			});
+		}
+
+		// ===========================
+		// Lifecycle: component mount.
+		// ===========================
+
 		connectedCallback() {
-			// Add events.
 			this.addEvents();
 		}
 
-		// Unmount.
+		// =============================
+		// Lifecycle: component unmount.
+		// =============================
+
 		disconnectedCallback() {
 			this.removeEvents();
 		}
 
-		// Add events.
+		// ======================
+		// Lifecycle: add events.
+		// ======================
+
 		addEvents() {
+			// Prevent doubles.
 			this.removeEvents();
 
-			document.addEventListener(FOCUSIN, this.handleFocusIn.bind(this));
-			document.addEventListener(KEYDOWN, this.handleKeyDown.bind(this));
+			document.addEventListener(FOCUSIN, this.handleFocusIn);
+			document.addEventListener(KEYDOWN, this.handleKeyDown);
 
-			this.buttonClose.addEventListener(CLICK, this.handleClickToggle.bind(this));
-			this.buttonToggle.addEventListener(CLICK, this.handleClickToggle.bind(this));
-			this.modalOverlay.addEventListener(CLICK, this.handleClickOverlay.bind(this));
+			this.buttonClose.addEventListener(CLICK, this.handleClickToggle);
+			this.buttonToggle.addEventListener(CLICK, this.handleClickToggle);
+			this.modalOverlay.addEventListener(CLICK, this.handleClickOverlay);
 		}
 
-		// Remove events.
+		// =========================
+		// Lifecycle: remove events.
+		// =========================
+
 		removeEvents() {
 			document.removeEventListener(FOCUSIN, this.handleFocusIn);
 			document.removeEventListener(KEYDOWN, this.handleKeyDown);
@@ -264,21 +320,10 @@
 			this.modalOverlay.removeEventListener(CLICK, this.handleClickOverlay);
 		}
 
-		// Helper: toggle modal.
-		toggleModalDisplay() {
-			// Set attribute.
-			this.setAttribute('active', this.isActive);
-
-			// Show or hide?
-			this.modalOverlay.style.display = this.isActive ? 'block' : 'none';
-
-			// Focus modal?
-			if (this.isActive) {
-				this.modal.focus();
-			}
-		}
-
+		// =============================
 		// Helper: detect outside modal.
+		// =============================
+
 		isOutsideModal(element) {
 			// Early exit.
 			if (!this.isActive || !element) {
@@ -289,36 +334,63 @@
 			const hasElement = this.contains(element) || this.shadowRoot.contains(element);
 
 			// Get boolean.
-			const bool =
-				!hasElement ||
-				element.classList.contains('cta-modal__focus-trap') ||
-				element.classList.contains('cta-modal__toggle');
+			const bool = !hasElement || element.classList.contains('cta-modal__focus-trap');
 
 			// Expose boolean.
 			return bool;
 		}
 
+		// =====================
+		// Helper: toggle modal.
+		// =====================
+
+		toggleModalDisplay() {
+			// Set attribute.
+			this.setAttribute('active', this.isActive);
+
+			// Show or hide?
+			this.modalOverlay.style.display = this.isActive ? 'block' : 'none';
+		}
+
+		// =====================
 		// Event: overlay click.
+		// =====================
+
 		handleClickOverlay(event) {
 			// Get layer.
 			const { target } = event;
 
 			// Outside modal?
-			if (target.classList.contains('cta-modal__scroll')) {
+			if (target.classList.contains('cta-modal__overlay')) {
 				this.handleClickToggle();
 			}
 		}
 
+		// ====================
 		// Event: toggle modal.
+		// ====================
+
 		handleClickToggle() {
 			// Set flag.
 			this.isActive = !this.isActive;
 
 			// Set display.
 			this.toggleModalDisplay();
+
+			// Focus modal?
+			if (this.isActive) {
+				this.modal.focus();
+
+				// Focus button.
+			} else {
+				this.buttonToggle.focus();
+			}
 		}
 
+		// =========================
 		// Event: focus in document.
+		// =========================
+
 		handleFocusIn() {
 			// Get active element.
 			const activeElement = this.shadowRoot.activeElement || document.activeElement;
@@ -329,10 +401,25 @@
 			}
 		}
 
-		// Event: escape key.
+		// =================
+		// Event: key press.
+		// =================
+
 		handleKeyDown({ key }) {
-			if (this.isActive && key.toLowerCase() === 'escape') {
-				this.handleClickToggle();
+			// Get key.
+			key = key.toLowerCase();
+
+			// Modal active?
+			if (this.isActive) {
+				// Close modal?
+				if (key === ESCAPE) {
+					this.handleClickToggle();
+				}
+
+				// Focus trap?
+				if (key === TAB) {
+					this.handleFocusIn();
+				}
 			}
 		}
 	}
