@@ -211,13 +211,35 @@
 				template.content.cloneNode(true)
 			);
 
+			// Get slots.
+			this.slotForButton = this.querySelector('[slot="button"]');
+			this.slotForModal = this.querySelector('[slot="modal"]');
+
 			// Get elements.
-			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close');
 			this.buttonToggleList = this.querySelectorAll('[data-cta-modal="toggle"]');
 			this.heading = this.querySelector('h1, h2, h3, h4, h5, h6');
+
+			// Get shadow elements.
+			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close');
+			this.focusTrapList = this.shadowRoot.querySelectorAll('.cta-modal__focus-trap');
 			this.modal = this.shadowRoot.querySelector('.cta-modal');
 			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll');
 			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
+
+			// Early exit.
+			if (!this.buttonToggleList) {
+				throw new Error('Required `[data-cta-modal="toggle"]` not found inside <cta-modal>.');
+			}
+
+			// Early exit.
+			if (!this.slotForButton) {
+				throw new Error('Required `[slot="button"]` not found inside <cta-modal>.');
+			}
+
+			// Early exit.
+			if (!this.slotForModal) {
+				throw new Error('Required `[slot="modal"]` not found inside <cta-modal>.');
+			}
 
 			// Add heading ID.
 			this.addHeadingId();
@@ -354,10 +376,10 @@
 			}
 
 			// Has element?
-			const hasElement = this.contains(element) || this.shadowRoot.contains(element);
+			const hasElement = this.contains(element) || this.modal.contains(element);
 
 			// Get boolean.
-			const bool = !hasElement || element.classList.contains('cta-modal__focus-trap');
+			const bool = !hasElement;
 
 			// Expose boolean.
 			return bool;
@@ -374,9 +396,12 @@
 			// Show or hide?
 			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
 
+			// Get active element.
+			const activeElement = document.activeElement;
+
 			// Cache active element?
-			if (this.isActive && document.activeElement) {
-				this.activeElement = document.activeElement;
+			if (this.isActive && activeElement) {
+				this.activeElement = activeElement;
 			}
 		}
 
@@ -422,11 +447,11 @@
 			// Set display.
 			this.toggleModalDisplay();
 
-			// Focus modal?
+			// Focus modal content?
 			if (this.isActive) {
 				this.modal.focus();
 
-				// Focus button?
+				// Return focus?
 			} else if (this.activeElement) {
 				this.activeElement.focus();
 			}
@@ -440,9 +465,35 @@
 			// Get active element.
 			const activeElement = this.shadowRoot.activeElement || document.activeElement;
 
-			// Outside modal?
-			if (this.isOutsideModal(activeElement)) {
-				this.modal.focus();
+			// Selector.
+			const s = 'a, button, input, select, textarea, [tabindex="0"]';
+
+			// Get elements.
+			const focusListReal = Array.from(this.slotForModal.querySelectorAll(s));
+			const focusListShadow = Array.from(this.modal.querySelectorAll(s));
+			const focusListTotal = focusListShadow.concat(focusListReal);
+
+			// Get first & last items.
+			const focusItemFirst = focusListTotal[0];
+			const focusItemLast = focusListTotal[focusListTotal.length - 1];
+
+			// Focus trap: above?
+			if (activeElement === this.focusTrapList[0] && focusItemLast) {
+				window.requestAnimationFrame(() => {
+					focusItemLast.focus();
+				});
+
+				// Focus trap: below?
+			} else if (activeElement === this.focusTrapList[1] && focusItemFirst) {
+				window.requestAnimationFrame(() => {
+					focusItemFirst.focus();
+				});
+
+				// Outside modal?
+			} else if (this.isOutsideModal(activeElement)) {
+				window.requestAnimationFrame(() => {
+					(focusItemFirst || this.modal).focus();
+				});
 			}
 		}
 

@@ -25,6 +25,7 @@ body {
 	padding-top: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
+	padding-bottom: 10px;
 }
 
 h1,
@@ -33,14 +34,29 @@ h3,
 h4,
 h5,
 h6,
+hr,
 p {
 	margin-bottom: 20px;
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid #ccc;
+	clear: both;
 }
 
 a {
 	color: blue;
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+a:hover {
+	color: orangered;
+}
+
+code {
+	font-size: 1rem;
 }
 
 button {
@@ -54,6 +70,10 @@ button {
 	font-weight: bold;
 	line-height: 1;
 	padding: 0.5em;
+}
+
+button:hover {
+	background-color: #ddd;
 }
 
 input {

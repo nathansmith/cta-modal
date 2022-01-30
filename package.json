@@ -8,7 +8,6 @@
 	},
 	"scripts": {
 		"format": "prettier --write ./*.{css,html,js,json,md,scss} **/*.{css,html,js,json,md,scss}",
-		"lint": "eslint --fix ./",
 		"prepare": "node ./scripts/prepare.js"
 	},
 	"devDependencies": {
