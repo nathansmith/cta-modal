@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="./assets/css/index.css" />
 		<script>
 			function toggleModal() {
-				const modal = document.getElementById('CTA_MODAL_ID');
+				const modal = document.getElementById('ID_FOR_CTA_MODAL');
 
 				if (modal) {
 					modal.setAttribute('active', true);
@@ -37,7 +37,7 @@
 			Component tag.</p
 		>
 
-		<cta-modal text="Button text here" active="false" id="CTA_MODAL_ID">
+		<cta-modal text="Button text here" active="false" id="ID_FOR_CTA_MODAL">
 			<div slot="button">
 				<p>
 					<a data-cta-modal="toggle" role="button" tabindex="0">Toggle modal</a>

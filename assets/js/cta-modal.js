@@ -357,7 +357,7 @@
 			// Add a11y heading.
 			if (this.heading) {
 				// Get ID.
-				const id = this.heading.id || 'CTA_MODAL_HEADING_ID';
+				const id = this.heading.id || 'ID_FOR_CTA_MODAL_HEADING';
 
 				// Set ID.
 				this.heading.setAttribute('id', id);
@@ -465,6 +465,10 @@
 			// Get active element.
 			const activeElement = this.shadowRoot.activeElement || document.activeElement;
 
+			// Get booleans.
+			const isFocusTrap1 = activeElement === this.focusTrapList[0];
+			const isFocusTrap2 = activeElement === this.focusTrapList[1];
+
 			// Selector.
 			const s = 'a, button, input, select, textarea, [tabindex="0"]';
 
@@ -478,13 +482,13 @@
 			const focusItemLast = focusListTotal[focusListTotal.length - 1];
 
 			// Focus trap: above?
-			if (activeElement === this.focusTrapList[0] && focusItemLast) {
+			if (isFocusTrap1 && focusItemLast) {
 				window.requestAnimationFrame(() => {
 					focusItemLast.focus();
 				});
 
 				// Focus trap: below?
-			} else if (activeElement === this.focusTrapList[1] && focusItemFirst) {
+			} else if (isFocusTrap2 && focusItemFirst) {
 				window.requestAnimationFrame(() => {
 					focusItemFirst.focus();
 				});
@@ -492,7 +496,7 @@
 				// Outside modal?
 			} else if (this.isOutsideModal(activeElement)) {
 				window.requestAnimationFrame(() => {
-					(focusItemFirst || this.modal).focus();
+					this.modal.focus();
 				});
 			}
 		}
