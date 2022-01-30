@@ -227,18 +227,18 @@
 			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
 
 			// Early exit.
-			if (!this.buttonToggleList) {
-				throw new Error('Required `[data-cta-modal="toggle"]` not found inside <cta-modal>.');
+			if (!this.slotForModal) {
+				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
 			}
 
 			// Early exit.
 			if (!this.slotForButton) {
-				throw new Error('Required `[slot="button"]` not found inside <cta-modal>.');
+				throw new Error('Required `[slot="button"]` not found inside `<cta-modal>`.');
 			}
 
 			// Early exit.
-			if (!this.slotForModal) {
-				throw new Error('Required `[slot="modal"]` not found inside <cta-modal>.');
+			if (!this.slotForButton.querySelector('[data-cta-modal="toggle"]')) {
+				throw new Error('Required `[data-cta-modal="toggle"]` not found inside `[slot="button"]`.');
 			}
 
 			// Add heading ID.
