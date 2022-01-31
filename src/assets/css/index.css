@@ -56,14 +56,6 @@ NOTE:
     - They are not needed for the modal.
 */
 
-*,
-*:after,
-*:before {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
 html {
 	color: #333;
 	background-color: #fff;
