@@ -9,9 +9,11 @@
 		/>
 		<link rel="stylesheet" href="./assets/css/sanitize.css" />
 		<link rel="stylesheet" href="./assets/css/index.css" />
+		<script src="./assets/js/cta-modal.js"></script>
 		<script>
-			function toggleModal() {
-				const modal = document.getElementById('ID_FOR_CTA_MODAL');
+			function toggleModal(el) {
+				const id = el.getAttribute('data-cta-modal-id');
+				const modal = document.getElementById(id);
 
 				if (modal) {
 					modal.setAttribute('active', true);
@@ -77,7 +79,9 @@
 		<p>Rather, it edits the <code>active="true"</code> attribute of the Web Component directly.</p>
 
 		<p>
-			<button type="button" onclick="toggleModal()">External trigger</button>
+			<button data-cta-modal-id="ID_FOR_CTA_MODAL" type="button" onclick="toggleModal(this)">
+				External trigger
+			</button>
 		</p>
 
 		<hr />
@@ -307,7 +311,5 @@
 			</p>
 		</div>
 		<!-- [aria-hidden="true"] -->
-
-		<script src="./assets/js/cta-modal.js"></script>
 	</body>
 </html>

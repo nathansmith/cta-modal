@@ -521,7 +521,9 @@
 	// Define element.
 	// ===============
 
-	window.customElements.define('cta-modal', CtaModal);
+	window.addEventListener('DOMContentLoaded', () => {
+		window.customElements.define('cta-modal', CtaModal);
+	});
 })();
 
 // =============
