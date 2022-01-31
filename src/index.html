@@ -11,6 +11,16 @@
 		<link rel="stylesheet" href="./assets/css/index.css" />
 		<script src="./assets/js/cta-modal.js"></script>
 		<script>
+			/*
+			=====
+			NOTE:
+			=====
+
+				This is not needed for the typical Web Component
+				use case. It exists simply to show how "external"
+				triggers can still control toggling the modal.
+			*/
+
 			function toggleModal(el) {
 				const id = el.getAttribute('data-cta-modal-id');
 				const modal = document.getElementById(id);
