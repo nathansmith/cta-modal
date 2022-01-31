@@ -98,7 +98,8 @@ a:hover {
 }
 
 code {
-	font-size: 1rem;
+	background-color: #ffd;
+	font-size: 1em;
 }
 
 button {
