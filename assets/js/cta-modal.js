@@ -64,27 +64,31 @@
 			}
 
 			.cta-modal__overlay {
-				background-color: rgba(0, 0, 0, 0.5);
+				background-color: var(--cta-modal-overlay-background-color, rgba(0, 0, 0, 0.5));
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
 
-				padding-top: 20px;
-				padding-left: 20px;
-				padding-right: 20px;
-				padding-bottom: 20px;
+				padding-top: var(--cta-modal-overlay-padding-top, 20px);
+				padding-left: var(--cta-modal-overlay-padding-left, 20px);
+				padding-right: var(--cta-modal-overlay-padding-right, 20px);
+				padding-bottom: var(--cta-modal-overlay-padding-bottom, 20px);
 
 				width: 100%;
 				min-height: 100%;
 			}
 
 			.cta-modal {
-				background-color: #fff;
-				border-radius: 4px;
-				padding: 20px;
+				background-color: var(--cta-modal-background-color, #fff);
+				border-radius: var(--cta-modal-border-radius, 4px);
 
-				width: 500px;
+				padding-top: var(--cta-modal-padding-top, 20px);
+				padding-left: var(--cta-modal-padding-left, 20px);
+				padding-right: var(--cta-modal-padding-right, 20px);
+				padding-bottom: var(--cta-modal-padding-bottom, 20px);
+
+				width: var(--cta-modal-width, 500px);
 				max-width: 100%;
 
 				position: relative;
@@ -95,20 +99,18 @@
 				border: 0;
 				padding: 0;
 
-				color: #fff;
-				background-color: #000;
-				border-radius: 50%;
-				box-shadow: 0 0 0 1px #fff;
+				color: var(--cta-modal-close-color, #fff);
+				background-color: var(--cta-modal-close-background-color, #000);
+				border-radius: var(--cta-modal-close-border-radius, 50%);
+				box-shadow: var(--cta-modal-close-box-shadow, 0 0 0 1px #fff);
 
 				cursor: pointer;
-				font-family: 'Arial', sans-serif;
-				font-size: 24px;
-				line-height: 30px;
+				font-family: var(--cta-modal-close-font-family, 'Arial', sans-serif);
+				font-size: var(--cta-modal-close-font-size, 24px);
 				text-align: center;
-				width: 30px;
 
-				transition-duration: 0.25s;
-				transition-property: background-color, box-shadow, color;
+				line-height: var(--cta-modal-close-line-height, 30px);
+				width: var(--cta-modal-close-width, 30px);
 
 				transform: translate(50%, -50%);
 				position: absolute;
@@ -117,24 +119,24 @@
 			}
 
 			.cta-modal__close:hover {
-				color: #000;
-				background-color: #fff;
-				box-shadow: 0 0 0 1px #000;
+				color: var(--cta-modal-close-color-hover, #000);
+				background-color: var(--cta-modal-close-background-color-hover, #fff);
+				box-shadow: var(--cta-modal-close-box-shadow-hover, 0 0 0 1px #000);
 			}
 
 			@supports selector(:focus-visible) {
 				.cta-modal__close:focus-visible {
-					color: #000;
-					background-color: #fff;
-					box-shadow: 0 0 0 1px #000;
+					color: var(--cta-modal-close-color-hover, #000);
+					background-color: var(--cta-modal-close-background-color-hover, #fff);
+					box-shadow: var(--cta-modal-close-box-shadow-hover, 0 0 0 1px #000);
 				}
 			}
 
 			@supports not selector(:focus-visible) {
 				.cta-modal__close:focus {
-					color: #000;
-					background-color: #fff;
-					box-shadow: 0 0 0 1px #000;
+					color: var(--cta-modal-close-color-hover, #000);
+					background-color: var(--cta-modal-close-background-color-hover, #fff);
+					box-shadow: var(--cta-modal-close-box-shadow-hover, 0 0 0 1px #000);
 				}
 			}
 		</style>

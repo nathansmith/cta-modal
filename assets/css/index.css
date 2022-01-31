@@ -1,5 +1,55 @@
 /*
-    NOTE:
+================
+Modal overrides.
+================
+
+    If you want to override the default styles of the
+    modal, that needs to be done via CSS variables.
+
+    The reason for this is Web Components use the "shadow DOM"
+    which does not inherit styles from the parent page.
+
+    The following variables have been set to their default
+    values. Feel free to tweak them to your liking.
+*/
+
+:root {
+	/* Modal overlay. */
+	--cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
+	--cta-modal-overlay-padding-top: 20px;
+	--cta-modal-overlay-padding-left: 20px;
+	--cta-modal-overlay-padding-right: 20px;
+	--cta-modal-overlay-padding-bottom: 20px;
+
+	/* Modal window. */
+	--cta-modal-background-color: #fff;
+	--cta-modal-border-radius: 4px;
+	--cta-modal-padding-top: 20px;
+	--cta-modal-padding-left: 20px;
+	--cta-modal-padding-right: 20px;
+	--cta-modal-padding-bottom: 20px;
+	--cta-modal-width: 500px;
+
+	/* Modal close button. */
+	--cta-modal-close-color: #fff;
+	--cta-modal-close-background-color: #000;
+	--cta-modal-close-border-radius: 50%;
+	--cta-modal-close-box-shadow: 0 0 0 1px #fff;
+	--cta-modal-close-font-family: 'Arial', sans-serif;
+	--cta-modal-close-font-size: 24px;
+	--cta-modal-close-line-height: 30px;
+	--cta-modal-close-width: 30px;
+
+	/* Modal close button - hover. */
+	--cta-modal-close-color-hover: #000;
+	--cta-modal-close-background-color-hover: #fff;
+	--cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
+}
+
+/*
+=====
+NOTE:
+=====
 
     - These styles are for the demo page.
 
