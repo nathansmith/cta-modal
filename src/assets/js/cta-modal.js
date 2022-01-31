@@ -185,6 +185,24 @@
 	const template = document.createElement('template');
 	template.innerHTML = markup;
 
+	// ===========================
+	// Helper: `html` tag changes.
+	// ===========================
+
+	/*
+	=====
+	NOTE:
+	=====
+
+			This is an external function. Once the Web Component
+			is instantiated, it seemingly is not allowed to make
+			any changes to the "real" non-shadow DOM outside.
+	*/
+
+	const togglePageScrollbar = (isActive) => {
+		document.documentElement.style.overflow = isActive ? 'hidden' : '';
+	};
+
 	// ==========
 	// Component.
 	// ==========
@@ -388,6 +406,9 @@
 
 			// Show or hide?
 			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
+
+			// Toggle scrollbar.
+			togglePageScrollbar(this.isActive);
 
 			// Get active element.
 			const activeElement = document.activeElement;
