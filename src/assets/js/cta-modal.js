@@ -190,9 +190,9 @@
 	// ==========
 
 	class CtaModal extends HTMLElement {
-		// ============
-		// Constructor.
-		// ============
+		// =======================
+		// Lifecycle: constructor.
+		// =======================
 
 		constructor() {
 			super();
@@ -216,7 +216,6 @@
 			);
 
 			// Get slots.
-			this.slotForButton = this.querySelector('[slot="button"]');
 			this.slotForModal = this.querySelector('[slot="modal"]');
 
 			// Get elements.
@@ -233,16 +232,6 @@
 			// Early exit.
 			if (!this.slotForModal) {
 				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
-			}
-
-			// Early exit.
-			if (!this.slotForButton) {
-				throw new Error('Required `[slot="button"]` not found inside `<cta-modal>`.');
-			}
-
-			// Early exit.
-			if (!this.slotForButton.querySelector('[data-cta-modal="toggle"]')) {
-				throw new Error('Required `[data-cta-modal="toggle"]` not found inside `[slot="button"]`.');
 			}
 
 			// Add heading ID.
@@ -278,9 +267,25 @@
 			}
 		}
 
-		// ===============================
-		// Lifecycle: bind `this` context.
-		// ===============================
+		// ===========================
+		// Lifecycle: component mount.
+		// ===========================
+
+		connectedCallback() {
+			this.addEvents();
+		}
+
+		// =============================
+		// Lifecycle: component unmount.
+		// =============================
+
+		disconnectedCallback() {
+			this.removeEvents();
+		}
+
+		// ============================
+		// Helper: bind `this` context.
+		// ============================
 
 		bind() {
 			// Get property names.
@@ -298,25 +303,9 @@
 			});
 		}
 
-		// ===========================
-		// Lifecycle: component mount.
-		// ===========================
-
-		connectedCallback() {
-			this.addEvents();
-		}
-
-		// =============================
-		// Lifecycle: component unmount.
-		// =============================
-
-		disconnectedCallback() {
-			this.removeEvents();
-		}
-
-		// ======================
-		// Lifecycle: add events.
-		// ======================
+		// ===================
+		// Helper: add events.
+		// ===================
 
 		addEvents() {
 			// Prevent doubles.
@@ -335,9 +324,9 @@
 			});
 		}
 
-		// =========================
-		// Lifecycle: remove events.
-		// =========================
+		// ======================
+		// Helper: remove events.
+		// ======================
 
 		removeEvents() {
 			document.removeEventListener(FOCUSIN, this.handleFocusIn);
