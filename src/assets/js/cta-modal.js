@@ -60,7 +60,7 @@
 				position: fixed;
 				top: 0;
 				left: 0;
-				z-index: 2;
+				z-index: 100000;
 			}
 
 			.cta-modal__overlay {
