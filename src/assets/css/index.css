@@ -108,11 +108,6 @@ code {
 	font-size: 1em;
 }
 
-[disabled] {
-	cursor: not-allowed;
-	opacity: 0.5;
-}
-
 button {
 	appearance: none;
 	color: #333;
@@ -144,6 +139,11 @@ input {
 	padding: 0.5em;
 
 	width: 100%;
+}
+
+[disabled] {
+	cursor: not-allowed;
+	opacity: 0.5;
 }
 
 cta-modal [slot='modal'] > *:last-child {
