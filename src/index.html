@@ -47,10 +47,7 @@
 
 		<h2>Modal form example</h2>
 
-		<p>
-			The following toggle triggers are located within the <code>&lt;cta-modal&gt;</code> Web
-			Component tag.
-		</p>
+		<p>The following toggle triggers are located within a <code>&lt;cta-modal&gt;</code> tag.</p>
 
 		<cta-modal id="ID_FOR_CTA_MODAL">
 			<div slot="button">
@@ -86,12 +83,9 @@
 
 		<hr />
 
-		<h2>Modal scrolling example</h2>
+		<h2>Modal scroll example</h2>
 
-		<p>
-			The following toggle triggers are located within the <code>&lt;cta-modal&gt;</code> Web
-			Component tag.
-		</p>
+		<p>The following toggle triggers are located within a <code>&lt;cta-modal&gt;</code> tag.</p>
 
 		<cta-modal>
 			<div slot="button">
@@ -121,12 +115,16 @@
 
 		<h2>External trigger example</h2>
 
-		<p>The following button is <i>not</i> located inside the Web Component.</p>
+		<p>The following button is <i>not</i> located inside a <code>&lt;cta-modal&gt;</code> tag.</p>
 
-		<p>Rather, it edits the <code>active="true"</code> attribute of the Web Component directly.</p>
+		<p>Rather, they change the <code>active="true"</code> attribute of a modal directly.</p>
 
 		<p>
-			<button type="button" onclick="toggleModal('ID_FOR_CTA_MODAL')"> External trigger </button>
+			<a onclick="toggleModal('ID_FOR_CTA_MODAL')" role="button" tabindex="0">External trigger</a>
+		</p>
+
+		<p>
+			<button onclick="toggleModal('ID_FOR_CTA_MODAL')" type="button">External trigger</button>
 		</p>
 
 		<hr />
