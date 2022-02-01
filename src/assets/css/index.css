@@ -36,6 +36,7 @@ cta-modal {
 	--cta-modal-close-background-color: #000;
 	--cta-modal-close-border-radius: 50%;
 	--cta-modal-close-box-shadow: 0 0 0 1px #fff;
+	--cta-modal-close-display: block;
 	--cta-modal-close-font-family: 'Arial', sans-serif;
 	--cta-modal-close-font-size: 23px;
 	--cta-modal-close-line-height: 26px;

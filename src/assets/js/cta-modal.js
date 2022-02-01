@@ -107,6 +107,7 @@
 				background-color: var(--cta-modal-close-background-color, #000);
 				border-radius: var(--cta-modal-close-border-radius, 50%);
 				box-shadow: var(--cta-modal-close-box-shadow, 0 0 0 1px #fff);
+				display: var(--cta-modal-close-display, block);
 
 				cursor: pointer;
 				font-family: var(--cta-modal-close-font-family, 'Arial', sans-serif);
