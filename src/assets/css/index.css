@@ -13,7 +13,7 @@ Modal overrides.
     values. Feel free to tweak them to your liking.
 */
 
-:root {
+cta-modal {
 	/* Modal overlay. */
 	--cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
 	--cta-modal-overlay-padding-top: 20px;
@@ -45,6 +45,10 @@ Modal overrides.
 	--cta-modal-close-color-hover: #000;
 	--cta-modal-close-background-color-hover: #fff;
 	--cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
+}
+
+cta-modal [slot='modal'] > *:last-child {
+	margin-bottom: 0;
 }
 
 /*
@@ -113,7 +117,6 @@ button {
 	color: #333;
 	background-color: #eee;
 	border: 0;
-	cursor: pointer;
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: bold;
@@ -121,11 +124,16 @@ button {
 	padding: 0.5em;
 }
 
+button:not([disabled]) {
+	cursor: pointer;
+}
+
 button:not([disabled]):hover {
 	background-color: #ddd;
 }
 
-input {
+input[type='email'],
+input[type='text'] {
 	color: #333;
 	background-color: #fff;
 
@@ -142,10 +150,5 @@ input {
 }
 
 [disabled] {
-	cursor: not-allowed;
 	opacity: 0.5;
-}
-
-cta-modal [slot='modal'] > *:last-child {
-	margin-bottom: 0;
 }
