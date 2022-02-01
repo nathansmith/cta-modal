@@ -81,7 +81,8 @@
 
 			.cta-modal {
 				background-color: var(--cta-modal-background-color, #fff);
-				border-radius: var(--cta-modal-border-radius, 4px);
+				border-radius: var(--cta-modal-border-radius, 5px);
+				box-shadow: var(--cta-modal-box-shadow, 0 2px 5px 0 rgba(0, 0, 0, 0.5));
 
 				padding-top: var(--cta-modal-padding-top, 20px);
 				padding-left: var(--cta-modal-padding-left, 20px);

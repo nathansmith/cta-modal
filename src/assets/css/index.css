@@ -23,7 +23,8 @@ Modal overrides.
 
 	/* Modal window. */
 	--cta-modal-background-color: #fff;
-	--cta-modal-border-radius: 4px;
+	--cta-modal-border-radius: 5px;
+	--cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
 	--cta-modal-padding-top: 20px;
 	--cta-modal-padding-left: 20px;
 	--cta-modal-padding-right: 20px;
