@@ -70,7 +70,7 @@
 				align-items: center;
 				justify-content: center;
 
-				padding-top: var(--cta-modal-overlay-padding-top, 20px);
+				padding-top: var(--cta-modal-overlay-padding-top, 30px);
 				padding-left: var(--cta-modal-overlay-padding-left, 20px);
 				padding-right: var(--cta-modal-overlay-padding-right, 20px);
 				padding-bottom: var(--cta-modal-overlay-padding-bottom, 20px);
@@ -96,6 +96,8 @@
 
 			.cta-modal__close {
 				appearance: none;
+				touch-action: none;
+
 				border: 0;
 				padding: 0;
 
