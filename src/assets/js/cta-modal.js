@@ -428,6 +428,15 @@
 			let { key = '' } = event;
 			key = key.toLowerCase();
 
+			// Get target.
+			const { currentTarget = {} } = event;
+			const { disabled = false } = currentTarget;
+
+			// Early exit.
+			if (disabled) {
+				return;
+			}
+
 			// Key event?
 			if (key) {
 				// Active key?

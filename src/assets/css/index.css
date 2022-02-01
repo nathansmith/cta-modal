@@ -108,6 +108,11 @@ code {
 	font-size: 1em;
 }
 
+[disabled] {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
 button {
 	appearance: none;
 	color: #333;
@@ -121,7 +126,7 @@ button {
 	padding: 0.5em;
 }
 
-button:hover {
+button:not([disabled]):hover {
 	background-color: #ddd;
 }
 
