@@ -57,10 +57,10 @@
 				width: 100%;
 				height: 100%;
 
+				z-index: 100000;
 				position: fixed;
 				top: 0;
 				left: 0;
-				z-index: 100000;
 			}
 
 			.cta-modal__overlay {
@@ -70,7 +70,7 @@
 				align-items: center;
 				justify-content: center;
 
-				padding-top: var(--cta-modal-overlay-padding-top, 30px);
+				padding-top: var(--cta-modal-overlay-padding-top, 20px);
 				padding-left: var(--cta-modal-overlay-padding-left, 20px);
 				padding-right: var(--cta-modal-overlay-padding-right, 20px);
 				padding-bottom: var(--cta-modal-overlay-padding-bottom, 20px);
@@ -97,6 +97,7 @@
 			.cta-modal__close {
 				appearance: none;
 				touch-action: none;
+				user-select: none;
 
 				border: 0;
 				padding: 0;
@@ -108,13 +109,13 @@
 
 				cursor: pointer;
 				font-family: var(--cta-modal-close-font-family, 'Arial', sans-serif);
-				font-size: var(--cta-modal-close-font-size, 24px);
+				font-size: var(--cta-modal-close-font-size, 23px);
 				text-align: center;
 
-				line-height: var(--cta-modal-close-line-height, 30px);
-				width: var(--cta-modal-close-width, 30px);
+				line-height: var(--cta-modal-close-line-height, 26px);
+				width: var(--cta-modal-close-width, 26px);
 
-				transform: translate(50%, -50%);
+				transform: translate(40%, -40%);
 				position: absolute;
 				top: 0;
 				right: 0;
@@ -186,24 +187,6 @@
 	const markup = [style, modal].join('').trim().replace(/\s+/g, ' ');
 	const template = document.createElement('template');
 	template.innerHTML = markup;
-
-	// ===========================
-	// Helper: `html` tag changes.
-	// ===========================
-
-	/*
-	=====
-	NOTE:
-	=====
-
-			This is an external function. Once the Web Component
-			is instantiated, it seemingly is not allowed to make
-			any changes to the "real" non-shadow DOM outside.
-	*/
-
-	const togglePageScrollbar = (isActive) => {
-		document.documentElement.style.overflow = isActive ? 'hidden' : '';
-	};
 
 	// ==========
 	// Component.
@@ -410,7 +393,7 @@
 			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
 
 			// Toggle scrollbar.
-			togglePageScrollbar(this.isActive);
+			document.body.style.overflow = this.isActive ? 'hidden' : '';
 
 			// Get active element.
 			const activeElement = document.activeElement;
