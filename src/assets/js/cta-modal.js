@@ -462,6 +462,11 @@
 		// =========================
 
 		handleFocusIn() {
+			// Early exit.
+			if (!this.isActive) {
+				return;
+			}
+
 			// Get active element.
 			const activeElement = this.shadowRoot.activeElement || document.activeElement;
 
@@ -507,20 +512,22 @@
 		// =================
 
 		handleKeyDown({ key }) {
+			// Early exit.
+			if (!this.isActive) {
+				return;
+			}
+
 			// Get key.
 			key = key.toLowerCase();
 
-			// Modal active?
-			if (this.isActive) {
-				// Escape key?
-				if (key === ESCAPE) {
-					this.handleClickToggle();
-				}
+			// Escape key?
+			if (key === ESCAPE) {
+				this.handleClickToggle();
+			}
 
-				// Tab key?
-				if (key === TAB) {
-					this.handleFocusIn();
-				}
+			// Tab key?
+			if (key === TAB) {
+				this.handleFocusIn();
 			}
 		}
 	}
