@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "cta-modal",
-	"description": "A call-to-action modal",
+	"description": "Web Component call-to-action modal",
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:nathansmith/cta-modal.git"

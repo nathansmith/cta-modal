@@ -387,7 +387,7 @@
 
 		toggleModalDisplay() {
 			// Set attribute.
-			this.setAttribute('active', this.isActive);
+			this.setAttribute(ACTIVE, this.isActive);
 
 			// Show or hide?
 			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
@@ -446,9 +446,10 @@
 			// Set display.
 			this.toggleModalDisplay();
 
-			// Focus modal content?
+			// Focus modal?
 			if (this.isActive) {
 				this.modal.focus();
+				this.modalScroll.scrollTo(0, 0);
 
 				// Return focus?
 			} else if (this.activeElement) {
@@ -496,6 +497,7 @@
 			} else if (this.isOutsideModal(activeElement)) {
 				window.requestAnimationFrame(() => {
 					this.modal.focus();
+					this.modalScroll.scrollTo(0, 0);
 				});
 			}
 		}

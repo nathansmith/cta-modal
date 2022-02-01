@@ -22,8 +22,7 @@
 				triggers can still control toggling the modal.
 			*/
 
-			function toggleModal(el) {
-				const id = el.getAttribute('data-cta-modal-id');
+			function toggleModal(id) {
 				const modal = document.getElementById(id);
 
 				if (modal) {
@@ -46,12 +45,14 @@
 
 		<hr />
 
+		<h2>Modal form example</h2>
+
 		<p>
 			The following toggle triggers are located within the <code>&lt;cta-modal&gt;</code> Web
 			Component tag.
 		</p>
 
-		<cta-modal active="false" id="ID_FOR_CTA_MODAL">
+		<cta-modal id="ID_FOR_CTA_MODAL">
 			<div slot="button">
 				<p>
 					<a data-cta-modal="toggle" role="button" tabindex="0">Toggle modal</a>
@@ -85,14 +86,47 @@
 
 		<hr />
 
+		<h2>Modal scrolling example</h2>
+
+		<p>
+			The following toggle triggers are located within the <code>&lt;cta-modal&gt;</code> Web
+			Component tag.
+		</p>
+
+		<cta-modal>
+			<div slot="button">
+				<p>
+					<a data-cta-modal="toggle" role="button" tabindex="0">Toggle modal</a>
+				</p>
+
+				<p>
+					<button data-cta-modal="toggle" type="button">Toggle modal</button>
+				</p>
+			</div>
+
+			<div slot="modal">
+				<h2>This is a tall tale</h2>
+
+				<p>The modal container will scroll, if necessary.</p>
+
+				<p>Here is a tall <code>&lt;div&gt;</code> tag.</p>
+
+				<div style="border: 2px dashed blue; margin-bottom: 20px; height: 5000px"></div>
+
+				<p>You have reached the end.</p>
+			</div>
+		</cta-modal>
+
+		<hr />
+
+		<h2>External trigger example</h2>
+
 		<p>The following button is <i>not</i> located inside the Web Component.</p>
 
 		<p>Rather, it edits the <code>active="true"</code> attribute of the Web Component directly.</p>
 
 		<p>
-			<button data-cta-modal-id="ID_FOR_CTA_MODAL" type="button" onclick="toggleModal(this)">
-				External trigger
-			</button>
+			<button type="button" onclick="toggleModal('ID_FOR_CTA_MODAL')"> External trigger </button>
 		</p>
 
 		<hr />
@@ -100,11 +134,11 @@
 		<p><b>Note:</b></p>
 
 		<p>
-			The rest of this text is just to force a content scrollbar, to show that the modal opening
-			does not "lose" your spot in the page.
+			The rest of this text is just to force a page scroll, to show that the modal opening does not
+			"forget" your spot in the page.
 		</p>
 
-		<p>Shout out to <a href="https://baconipsum.com/">Bacon Ipsum</a> for the filler text…</p>
+		<p>Thanks to <a href="https://baconipsum.com/">Bacon Ipsum</a> for the filler text…</p>
 
 		<hr />
 
