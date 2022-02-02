@@ -177,8 +177,8 @@ input[type='button'] {
 	font-weight: bold;
 
 	line-height: 2.5em;
-	padding-left: 1em;
-	padding-right: 1em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
 }
 
 button:not([disabled]),
@@ -205,8 +205,8 @@ input[type='text'] {
 	font-size: inherit;
 
 	line-height: 2.5em;
-	padding-left: 1em;
-	padding-right: 1em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
 	width: 100%;
 }
 
