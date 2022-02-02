@@ -114,6 +114,36 @@ ul {
 }
 
 /*
+=========
+Headings.
+=========
+*/
+
+h1 {
+	font-size: calc(1rem + 12px);
+}
+
+h2 {
+	font-size: calc(1rem + 10px);
+}
+
+h3 {
+	font-size: calc(1rem + 8px);
+}
+
+h4 {
+	font-size: calc(1rem + 6px);
+}
+
+h5 {
+	font-size: calc(1rem + 4px);
+}
+
+h6 {
+	font-size: calc(1rem + 2px);
+}
+
+/*
 ================
 Horizontal rule.
 ================
