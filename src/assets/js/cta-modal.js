@@ -25,6 +25,15 @@
 	const SPACE = ' ';
 	const TAB = 'tab';
 
+	const FOCUSABLE_SELECTORS = [
+		'a:not([disabled])',
+		'button:not([disabled])',
+		'input:not([disabled]):not([type="hidden"])',
+		'select:not([disabled])',
+		'textarea:not([disabled])',
+		'[tabindex="0"]:not([disabled])',
+	].join(',');
+
 	// ======
 	// Style.
 	// ======
@@ -533,12 +542,9 @@
 			const isFocusTrap1 = activeElement === this.focusTrapList[0];
 			const isFocusTrap2 = activeElement === this.focusTrapList[1];
 
-			// Selector.
-			const s = 'a, button, input, select, textarea, [tabindex="0"]';
-
 			// Get elements.
-			const focusListReal = Array.from(this.slotForModal.querySelectorAll(s));
-			const focusListShadow = Array.from(this.modal.querySelectorAll(s));
+			const focusListReal = Array.from(this.slotForModal.querySelectorAll(FOCUSABLE_SELECTORS));
+			const focusListShadow = Array.from(this.modal.querySelectorAll(FOCUSABLE_SELECTORS));
 			const focusListTotal = focusListShadow.concat(focusListReal);
 
 			// Get first & last items.
