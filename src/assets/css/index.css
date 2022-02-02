@@ -62,10 +62,22 @@ NOTE:
     - They are not needed for the modal.
 */
 
+/*
+======
+Reset.
+======
+*/
+
 * {
 	margin: 0;
 	padding: 0;
 }
+
+/*
+=====
+Root.
+=====
+*/
 
 html {
 	color: #333;
@@ -81,6 +93,12 @@ body {
 	padding-bottom: 10px;
 }
 
+/*
+========
+Spacing.
+========
+*/
+
 h1,
 h2,
 h3,
@@ -88,15 +106,30 @@ h4,
 h5,
 h6,
 hr,
-p {
+ol,
+p,
+pre,
+ul {
 	margin-bottom: 20px;
 }
+
+/*
+================
+Horizontal rule.
+================
+*/
 
 hr {
 	border: 0;
 	border-top: 1px solid #ccc;
 	clear: both;
 }
+
+/*
+======
+Links.
+======
+*/
 
 a {
 	color: blue;
@@ -108,22 +141,44 @@ a:hover {
 	color: orangered;
 }
 
-code {
-	background-color: #ffd;
-	font-size: 1em;
+/*
+======
+Lists.
+======
+*/
+
+ol {
+	list-style-type: decimal;
+	padding-left: 1.25em;
 }
+
+ul {
+	list-style-type: disc;
+	padding-left: 1.25em;
+}
+
+/*
+==============
+Form elements.
+==============
+*/
 
 button,
 input[type='button'] {
 	appearance: none;
 	color: #333;
 	background-color: #eee;
+
 	border: 0;
+	border-radius: 5px;
+
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: bold;
-	line-height: 1;
-	padding: 0.5em;
+
+	line-height: 2.5em;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 button:not([disabled]),
@@ -142,17 +197,39 @@ input[type='text'] {
 	background-color: #fff;
 
 	border-color: #999;
+	border-radius: 5px;
 	border-style: solid;
 	border-width: 1px;
 
 	font-family: inherit;
 	font-size: inherit;
-	line-height: 1;
-	padding: 0.5em;
 
+	line-height: 2.5em;
+	padding-left: 1em;
+	padding-right: 1em;
 	width: 100%;
 }
 
 [disabled] {
 	opacity: 0.5;
+}
+
+/*
+=====
+Code.
+=====
+*/
+
+*:not(pre) > code {
+	background-color: #ffd;
+}
+
+pre {
+	border-radius: 5px;
+	color: #fff;
+	background-color: #345;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 1em;
+	tab-size: 2;
 }

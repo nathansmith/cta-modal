@@ -169,24 +169,73 @@
 		<p>Rather, it changes the <code>active="true"</code> attribute of its modal directly.</p>
 
 		<p>
-			<button onclick="toggleModal('ID_FOR_CTA_MODAL')" type="button"> External trigger </button>
+			<button onclick="toggleModal('ID_FOR_CTA_MODAL')" type="button">External trigger</button>
 		</p>
 
 		<hr />
 
-		<p><b>Note:</b></p>
+		<h2>How to use</h2>
 
 		<p>
-			The rest of this text is just to force a page scroll, to show that the modal opening does not
-			"forget" your spot in the page.
+			Just include a reference to the <code>cta-modal.js</code> file somewhere in your page. After
+			that, all you need to do is type HTML like so.
 		</p>
 
-		<p>Thanks to <a href="https://baconipsum.com/">Bacon Ipsum</a> for the filler text…</p>
+		<!-- prettier-ignore -->
+		<pre><code>&lt;cta-modal&gt;
+	&lt;div slot="button"&gt;
+		&lt;p&gt;
+		&lt;button
+			class="cta-modal-toggle"
+			type="button"
+		&gt;Toggle modal&lt;/button&gt;
+		&lt;/p&gt;
+	&lt;/div&gt;
+
+	&lt;div slot="modal"&gt;
+		&lt;h2&gt;Modal title&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/cta-modal&gt;</code></pre>
+
+		<p>
+			The rest of the details are abstracted away, including all the additional accessibility hooks,
+			etc.
+		</p>
+
+		<ul>
+			<li>
+				<p>
+					<code>&lt;div slot="button"&gt;</code> is <b>optional</b>. It contains anything you want
+					shown in the <i>page</i> (not in the <i>modal</i>).
+				</p>
+			</li>
+
+			<li>
+				<p>
+					<code>&lt;div slot="modal"&gt;</code> is <b>required</b>. It contains anything you want
+					shown in the <i>modal</i> (not in the <i>page</i>).
+				</p>
+			</li>
+		</ul>
+
+		<p>
+			If you don't include a <code>slot="button"</code> element, then you will need to manually
+			control setting the <code>&lt;cta-modal active="true"&gt;</code> attribute yourself.
+		</p>
 
 		<hr />
 
 		<div aria-hidden="true">
 			<h2>Filler text</h2>
+
+			<p><b>Note:</b></p>
+
+			<p>
+				The rest of this text is just to force a page scroll, to show that the modal opening does
+				not "forget" your spot in the page.
+			</p>
+
+			<p>Thanks to <a href="https://baconipsum.com/">Bacon Ipsum</a> for the filler text…</p>
 
 			<p>
 				Bacon ipsum dolor amet quis buffalo pancetta occaecat fugiat. Brisket officia nulla venison
