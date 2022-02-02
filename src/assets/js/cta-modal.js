@@ -460,7 +460,6 @@
 
 				// Delegated click.
 			} else if (typeof target.closest === FUNCTION) {
-				// Get button.
 				button = target.closest('.cta-modal-toggle');
 			}
 
