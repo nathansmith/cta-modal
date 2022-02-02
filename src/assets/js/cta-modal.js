@@ -413,16 +413,6 @@
 			if (this.isActive && activeElement) {
 				this.activeElement = activeElement;
 			}
-
-			// Focus modal?
-			if (this.isActive) {
-				this.modal.focus();
-				this.modalScroll.scrollTo(0, 0);
-
-				// Return focus?
-			} else if (this.activeElement) {
-				this.activeElement.focus();
-			}
 		}
 
 		// =====================
@@ -487,6 +477,16 @@
 
 			// Set display.
 			this.toggleModalDisplay();
+
+			// Focus modal?
+			if (this.isActive) {
+				this.modal.focus();
+				this.modalScroll.scrollTo(0, 0);
+
+				// Return focus?
+			} else if (this.activeElement) {
+				this.activeElement.focus();
+			}
 		}
 
 		// =========================
