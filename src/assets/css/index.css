@@ -113,7 +113,8 @@ code {
 	font-size: 1em;
 }
 
-button {
+button,
+input[type='button'] {
 	appearance: none;
 	color: #333;
 	background-color: #eee;
@@ -125,11 +126,13 @@ button {
 	padding: 0.5em;
 }
 
-button:not([disabled]) {
+button:not([disabled]),
+input[type='button']:not([disabled]) {
 	cursor: pointer;
 }
 
-button:not([disabled]):hover {
+button:not([disabled]):hover,
+input[type='button']:not([disabled]):hover {
 	background-color: #ddd;
 }
 

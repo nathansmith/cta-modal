@@ -20,6 +20,7 @@
 	const ENTER = 'enter';
 	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
+	const FUNCTION = 'function';
 	const KEYDOWN = 'keydown';
 	const SPACE = ' ';
 	const TAB = 'tab';
@@ -221,10 +222,10 @@
 			);
 
 			// Get slots.
+			this.slotForButton = this.querySelector('[slot="button"');
 			this.slotForModal = this.querySelector('[slot="modal"]');
 
 			// Get elements.
-			this.buttonToggleList = this.querySelectorAll('[data-cta-modal="toggle"]');
 			this.heading = this.querySelector('h1, h2, h3, h4, h5, h6');
 
 			// Get shadow elements.
@@ -322,11 +323,15 @@
 			this.buttonClose.addEventListener(CLICK, this.handleClickToggle);
 			this.modalOverlay.addEventListener(CLICK, this.handleClickOverlay);
 
-			// Loop through.
-			this.buttonToggleList.forEach((button) => {
-				button.addEventListener(CLICK, this.handleClickToggle);
-				button.addEventListener(KEYDOWN, this.handleClickToggle);
-			});
+			if (this.slotForButton) {
+				this.slotForButton.addEventListener(CLICK, this.handleClickToggle);
+				this.slotForButton.addEventListener(KEYDOWN, this.handleClickToggle);
+			}
+
+			if (this.slotForModal) {
+				this.slotForModal.addEventListener(CLICK, this.handleClickToggle);
+				this.slotForModal.addEventListener(KEYDOWN, this.handleClickToggle);
+			}
 		}
 
 		// ======================
@@ -340,11 +345,15 @@
 			this.buttonClose.removeEventListener(CLICK, this.handleClickToggle);
 			this.modalOverlay.removeEventListener(CLICK, this.handleClickOverlay);
 
-			// Loop through.
-			this.buttonToggleList.forEach((button) => {
-				button.removeEventListener(CLICK, this.handleClickToggle);
-				button.removeEventListener(KEYDOWN, this.handleClickToggle);
-			});
+			if (this.slotForButton) {
+				this.slotForButton.removeEventListener(CLICK, this.handleClickToggle);
+				this.slotForButton.removeEventListener(KEYDOWN, this.handleClickToggle);
+			}
+
+			if (this.slotForModal) {
+				this.slotForModal.removeEventListener(CLICK, this.handleClickToggle);
+				this.slotForModal.removeEventListener(KEYDOWN, this.handleClickToggle);
+			}
 		}
 
 		// =======================
@@ -430,25 +439,34 @@
 			key = key.toLowerCase();
 
 			// Get target.
-			const { currentTarget = {} } = event;
-			const { disabled = false } = currentTarget;
+			const { target = {} } = event;
+
+			// Set later.
+			let button;
+
+			// Target exists?
+			if (typeof target.closest === FUNCTION) {
+				// Get button.
+				button = target.closest('.cta-modal-toggle');
+			}
+
+			// Get booleans.
+			const isValidEvent = typeof event.preventDefault === FUNCTION;
+			const isValidClick = !!(button && isValidEvent && !key);
+			const isValidKey = !!(button && isValidEvent && [ENTER, SPACE].includes(key));
+
+			const isButtonDisabled = !!(button && button.disabled);
+			const isButtonMissing = !!(isValidEvent && !button);
+			const isWrongKeyEvent = !!(key && !isValidKey);
 
 			// Early exit.
-			if (disabled) {
+			if (isButtonDisabled || isButtonMissing || isWrongKeyEvent) {
 				return;
 			}
 
-			// Key event?
-			if (key) {
-				// Active key?
-				if ([ENTER, SPACE].includes(key)) {
-					// Prevent scroll.
-					event.preventDefault();
-
-					// Early exit.
-				} else {
-					return;
-				}
+			// Prevent default?
+			if (isValidKey || isValidClick) {
+				event.preventDefault();
 			}
 
 			// Set flag.
