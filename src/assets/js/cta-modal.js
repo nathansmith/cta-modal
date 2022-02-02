@@ -270,6 +270,12 @@
 
 				// Set display.
 				this.toggleModalDisplay();
+
+				// Focus modal?
+				if (this.isActive) {
+					this.modal.focus();
+					this.modalScroll.scrollTo(0, 0);
+				}
 			}
 		}
 
