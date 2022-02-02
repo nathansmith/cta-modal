@@ -273,8 +273,7 @@
 
 				// Focus modal?
 				if (this.isActive) {
-					this.modal.focus();
-					this.modalScroll.scrollTo(0, 0);
+					this.focusModal();
 				}
 			}
 		}
@@ -376,6 +375,29 @@
 				this.heading.setAttribute('id', id);
 				this.modal.setAttribute('aria-labelledby', id);
 			}
+		}
+
+		// ======================
+		// Helper: focus element.
+		// ======================
+
+		focusElement(element = {}) {
+			window.requestAnimationFrame(() => {
+				if (typeof element.focus === FUNCTION) {
+					element.focus();
+				}
+			});
+		}
+
+		// ====================
+		// Helper: focus modal.
+		// ====================
+
+		focusModal() {
+			window.requestAnimationFrame(() => {
+				this.modal.focus();
+				this.modalScroll.scrollTo(0, 0);
+			});
 		}
 
 		// =============================
@@ -486,12 +508,11 @@
 
 			// Focus modal?
 			if (this.isActive) {
-				this.modal.focus();
-				this.modalScroll.scrollTo(0, 0);
+				this.focusModal();
 
 				// Return focus?
 			} else if (this.activeElement) {
-				this.activeElement.focus();
+				this.focusElement(this.activeElement);
 			}
 		}
 
@@ -526,22 +547,15 @@
 
 			// Focus trap: above?
 			if (isFocusTrap1 && focusItemLast) {
-				window.requestAnimationFrame(() => {
-					focusItemLast.focus();
-				});
+				this.focusElement(focusItemLast);
 
 				// Focus trap: below?
 			} else if (isFocusTrap2 && focusItemFirst) {
-				window.requestAnimationFrame(() => {
-					focusItemFirst.focus();
-				});
+				this.focusElement(focusItemFirst);
 
 				// Outside modal?
 			} else if (this.isOutsideModal(activeElement)) {
-				window.requestAnimationFrame(() => {
-					this.modal.focus();
-					this.modalScroll.scrollTo(0, 0);
-				});
+				this.focusModal();
 			}
 		}
 
