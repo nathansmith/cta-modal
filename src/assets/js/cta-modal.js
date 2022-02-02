@@ -413,6 +413,16 @@
 			if (this.isActive && activeElement) {
 				this.activeElement = activeElement;
 			}
+
+			// Focus modal?
+			if (this.isActive) {
+				this.modal.focus();
+				this.modalScroll.scrollTo(0, 0);
+
+				// Return focus?
+			} else if (this.activeElement) {
+				this.activeElement.focus();
+			}
 		}
 
 		// =====================
@@ -444,8 +454,12 @@
 			// Set later.
 			let button;
 
-			// Target exists?
-			if (typeof target.closest === FUNCTION) {
+			// Direct click.
+			if (target.classList && target.classList.contains('cta-modal__close')) {
+				button = target;
+
+				// Delegated click.
+			} else if (typeof target.closest === FUNCTION) {
 				// Get button.
 				button = target.closest('.cta-modal-toggle');
 			}
@@ -474,16 +488,6 @@
 
 			// Set display.
 			this.toggleModalDisplay();
-
-			// Focus modal?
-			if (this.isActive) {
-				this.modal.focus();
-				this.modalScroll.scrollTo(0, 0);
-
-				// Return focus?
-			} else if (this.activeElement) {
-				this.activeElement.focus();
-			}
 		}
 
 		// =========================
