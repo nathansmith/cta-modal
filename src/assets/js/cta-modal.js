@@ -18,18 +18,24 @@
 	const ACTIVE = 'active';
 	const ANIMATION = 'animation';
 	const ANIMATION_DURATION = 250;
+	const ARIA_LABELLEDBY = 'aria-labelledby';
 	const BLOCK = 'block';
 	const CLICK = 'click';
 	const CLOSE = 'close';
+	const CLOSE_TITLE = 'Close';
 	const DATA_IS_HIDE = 'data-cta-modal-is-hide';
 	const DATA_IS_SHOW = 'data-cta-modal-is-show';
+	const DOM_CONTENT_LOADED = 'DOMContentLoaded';
 	const EMPTY_STRING = '';
 	const ENTER = 'enter';
 	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
 	const FUNCTION = 'function';
 	const HIDDEN = 'hidden';
+	const ID = 'id';
+	const ID_FOR_CTA_MODAL_HEADING = 'ID_FOR_CTA_MODAL_HEADING';
 	const KEYDOWN = 'keydown';
+	const MEDIA_QUERY_FOR_MOTION = '(prefers-reduced-motion: no-preference)';
 	const NONE = 'none';
 	const SPACE = ' ';
 	const STATIC = 'static';
@@ -412,7 +418,7 @@
 			// Loop through.
 			propertyNames.forEach((name) => {
 				// Bind functions.
-				if (typeof this[name] === 'function') {
+				if (typeof this[name] === FUNCTION) {
 					this[name] = this[name].bind(this);
 				}
 			});
@@ -479,7 +485,7 @@
 
 		setCloseTitle() {
 			// Get title.
-			const title = this.getAttribute(CLOSE) || 'Close';
+			const title = this.getAttribute(CLOSE) || CLOSE_TITLE;
 
 			// Set title.
 			this.buttonClose.setAttribute(TITLE, title);
@@ -493,11 +499,11 @@
 			// Add a11y heading.
 			if (this.heading) {
 				// Get ID.
-				const id = this.heading.id || 'ID_FOR_CTA_MODAL_HEADING';
+				const id = this.heading.id || ID_FOR_CTA_MODAL_HEADING;
 
 				// Set ID.
-				this.heading.setAttribute('id', id);
-				this.modal.setAttribute('aria-labelledby', id);
+				this.heading.setAttribute(ID, id);
+				this.modal.setAttribute(ARIA_LABELLEDBY, id);
 			}
 		}
 
@@ -578,8 +584,7 @@
 
 		isMotionOkay() {
 			// Get pref.
-			const s = '(prefers-reduced-motion: no-preference)';
-			const { matches } = window.matchMedia(s);
+			const { matches } = window.matchMedia(MEDIA_QUERY_FOR_MOTION);
 
 			// Expose boolean.
 			return this.isAnimated && matches;
@@ -835,7 +840,7 @@
 	// Define element.
 	// ===============
 
-	window.addEventListener('DOMContentLoaded', () => {
+	window.addEventListener(DOM_CONTENT_LOADED, () => {
 		window.customElements.define('cta-modal', CtaModal);
 	});
 })();
