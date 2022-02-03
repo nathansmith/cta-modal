@@ -561,13 +561,29 @@
 			return bool;
 		}
 
+		// ===========================
+		// Helper: detect motion pref.
+		// ===========================
+
+		isMotionOkay() {
+			// Get pref.
+			const s = '(prefers-reduced-motion: no-preference)';
+			const { matches } = window.matchMedia(s);
+
+			// Expose boolean.
+			return this.isAnimated && matches;
+		}
+
 		// =====================
 		// Helper: toggle modal.
 		// =====================
 
 		toggleModalDisplay(f) {
+			// Get boolean.
+			const isMotionOkay = this.isMotionOkay();
+
 			// Get delay.
-			const delay = this.isAnimated ? ANIMATION_DURATION : 0;
+			const delay = isMotionOkay ? ANIMATION_DURATION : 0;
 
 			// Set attribute.
 			this.setAttribute(ACTIVE, this.isActive);
@@ -589,7 +605,7 @@
 				this.modalScroll.style.display = BLOCK;
 
 				// Set flag.
-				if (this.isAnimated) {
+				if (isMotionOkay) {
 					this.isHideShow = true;
 					this.modalScroll.setAttribute(DATA_IS_SHOW, true);
 				}
@@ -612,7 +628,7 @@
 				}, delay);
 			} else {
 				// Set flag.
-				if (this.isAnimated) {
+				if (isMotionOkay) {
 					this.isHideShow = true;
 					this.modalScroll.setAttribute(DATA_IS_HIDE, true);
 				}
