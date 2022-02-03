@@ -16,13 +16,21 @@
 	// ==========
 
 	const ACTIVE = 'active';
+	const ANIMATION = 'animation';
+	const ANIMATION_DURATION = 250;
+	const BLOCK = 'block';
 	const CLICK = 'click';
 	const CLOSE = 'close';
+	const DATA_IS_HIDE = 'data-cta-modal-is-hide';
+	const DATA_IS_SHOW = 'data-cta-modal-is-show';
+	const EMPTY_STRING = '';
 	const ENTER = 'enter';
 	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
 	const FUNCTION = 'function';
+	const HIDDEN = 'hidden';
 	const KEYDOWN = 'keydown';
+	const NONE = 'none';
 	const SPACE = ' ';
 	const STATIC = 'static';
 	const TAB = 'tab';
@@ -60,7 +68,7 @@
 				}
 			}
 
-			@keyframes ANIMATION-cta-modal-overlay {
+			@keyframes ANIMATION-SHOW-cta-modal-overlay {
 				0% {
 					opacity: 0;
 				}
@@ -70,13 +78,33 @@
 				}
 			}
 
-			@keyframes ANIMATION-cta-modal {
+			@keyframes ANIMATION-SHOW-cta-modal {
 				0% {
 					transform: scale(0.95);
 				}
 
 				100% {
 					transform: scale(1);
+				}
+			}
+
+			@keyframes ANIMATION-HIDE-cta-modal-overlay {
+				0% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0;
+				}
+			}
+
+			@keyframes ANIMATION-HIDE-cta-modal {
+				0% {
+					transform: scale(1);
+				}
+
+				100% {
+					transform: scale(0.95);
 				}
 			}
 
@@ -106,9 +134,6 @@
 			}
 
 			.cta-modal__overlay {
-				animation-duration: 0.25s;
-				animation-name: ANIMATION-cta-modal-overlay;
-
 				background-color: var(--cta-modal-overlay-background-color, rgba(0, 0, 0, 0.5));
 				display: flex;
 				align-items: center;
@@ -124,9 +149,6 @@
 			}
 
 			.cta-modal {
-				animation-duration: 0.25s;
-				animation-name: ANIMATION-cta-modal;
-
 				background-color: var(--cta-modal-background-color, #fff);
 				border-radius: var(--cta-modal-border-radius, 5px);
 				box-shadow: var(--cta-modal-box-shadow, 0 2px 5px 0 rgba(0, 0, 0, 0.5));
@@ -140,6 +162,28 @@
 				max-width: 100%;
 
 				position: relative;
+			}
+
+			[${DATA_IS_SHOW}="true"] .cta-modal__overlay {
+				animation-duration: ${ANIMATION_DURATION}ms;
+				animation-name: ANIMATION-SHOW-cta-modal-overlay;
+			}
+
+			[${DATA_IS_SHOW}="true"] .cta-modal {
+				animation-duration: ${ANIMATION_DURATION}ms;
+				animation-name: ANIMATION-SHOW-cta-modal;
+			}
+
+			[${DATA_IS_HIDE}="true"] .cta-modal__overlay {
+				animation-duration: ${ANIMATION_DURATION}ms;
+				animation-name: ANIMATION-HIDE-cta-modal-overlay;
+				opacity: 0;
+			}
+
+			[${DATA_IS_HIDE}="true"] .cta-modal {
+				animation-duration: ${ANIMATION_DURATION}ms;
+				animation-name: ANIMATION-HIDE-cta-modal;
+				transform: scale(0.95);
 			}
 
 			.cta-modal__close {
@@ -232,7 +276,7 @@
 		</div>
 	`;
 
-	const markup = [style, modal].join('').trim().replace(/\s+/g, ' ');
+	const markup = [style, modal].join(EMPTY_STRING).trim().replace(/\s+/g, SPACE);
 	const template = document.createElement('template');
 	template.innerHTML = markup;
 
@@ -254,7 +298,7 @@
 			// Get flag.
 			const isActive = this.getAttribute(ACTIVE) === String(true);
 
-			// Set flag.
+			// Set flags.
 			this.isActive = isActive;
 
 			// Shadow DOM.
@@ -285,6 +329,9 @@
 				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
 			}
 
+			// Set animation flag.
+			this.setAnimationFlag();
+
 			// Set close text.
 			this.setCloseTitle();
 
@@ -303,7 +350,7 @@
 		// ============================
 
 		static get observedAttributes() {
-			return [ACTIVE, CLOSE, STATIC];
+			return [ACTIVE, ANIMATION, CLOSE, STATIC];
 		}
 
 		// ==============================
@@ -320,12 +367,17 @@
 				this.isActive = isActive;
 
 				// Set display.
-				this.toggleModalDisplay();
+				this.toggleModalDisplay(() => {
+					// Focus modal?
+					if (this.isActive) {
+						this.focusModal();
+					}
+				});
+			}
 
-				// Focus modal?
-				if (this.isActive) {
-					this.focusModal();
-				}
+			// Changed animation="…" value?
+			if (name === ANIMATION && oldValue !== newValue) {
+				this.setAnimationFlag();
 			}
 
 			// Changed close="…" value?
@@ -422,13 +474,21 @@
 			}
 		}
 
+		// ===========================
+		// Helper: set animation flag.
+		// ===========================
+
+		setAnimationFlag() {
+			this.isAnimated = this.getAttribute(ANIMATION) !== String(false);
+		}
+
 		// =======================
 		// Helper: add close text.
 		// =======================
 
 		setCloseTitle() {
 			// Get title.
-			const title = this.getAttribute('close') || 'Close';
+			const title = this.getAttribute(CLOSE) || 'Close';
 
 			// Set title.
 			this.buttonClose.setAttribute(TITLE, title);
@@ -505,15 +565,12 @@
 		// Helper: toggle modal.
 		// =====================
 
-		toggleModalDisplay() {
+		toggleModalDisplay(f) {
+			// Get delay.
+			const delay = this.isAnimated ? ANIMATION_DURATION : 0;
+
 			// Set attribute.
 			this.setAttribute(ACTIVE, this.isActive);
-
-			// Show or hide?
-			this.modalScroll.style.display = this.isActive ? 'block' : 'none';
-
-			// Toggle scrollbar.
-			document.body.style.overflow = this.isActive ? 'hidden' : '';
 
 			// Get active element.
 			const activeElement = document.activeElement;
@@ -521,6 +578,67 @@
 			// Cache active element?
 			if (this.isActive && activeElement) {
 				this.activeElement = activeElement;
+			}
+
+			// Active?
+			if (this.isActive) {
+				// Hide scrollbar.
+				document.body.style.overflow = HIDDEN;
+
+				// Show modal.
+				this.modalScroll.style.display = BLOCK;
+
+				// Set flag.
+				if (this.isAnimated) {
+					this.isHideShow = true;
+					this.modalScroll.setAttribute(DATA_IS_SHOW, true);
+				}
+
+				// Fire callback?
+				if (typeof f === FUNCTION) {
+					f();
+				}
+
+				// Await CSS animation.
+				this.timerForShow = setTimeout(() => {
+					// Clear.
+					clearTimeout(this.timerForShow);
+
+					// Remove flag.
+					this.isHideShow = false;
+					this.modalScroll.removeAttribute(DATA_IS_SHOW);
+
+					// Delay.
+				}, delay);
+			} else {
+				// Set flag.
+				if (this.isAnimated) {
+					this.isHideShow = true;
+					this.modalScroll.setAttribute(DATA_IS_HIDE, true);
+				}
+
+				// Await CSS animation.
+				this.timerForHide = setTimeout(() => {
+					// Clear.
+					clearTimeout(this.timerForHide);
+
+					// Remove flag.
+					this.isHideShow = false;
+					this.modalScroll.removeAttribute(DATA_IS_HIDE);
+
+					// Hide modal.
+					this.modalScroll.style.display = NONE;
+
+					// Show scrollbar.
+					document.body.style.overflow = EMPTY_STRING;
+
+					// Fire callback?
+					if (typeof f === FUNCTION) {
+						f();
+					}
+
+					// Delay.
+				}, delay);
 			}
 		}
 
@@ -530,7 +648,7 @@
 
 		handleClickOverlay(event) {
 			// Early exit.
-			if (this.isStatic) {
+			if (this.isHideShow || this.isStatic) {
 				return;
 			}
 
@@ -549,7 +667,7 @@
 
 		handleClickToggle(event = {}) {
 			// Get key.
-			let { key = '' } = event;
+			let { key = EMPTY_STRING } = event;
 			key = key.toLowerCase();
 
 			// Get target.
@@ -590,16 +708,16 @@
 			this.isActive = !this.isActive;
 
 			// Set display.
-			this.toggleModalDisplay();
+			this.toggleModalDisplay(() => {
+				// Focus modal?
+				if (this.isActive) {
+					this.focusModal();
 
-			// Focus modal?
-			if (this.isActive) {
-				this.focusModal();
-
-				// Return focus?
-			} else if (this.activeElement) {
-				this.focusElement(this.activeElement);
-			}
+					// Return focus?
+				} else if (this.activeElement) {
+					this.focusElement(this.activeElement);
+				}
+			});
 		}
 
 		// =========================
@@ -656,7 +774,7 @@
 			key = key.toLowerCase();
 
 			// Escape key?
-			if (key === ESCAPE && !this.isStatic) {
+			if (key === ESCAPE && !this.isHideShow && !this.isStatic) {
 				this.handleClickToggle();
 			}
 
