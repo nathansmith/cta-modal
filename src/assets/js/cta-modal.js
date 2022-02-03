@@ -295,12 +295,6 @@
 			// Bind context.
 			this.bind();
 
-			// Get flag.
-			const isActive = this.getAttribute(ACTIVE) === String(true);
-
-			// Set flags.
-			this.isActive = isActive;
-
 			// Shadow DOM.
 			this.attachShadow({ mode: 'open' });
 
@@ -329,6 +323,9 @@
 				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
 			}
 
+			// Set active flag.
+			this.setActiveFlag();
+
 			// Set animation flag.
 			this.setAnimationFlag();
 
@@ -340,9 +337,6 @@
 
 			// Set static flag.
 			this.setStaticFlag();
-
-			// Set display.
-			this.toggleModalDisplay();
 		}
 
 		// ============================
@@ -358,21 +352,9 @@
 		// ==============================
 
 		attributeChangedCallback(name, oldValue, newValue) {
-			// Get flag.
-			const isActive = newValue === String(true);
-
 			// Changed active="…" value?
 			if (name === ACTIVE && oldValue !== newValue) {
-				// Set flag.
-				this.isActive = isActive;
-
-				// Set display.
-				this.toggleModalDisplay(() => {
-					// Focus modal?
-					if (this.isActive) {
-						this.focusModal();
-					}
-				});
+				this.setActiveFlag();
 			}
 
 			// Changed animation="…" value?
@@ -511,6 +493,26 @@
 		}
 
 		// ========================
+		// Helper: set active flag.
+		// ========================
+
+		setActiveFlag() {
+			// Get flag.
+			const isActive = this.getAttribute(ACTIVE) === String(true);
+
+			// Set flag.
+			this.isActive = isActive;
+
+			// Set display.
+			this.toggleModalDisplay(() => {
+				// Focus modal?
+				if (this.isActive) {
+					this.focusModal();
+				}
+			});
+		}
+
+		// ========================
 		// Helper: set static flag.
 		// ========================
 
@@ -579,14 +581,14 @@
 		// =====================
 
 		toggleModalDisplay(f) {
+			// // Set attribute.
+			this.setAttribute(ACTIVE, this.isActive);
+
 			// Get boolean.
 			const isMotionOkay = this.isMotionOkay();
 
 			// Get delay.
 			const delay = isMotionOkay ? ANIMATION_DURATION : 0;
-
-			// Set attribute.
-			this.setAttribute(ACTIVE, this.isActive);
 
 			// Get active element.
 			const activeElement = document.activeElement;
