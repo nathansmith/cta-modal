@@ -581,10 +581,11 @@
 		// =====================
 
 		toggleModalDisplay(f) {
-			// // Set attribute.
+			// Set attribute.
 			this.setAttribute(ACTIVE, this.isActive);
 
-			// Get boolean.
+			// Get booleans.
+			const isModalVisible = this.modalScroll.style.display === BLOCK;
 			const isMotionOkay = this.isMotionOkay();
 
 			// Get delay.
@@ -598,7 +599,10 @@
 				this.activeElement = activeElement;
 			}
 
-			// Active?
+			// =============
+			// Modal active?
+			// =============
+
 			if (this.isActive) {
 				// Hide scrollbar.
 				document.body.style.overflow = HIDDEN;
@@ -628,7 +632,22 @@
 
 					// Delay.
 				}, delay);
-			} else {
+
+				/*
+				=====
+				NOTE:
+				=====
+
+					We want to ensure that the modal is currently
+					visible, because we do not want to put scroll
+					back on the `<body>` unnecessarily.
+
+					The reason is that another `<cta-modal>` in
+					the page might have been pre-rendered with an
+					`active="true"` attribute. If so, we want to
+					leave the body's overflow value alone.
+				*/
+			} else if (isModalVisible) {
 				// Set flag.
 				if (isMotionOkay) {
 					this.isHideShow = true;
