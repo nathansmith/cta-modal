@@ -17,13 +17,16 @@
 
 	const ACTIVE = 'active';
 	const CLICK = 'click';
+	const CLOSE = 'close';
 	const ENTER = 'enter';
 	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
 	const FUNCTION = 'function';
 	const KEYDOWN = 'keydown';
 	const SPACE = ' ';
+	const STATIC = 'static';
 	const TAB = 'tab';
+	const TITLE = 'title';
 
 	const FOCUSABLE_SELECTORS = [
 		'a:not([disabled])',
@@ -46,6 +49,35 @@
 				box-sizing: border-box;
 				margin: 0;
 				padding: 0;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				*,
+				*:after,
+				*:before {
+					animation: none !important;
+					transition: none !important;
+				}
+			}
+
+			@keyframes ANIMATION-cta-modal-overlay {
+				0% {
+					opacity: 0;
+				}
+
+				100% {
+					opacity: 1;
+				}
+			}
+
+			@keyframes ANIMATION-cta-modal {
+				0% {
+					transform: scale(0.95);
+				}
+
+				100% {
+					transform: scale(1);
+				}
 			}
 
 			.cta-modal__focus-trap {
@@ -74,8 +106,10 @@
 			}
 
 			.cta-modal__overlay {
-				background-color: var(--cta-modal-overlay-background-color, rgba(0, 0, 0, 0.5));
+				animation-duration: 0.25s;
+				animation-name: ANIMATION-cta-modal-overlay;
 
+				background-color: var(--cta-modal-overlay-background-color, rgba(0, 0, 0, 0.5));
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -90,6 +124,9 @@
 			}
 
 			.cta-modal {
+				animation-duration: 0.25s;
+				animation-name: ANIMATION-cta-modal;
+
 				background-color: var(--cta-modal-background-color, #fff);
 				border-radius: var(--cta-modal-border-radius, 5px);
 				box-shadow: var(--cta-modal-box-shadow, 0 2px 5px 0 rgba(0, 0, 0, 0.5));
@@ -184,7 +221,6 @@
 				>
 					<button
 						class="cta-modal__close"
-						title="Close"
 						type="button"
 					>&times;</button>
 
@@ -249,8 +285,14 @@
 				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
 			}
 
-			// Add heading ID.
-			this.addHeadingId();
+			// Set close text.
+			this.setCloseTitle();
+
+			// Set heading ID.
+			this.setHeadingId();
+
+			// Set static flag.
+			this.setStaticFlag();
 
 			// Set display.
 			this.toggleModalDisplay();
@@ -261,7 +303,7 @@
 		// ============================
 
 		static get observedAttributes() {
-			return [ACTIVE];
+			return [ACTIVE, CLOSE, STATIC];
 		}
 
 		// ==============================
@@ -284,6 +326,16 @@
 				if (this.isActive) {
 					this.focusModal();
 				}
+			}
+
+			// Changed close="…" value?
+			if (name === CLOSE && oldValue !== newValue) {
+				this.setCloseTitle();
+			}
+
+			// Changed static="…" value?
+			if (name === STATIC && oldValue !== newValue) {
+				this.setStaticFlag();
 			}
 		}
 
@@ -371,10 +423,22 @@
 		}
 
 		// =======================
+		// Helper: add close text.
+		// =======================
+
+		setCloseTitle() {
+			// Get title.
+			const title = this.getAttribute('close') || 'Close';
+
+			// Set title.
+			this.buttonClose.setAttribute(TITLE, title);
+		}
+
+		// =======================
 		// Helper: add heading ID.
 		// =======================
 
-		addHeadingId() {
+		setHeadingId() {
 			// Add a11y heading.
 			if (this.heading) {
 				// Get ID.
@@ -384,6 +448,14 @@
 				this.heading.setAttribute('id', id);
 				this.modal.setAttribute('aria-labelledby', id);
 			}
+		}
+
+		// ========================
+		// Helper: set static flag.
+		// ========================
+
+		setStaticFlag() {
+			this.isStatic = this.getAttribute(STATIC) === String(true);
 		}
 
 		// ======================
@@ -457,6 +529,11 @@
 		// =====================
 
 		handleClickOverlay(event) {
+			// Early exit.
+			if (this.isStatic) {
+				return;
+			}
+
 			// Get layer.
 			const { target } = event;
 
@@ -579,7 +656,7 @@
 			key = key.toLowerCase();
 
 			// Escape key?
-			if (key === ESCAPE) {
+			if (key === ESCAPE && !this.isStatic) {
 				this.handleClickToggle();
 			}
 
