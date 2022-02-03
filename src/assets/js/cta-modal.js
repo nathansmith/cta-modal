@@ -323,9 +323,6 @@
 				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
 			}
 
-			// Set active flag.
-			this.setActiveFlag();
-
 			// Set animation flag.
 			this.setAnimationFlag();
 
@@ -337,6 +334,18 @@
 
 			// Set static flag.
 			this.setStaticFlag();
+
+			/*
+			=====
+			NOTE:
+			=====
+
+				We set this flag last, because the UI visuals within
+				are contingent on some of the other flags being set.
+			*/
+
+			// Set active flag.
+			this.setActiveFlag();
 		}
 
 		// ============================
