@@ -23,10 +23,16 @@
 			*/
 
 			function toggleModal(id) {
+				// Get modal.
 				const modal = document.getElementById(id);
 
+				// Modal exists?
 				if (modal) {
-					modal.setAttribute('active', true);
+					// Get flag.
+					const bool = modal.getAttribute('active') === String(true);
+
+					// Set flag.
+					modal.setAttribute('active', !bool);
 				}
 			}
 		</script>
