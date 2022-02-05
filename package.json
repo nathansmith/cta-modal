@@ -9,6 +9,7 @@
 	"scripts": {
 		"build": "vite build --base=./ --config vite.config.js",
 		"format": "prettier --write ./*.{css,html,js,json,md,scss} **/*.{css,html,js,json,md,scss}",
+		"postbuild": "node ./scripts/postbuild.js",
 		"prebuild": "rimraf ./build",
 		"prepare": "node ./scripts/prepare.js",
 		"start": "vite --config vite.config.js"
@@ -18,6 +19,7 @@
 		"eslint": "^8.6.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
+		"html-minifier": "^4.0.0",
 		"husky": "^7.0.4",
 		"lint-staged": "^12.1.7",
 		"prettier": "^2.3.0",
