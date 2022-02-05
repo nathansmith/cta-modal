@@ -221,6 +221,7 @@ input[type='button']:not([disabled]):hover {
 	background-color: #ddd;
 }
 
+input:not([type]),
 input[type='email'],
 input[type='text'] {
 	color: #333;
