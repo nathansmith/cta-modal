@@ -8,6 +8,7 @@ module.exports = {
 		// React & Prettier.
 		'eslint:recommended',
 		'plugin:prettier/recommended',
+		'plugin:@typescript-eslint/recommended',
 	],
 	ignorePatterns: [
 		// Exclude generated files.
@@ -33,8 +34,8 @@ module.exports = {
 				allow: ['warn', 'error'],
 			},
 		],
-		'no-unused-vars': 'error',
 		'no-var': 'error',
+		'no-unused-vars': 'error',
 		'prefer-arrow-callback': 'error',
 		'prefer-const': 'error',
 	},

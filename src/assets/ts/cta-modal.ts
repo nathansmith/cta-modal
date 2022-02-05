@@ -290,6 +290,24 @@
 	// ==========
 
 	class CtaModal extends HTMLElement {
+		// Types.
+		activeElement: HTMLElement | null = null;
+		buttonClose: HTMLElement;
+		focusTrapList: NodeListOf<HTMLElement>;
+		heading: HTMLElement | null;
+		isActive = false;
+		isAnimated = true;
+		isHideShow = false;
+		isStatic = false;
+		modal: HTMLElement;
+		modalOverlay: HTMLElement;
+		modalScroll: HTMLElement;
+		shadowRoot: ShadowRoot;
+		slotForButton: HTMLElement | null;
+		slotForModal: HTMLElement;
+		timerForHide: number | undefined;
+		timerForShow: number | undefined;
+
 		// =======================
 		// Lifecycle: constructor.
 		// =======================
@@ -311,17 +329,17 @@
 
 			// Get slots.
 			this.slotForButton = this.querySelector('[slot="button"');
-			this.slotForModal = this.querySelector('[slot="modal"]');
+			this.slotForModal = this.querySelector('[slot="modal"]') as HTMLElement;
 
 			// Get elements.
 			this.heading = this.querySelector('h1, h2, h3, h4, h5, h6');
 
 			// Get shadow elements.
-			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close');
+			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close') as HTMLElement;
 			this.focusTrapList = this.shadowRoot.querySelectorAll('.cta-modal__focus-trap');
-			this.modal = this.shadowRoot.querySelector('.cta-modal');
-			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay');
-			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll');
+			this.modal = this.shadowRoot.querySelector('.cta-modal') as HTMLElement;
+			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay') as HTMLElement;
+			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll') as HTMLElement;
 
 			// Early exit.
 			if (!this.slotForModal) {
@@ -365,7 +383,7 @@
 		// Lifecycle: attributes changed.
 		// ==============================
 
-		attributeChangedCallback(name, oldValue, newValue) {
+		attributeChangedCallback(name: string, oldValue: string, newValue: string) {
 			// Changed active="…" value?
 			if (name === ACTIVE && oldValue !== newValue) {
 				this.setActiveFlag();
@@ -412,12 +430,32 @@
 			const propertyNames = Object.getOwnPropertyNames(
 				// Get prototype.
 				Object.getPrototypeOf(this)
-			);
+			) as (keyof CtaModal)[];
 
 			// Loop through.
 			propertyNames.forEach((name) => {
 				// Bind functions.
 				if (typeof this[name] === 'function') {
+					/*
+					=====
+					NOTE:
+					=====
+
+						Why use "@ts-expect-error" here?
+
+						Calling `*.bind(this)` is a standard practice
+						when using JavaScript classes. It is necessary
+						for functions that might change context because
+						they are interacting directly with DOM elements.
+
+						Basically, I am telling TypeScript:
+
+						"Let me live my life!"
+
+						😎
+					*/
+
+					// @ts-expect-error bind
 					this[name] = this[name].bind(this);
 				}
 			});
@@ -538,7 +576,7 @@
 		// Helper: focus element.
 		// ======================
 
-		focusElement(element) {
+		focusElement(element: HTMLElement) {
 			window.requestAnimationFrame(() => {
 				if (typeof element.focus === 'function') {
 					element.focus();
@@ -561,7 +599,7 @@
 		// Helper: detect outside modal.
 		// =============================
 
-		isOutsideModal(element) {
+		isOutsideModal(element: HTMLElement) {
 			// Early exit.
 			if (!this.isActive || !element) {
 				return false;
@@ -593,7 +631,7 @@
 		// Helper: toggle modal.
 		// =====================
 
-		toggleModalDisplay(f) {
+		toggleModalDisplay(f: unknown) {
 			// Set attribute.
 			this.setAttribute(ACTIVE, String(this.isActive));
 
@@ -605,7 +643,7 @@
 			const delay = isMotionOkay ? ANIMATION_DURATION : 0;
 
 			// Get active element.
-			const activeElement = document.activeElement;
+			const activeElement = document.activeElement as HTMLElement;
 
 			// Cache active element?
 			if (this.isActive && activeElement) {
@@ -696,14 +734,14 @@
 		// Event: overlay click.
 		// =====================
 
-		handleClickOverlay(event) {
+		handleClickOverlay(event: MouseEvent) {
 			// Early exit.
 			if (this.isHideShow || this.isStatic) {
 				return;
 			}
 
 			// Get layer.
-			const target = event.target;
+			const target = event.target as HTMLElement;
 
 			// Outside modal?
 			if (target.classList.contains('cta-modal__overlay')) {
@@ -715,7 +753,7 @@
 		// Event: toggle modal.
 		// ====================
 
-		handleClickToggle(event) {
+		handleClickToggle(event?: MouseEvent | KeyboardEvent) {
 			// Set later.
 			let key = EMPTY_STRING;
 			let target = null;
@@ -723,12 +761,12 @@
 			// Event exists?
 			if (event) {
 				if (event.target) {
-					target = event.target;
+					target = event.target as HTMLElement;
 				}
 
 				// Get key.
-				if (event.key) {
-					key = event.key;
+				if ((event as KeyboardEvent).key) {
+					key = (event as KeyboardEvent).key;
 					key = key.toLowerCase();
 				}
 			}
@@ -740,11 +778,11 @@
 			if (target) {
 				// Direct click.
 				if (target.classList.contains('cta-modal__close')) {
-					button = target;
+					button = target as HTMLButtonElement;
 
 					// Delegated click.
 				} else if (typeof target.closest === 'function') {
-					button = target.closest('.cta-modal-toggle');
+					button = target.closest('.cta-modal-toggle') as HTMLButtonElement;
 				}
 			}
 
@@ -798,17 +836,21 @@
 				// Get active element.
 				this.shadowRoot.activeElement ||
 				document.activeElement
-			);
+			) as HTMLElement;
 
 			// Get booleans.
 			const isFocusTrap1 = activeElement === this.focusTrapList[0];
 			const isFocusTrap2 = activeElement === this.focusTrapList[1];
 
 			// Get "real" elements.
-			const focusListReal = Array.from(this.slotForModal.querySelectorAll(FOCUSABLE_SELECTORS));
+			const focusListReal = Array.from(
+				this.slotForModal.querySelectorAll(FOCUSABLE_SELECTORS)
+			) as HTMLElement[];
 
 			// Get "shadow" elements.
-			const focusListShadow = Array.from(this.modal.querySelectorAll(FOCUSABLE_SELECTORS));
+			const focusListShadow = Array.from(
+				this.modal.querySelectorAll(FOCUSABLE_SELECTORS)
+			) as HTMLElement[];
 
 			// Get "total" elements.
 			const focusListTotal = focusListShadow.concat(focusListReal);
@@ -835,7 +877,7 @@
 		// Event: key press.
 		// =================
 
-		handleKeyDown({ key }) {
+		handleKeyDown({ key }: KeyboardEvent) {
 			// Early exit.
 			if (!this.isActive) {
 				return;
