@@ -290,29 +290,34 @@
 	// ==========
 
 	class CtaModal extends HTMLElement {
-		// Types.
-		activeElement: HTMLElement | null = null;
-		buttonClose: HTMLElement;
-		focusTrapList: NodeListOf<HTMLElement>;
-		heading: HTMLElement | null;
-		isActive = false;
-		isAnimated = true;
-		isHideShow = false;
-		isStatic = false;
-		modal: HTMLElement;
-		modalOverlay: HTMLElement;
-		modalScroll: HTMLElement;
-		shadowRoot: ShadowRoot;
-		slotForButton: HTMLElement | null;
-		slotForModal: HTMLElement;
-		timerForHide: number | undefined;
-		timerForShow: number | undefined;
+		// Private & read-only types.
+		private readonly buttonClose: HTMLElement;
+		private readonly modal: HTMLElement;
+		private readonly modalOverlay: HTMLElement;
+		private readonly modalScroll: HTMLElement;
+		private readonly slotForButton: HTMLElement | null;
+		private readonly slotForModal: HTMLElement;
+
+		// Read-only types.
+		readonly shadowRoot: ShadowRoot;
+
+		// Private types.
+		private activeElement: HTMLElement | null = null;
+		private focusTrapList: NodeListOf<HTMLElement>;
+		private heading: HTMLElement | null;
+		private isActive = false;
+		private isAnimated = true;
+		private isHideShow = false;
+		private isStatic = false;
+		private timerForHide: number | undefined;
+		private timerForShow: number | undefined;
 
 		// =======================
 		// Lifecycle: constructor.
 		// =======================
 
 		constructor() {
+			// Parent constructor.
 			super();
 
 			// Bind context.
@@ -425,7 +430,7 @@
 		// Helper: bind `this` context.
 		// ============================
 
-		bind() {
+		private bind() {
 			// Get property names.
 			const propertyNames = Object.getOwnPropertyNames(
 				// Get prototype.
@@ -465,7 +470,7 @@
 		// Helper: add events.
 		// ===================
 
-		addEvents() {
+		private addEvents() {
 			// Prevent doubles.
 			this.removeEvents();
 
@@ -490,7 +495,7 @@
 		// Helper: remove events.
 		// ======================
 
-		removeEvents() {
+		private removeEvents() {
 			document.removeEventListener(FOCUSIN, this.handleFocusIn);
 			document.removeEventListener(KEYDOWN, this.handleKeyDown);
 
@@ -512,7 +517,7 @@
 		// Helper: set animation flag.
 		// ===========================
 
-		setAnimationFlag() {
+		private setAnimationFlag() {
 			this.isAnimated = this.getAttribute(ANIMATION) !== String(false);
 		}
 
@@ -520,7 +525,7 @@
 		// Helper: add close text.
 		// =======================
 
-		setCloseTitle() {
+		private setCloseTitle() {
 			// Get title.
 			const title = this.getAttribute(CLOSE) || CLOSE_TITLE;
 
@@ -532,7 +537,7 @@
 		// Helper: add heading ID.
 		// =======================
 
-		setHeadingId() {
+		private setHeadingId() {
 			// Add a11y heading.
 			if (this.heading) {
 				// Get ID.
@@ -548,7 +553,7 @@
 		// Helper: set active flag.
 		// ========================
 
-		setActiveFlag() {
+		private setActiveFlag() {
 			// Get flag.
 			const isActive = this.getAttribute(ACTIVE) === String(true);
 
@@ -568,7 +573,7 @@
 		// Helper: set static flag.
 		// ========================
 
-		setStaticFlag() {
+		private setStaticFlag() {
 			this.isStatic = this.getAttribute(STATIC) === String(true);
 		}
 
@@ -576,7 +581,7 @@
 		// Helper: focus element.
 		// ======================
 
-		focusElement(element: HTMLElement) {
+		private focusElement(element: HTMLElement) {
 			window.requestAnimationFrame(() => {
 				if (typeof element.focus === 'function') {
 					element.focus();
@@ -588,7 +593,7 @@
 		// Helper: focus modal.
 		// ====================
 
-		focusModal() {
+		private focusModal() {
 			window.requestAnimationFrame(() => {
 				this.modal.focus();
 				this.modalScroll.scrollTo(0, 0);
@@ -599,7 +604,7 @@
 		// Helper: detect outside modal.
 		// =============================
 
-		isOutsideModal(element: HTMLElement) {
+		private isOutsideModal(element: HTMLElement) {
 			// Early exit.
 			if (!this.isActive || !element) {
 				return false;
@@ -619,7 +624,7 @@
 		// Helper: detect motion pref.
 		// ===========================
 
-		isMotionOkay() {
+		private isMotionOkay() {
 			// Get pref.
 			const { matches } = window.matchMedia(MEDIA_QUERY_FOR_MOTION);
 
@@ -631,7 +636,7 @@
 		// Helper: toggle modal.
 		// =====================
 
-		toggleModalDisplay(f: unknown) {
+		private toggleModalDisplay(f: unknown) {
 			// Set attribute.
 			this.setAttribute(ACTIVE, String(this.isActive));
 
@@ -734,7 +739,7 @@
 		// Event: overlay click.
 		// =====================
 
-		handleClickOverlay(event: MouseEvent) {
+		private handleClickOverlay(event: MouseEvent) {
 			// Early exit.
 			if (this.isHideShow || this.isStatic) {
 				return;
@@ -753,7 +758,7 @@
 		// Event: toggle modal.
 		// ====================
 
-		handleClickToggle(event?: MouseEvent | KeyboardEvent) {
+		private handleClickToggle(event?: MouseEvent | KeyboardEvent) {
 			// Set later.
 			let key = EMPTY_STRING;
 			let target = null;
@@ -825,7 +830,7 @@
 		// Event: focus in document.
 		// =========================
 
-		handleFocusIn() {
+		private handleFocusIn() {
 			// Early exit.
 			if (!this.isActive) {
 				return;
@@ -877,7 +882,7 @@
 		// Event: key press.
 		// =================
 
-		handleKeyDown({ key }: KeyboardEvent) {
+		private handleKeyDown({ key }: KeyboardEvent) {
 			// Early exit.
 			if (!this.isActive) {
 				return;
