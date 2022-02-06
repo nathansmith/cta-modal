@@ -11,10 +11,10 @@ const { minifyWebComponent } = require('./minifyWebComponent');
 // =========
 
 let CLI_COMMAND = `
-    terser \
-    --compress \
-    --mangle \
-    --output ./dist/index.js \
+    terser
+    --compress
+    --mangle
+    --output ./dist/index.js
     -- ./dist/index.js
 `;
 
