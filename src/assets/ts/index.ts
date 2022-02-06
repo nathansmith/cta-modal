@@ -1,16 +1,8 @@
-// ===============
-// Closure: start.
-// ===============
+// ===========================
+// START: if "customElements".
+// ===========================
 
-(() => {
-	// ===========
-	// Early exit.
-	// ===========
-
-	if (!('customElements' in window)) {
-		return;
-	}
-
+if ('customElements' in window) {
 	// ==========
 	// Constants.
 	// ==========
@@ -169,23 +161,23 @@
 				position: relative;
 			}
 
-			[${DATA_IS_SHOW}="true"] .cta-modal__overlay {
+			[${DATA_IS_SHOW}='true'] .cta-modal__overlay {
 				animation-duration: ${ANIMATION_DURATION}ms;
 				animation-name: ANIMATION-SHOW-cta-modal-overlay;
 			}
 
-			[${DATA_IS_SHOW}="true"] .cta-modal {
+			[${DATA_IS_SHOW}='true'] .cta-modal {
 				animation-duration: ${ANIMATION_DURATION}ms;
 				animation-name: ANIMATION-SHOW-cta-modal;
 			}
 
-			[${DATA_IS_HIDE}="true"] .cta-modal__overlay {
+			[${DATA_IS_HIDE}='true'] .cta-modal__overlay {
 				animation-duration: ${ANIMATION_DURATION}ms;
 				animation-name: ANIMATION-HIDE-cta-modal-overlay;
 				opacity: 0;
 			}
 
-			[${DATA_IS_HIDE}="true"] .cta-modal {
+			[${DATA_IS_HIDE}='true'] .cta-modal {
 				animation-duration: ${ANIMATION_DURATION}ms;
 				animation-name: ANIMATION-HIDE-cta-modal;
 				transform: scale(0.95);
@@ -910,8 +902,8 @@
 	window.addEventListener(DOM_CONTENT_LOADED, () => {
 		window.customElements.define('cta-modal', CtaModal);
 	});
-})();
+}
 
-// =============
-// Closure: end.
-// =============
+// =========================
+// END: if "customElements".
+// =========================
