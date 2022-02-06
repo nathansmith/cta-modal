@@ -4,11 +4,9 @@ export default {
 		port: 1234,
 	},
 	build: {
-		outDir: 'build',
-		rollupOptions: [
-			{
-				input: 'index.html',
-			},
-		],
+		outDir: 'html',
+		rollupOptions: {
+			input: 'index.html',
+		},
 	},
 };

@@ -7,10 +7,14 @@
 		"url": "git@github.com:nathansmith/cta-modal.git"
 	},
 	"scripts": {
-		"build": "vite build --base=./ --config vite.config.js",
+		"build": "npm run build-dist && npm run build-html",
+		"build-html": "vite build --base=./ --config vite.config.js",
+		"build-dist": "tsc --project tsconfig.json",
 		"format": "prettier --write ./*.{css,html,js,json,md,scss} **/*.{css,html,js,json,md,scss}",
-		"postbuild": "node ./scripts/postbuild.js",
-		"prebuild": "rimraf ./build",
+		"postbuild-dist": "node ./scripts/postbuild-dist.js",
+		"postbuild-html": "node ./scripts/postbuild-html.js",
+		"prebuild-dist": "rimraf ./dist",
+		"prebuild-html": "rimraf ./html",
 		"prepare": "node ./scripts/prepare.js",
 		"start": "vite --config vite.config.js"
 	},
@@ -25,6 +29,7 @@
 		"prettier": "^2.3.0",
 		"rimraf": "^3.0.2",
 		"typescript": "^4.5.5",
+		"uglifyjs": "^2.4.11",
 		"vite": "^2.7.13"
 	},
 	"lint-staged": {
