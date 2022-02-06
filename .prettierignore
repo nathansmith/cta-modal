@@ -1,4 +1,4 @@
 # Ignore directories.
-build
 coverage
 dist
+html

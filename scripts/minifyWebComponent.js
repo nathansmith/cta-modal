@@ -29,41 +29,44 @@ const minifyWebComponent = (pathToAssets) => {
 
 			// Minify whitespace.
 			fileText = fileText.trim();
+			fileText = fileText.replace(/\\t/g, '');
+			fileText = fileText.replace(/\\n/g, ' ');
 			fileText = fileText.replace(/\s+/g, ' ');
 
-			// Trim string start.
-			fileText = fileText.replace(/` /g, '`');
-
-			// Trim string end.
-			fileText = fileText.replace(/ `/g, '`');
+			// Trim multi-line strings.
+			fileText = fileText.replace(/`\s+/g, '`');
+			fileText = fileText.replace(/\s+`/g, '`');
 
 			// Trim "less than" brackets.
-			fileText = fileText.replace(/< /g, '<');
-			fileText = fileText.replace(/ </g, '<');
+			fileText = fileText.replace(/<\s+/g, '<');
+			fileText = fileText.replace(/\s+</g, '<');
 
 			// Trim "greater than" brackets.
-			fileText = fileText.replace(/> /g, '>');
-			fileText = fileText.replace(/ >/g, '>');
+			fileText = fileText.replace(/>\s+/g, '>');
+			fileText = fileText.replace(/\s+>/g, '>');
 
 			// Trim commas.
-			fileText = fileText.replace(/, /g, ',');
-			fileText = fileText.replace(/ ,/g, ',');
+			fileText = fileText.replace(/,\s+/g, ',');
+			fileText = fileText.replace(/\s+,/g, ',');
 
 			// Trim colons.
-			fileText = fileText.replace(/: /g, ':');
-			fileText = fileText.replace(/ :/g, ':');
+			fileText = fileText.replace(/:\s+/g, ':');
+			fileText = fileText.replace(/\s+:/g, ':');
 
 			// Trim semicolons.
-			fileText = fileText.replace(/; /g, ';');
-			fileText = fileText.replace(/ ;/g, ';');
+			fileText = fileText.replace(/;\s+/g, ';');
+			fileText = fileText.replace(/\s+;/g, ';');
 
 			// Trim "open" curly brackets.
-			fileText = fileText.replace(/ {/g, '{');
-			fileText = fileText.replace(/{ /g, '{');
+			fileText = fileText.replace(/\s+{/g, '{');
+			fileText = fileText.replace(/{\s+/g, '{');
 
 			// Trim "close" curly brackets.
-			fileText = fileText.replace(/ }/g, '}');
-			fileText = fileText.replace(/} /g, '}');
+			fileText = fileText.replace(/\s+}/g, '}');
+			fileText = fileText.replace(/}\s+/g, '}');
+
+			// Trim unnecessary "use strict".
+			fileText = fileText.replace(/"use strict";/g, '');
 
 			// Write new file.
 			writeFileSync(pathToFile, fileText, options);

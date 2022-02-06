@@ -11,7 +11,7 @@ const { minifyWebComponent } = require('./minifyWebComponent');
 // =========
 
 let CLI_COMMAND = `
-    uglifyjs \
+    terser \
     --compress \
     --mangle \
     --output ./dist/index.js \

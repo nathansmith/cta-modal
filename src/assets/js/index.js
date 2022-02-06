@@ -325,7 +325,7 @@
 
 			// Early exit.
 			if (!this.slotForModal) {
-				throw new Error('Required `[slot="modal"]` not found inside `<cta-modal>`.');
+				throw new Error('Required [slot="modal"] not found inside <cta-modal>.');
 			}
 
 			// Set animation flag.
