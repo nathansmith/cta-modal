@@ -711,7 +711,7 @@ if ('customElements' in window) {
 				}
 
 				// Await CSS animation.
-				this.timerForHide = setTimeout(() => {
+				this.timerForHide = window.setTimeout(() => {
 					// Clear.
 					clearTimeout(this.timerForHide);
 
