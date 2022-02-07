@@ -151,7 +151,9 @@ Horizontal rule.
 
 hr {
 	border: 0;
-	border-top: 1px solid #ccc;
+	border-top-color: #ccc;
+	border-top-style: solid;
+	border-top-width: 1px;
 	clear: both;
 }
 
@@ -192,6 +194,17 @@ ul {
 Form elements.
 ==============
 */
+
+[disabled] {
+	opacity: 0.5;
+}
+
+[tabindex='0'],
+a[href='#'],
+button,
+input[type='button'] {
+	user-select: none;
+}
 
 button,
 input[type='button'] {
@@ -239,10 +252,6 @@ input[type='text'] {
 	padding-left: 0.75em;
 	padding-right: 0.75em;
 	width: 100%;
-}
-
-[disabled] {
-	opacity: 0.5;
 }
 
 /*

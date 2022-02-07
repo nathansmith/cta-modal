@@ -8,7 +8,7 @@ if ('customElements' in window) {
 	// ==========
 
 	const ACTIVE = 'active';
-	const ANIMATION = 'animation';
+	const ANIMATED = 'animated';
 	const ANIMATION_DURATION = 250;
 	const ARIA_LABELLEDBY = 'aria-labelledby';
 	const BLOCK = 'block';
@@ -351,7 +351,7 @@ if ('customElements' in window) {
 		// ============================
 
 		static get observedAttributes() {
-			return [ACTIVE, ANIMATION, CLOSE, STATIC];
+			return [ACTIVE, ANIMATED, CLOSE, STATIC];
 		}
 
 		// ==============================
@@ -364,8 +364,8 @@ if ('customElements' in window) {
 				this.setActiveFlag();
 			}
 
-			// Changed animation="…" value?
-			if (name === ANIMATION && oldValue !== newValue) {
+			// Changed animated="…" value?
+			if (name === ANIMATED && oldValue !== newValue) {
 				this.setAnimationFlag();
 			}
 
@@ -468,7 +468,7 @@ if ('customElements' in window) {
 		// ===========================
 
 		setAnimationFlag() {
-			this.isAnimated = this.getAttribute(ANIMATION) !== String(false);
+			this.isAnimated = this.getAttribute(ANIMATED) !== String(false);
 		}
 
 		// =======================
