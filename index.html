@@ -262,14 +262,9 @@
 
 		<ul>
 			<li>
-				<p>
-					<code>active="true"</code>
-				</p>
+				<p> <code>active="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
 
-				<p>
-					Implicitly <code>false</code> by default. You can use this to force a modal to display,
-					without a user clicking anything.
-				</p>
+				<p> You can use this to force a modal to display, without a user clicking anything. </p>
 
 				<p>
 					I suggest using this sparingly, because we all know that unexpected modals can be
@@ -278,41 +273,34 @@
 			</li>
 
 			<li>
-				<p>
-					<code>animated="false"</code>
-				</p>
+				<p> <code>animated="false"</code> &mdash; Implicitly <code>true</code> by default. </p>
+
+				<p> This will cause the modal to hide/show immediately, without a fade animation. </p>
 
 				<p>
-					Implicitly <code>true</code> by default. This will cause the modal to hide/show
-					immediately, without a fade animation.
-				</p>
-
-				<p>
-					If a user has their preference set for <code>prefers-reduced-motion</code> the animation
-					will be disabled regardless of the flag.
+					If a user has their operating system's preference set for
+					<code>prefers-reduced-motion</code> the animation will be disabled regardless of the flag.
 				</p>
 			</li>
 
 			<li>
+				<p> <code>close="TEXT HERE"</code> &mdash; Implicitly <code>"Close"</code> by default. </p>
+
 				<p>
-					<code>close="TEXT HERE"</code>
+					You can use this attribute to localize the text string shown in the close button's
+					<code>title="Close"</code> tooltip.
 				</p>
 
 				<p>
-					Implicitly <code>"Close"</code> by default. You can use this attribute to localize the
-					text string shown in the close button's <code>title="Close"</code> tooltip.
+					Whatever you put here will be shown on mouse hover, and will be read aloud to
+					<a href="#">screen readers</a>.
 				</p>
 			</li>
 
 			<li>
-				<p>
-					<code>static="true"</code>
-				</p>
+				<p> <code>static="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
 
-				<p>
-					Implicitly <code>false</code> by default. This will prevent clicks on the page overlay
-					from triggering a modal close.
-				</p>
+				<p> This will prevent clicks on the page overlay from triggering a modal close. </p>
 
 				<p>
 					Additionally, the <code>escape</code> key will be ignored. Whereas, normally that key
@@ -320,5 +308,92 @@
 				</p>
 			</li>
 		</ul>
+
+		<hr />
+
+		<h2>How to use: styling</h2>
+
+		<p>
+			If you want to override the default styles of the modal, that needs to be done via CSS
+			variables.
+		</p>
+
+		<p>
+			The reason for this is Web Components use the "shadow DOM" which does not inherit styles from
+			the parent page.
+		</p>
+
+		<p>
+			The following variables have been set to their default values. Feel free to tweak them to your
+			liking.
+		</p>
+
+		<pre><code>cta-modal {
+	/* Modal overlay. */
+	--cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
+	--cta-modal-overlay-padding-top: 20px;
+	--cta-modal-overlay-padding-left: 20px;
+	--cta-modal-overlay-padding-right: 20px;
+	--cta-modal-overlay-padding-bottom: 20px;
+
+	/* Modal window. */
+	--cta-modal-background-color: #fff;
+	--cta-modal-border-radius: 5px;
+	--cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+	--cta-modal-padding-top: 20px;
+	--cta-modal-padding-left: 20px;
+	--cta-modal-padding-right: 20px;
+	--cta-modal-padding-bottom: 20px;
+	--cta-modal-width: 500px;
+
+	/* Modal close button. */
+	--cta-modal-close-color: #fff;
+	--cta-modal-close-background-color: #000;
+	--cta-modal-close-border-radius: 50%;
+	--cta-modal-close-box-shadow: 0 0 0 1px #fff;
+	--cta-modal-close-display: block;
+	--cta-modal-close-font-family: 'Arial', sans-serif;
+	--cta-modal-close-font-size: 23px;
+	--cta-modal-close-line-height: 26px;
+	--cta-modal-close-width: 26px;
+
+	/* Modal close button - hover. */
+	--cta-modal-close-color-hover: #000;
+	--cta-modal-close-background-color-hover: #fff;
+	--cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
+}</code></pre>
+
+		<h3>Styling content</h3>
+
+		<p
+			>If you want to target content that is displayed <i>within</i> a modal, you can use a
+			descendant selector scoped to the context of the <code>cta-modal</code> tag.</p
+		>
+
+		<p
+			>For instance: Let's say you want to make all content within the
+			<code>slot="button"</code> area blue, and wanted to make all the content within the
+			<code>slot="modal"</code> area red. That would look something like this.</p
+		>
+
+		<pre><code>cta-modal [slot="button"] {
+	color: blue;
+}
+
+cta-modal [slot="modal"] {
+	color: red;
+}</code></pre>
+
+		<h3>No close button</h3>
+
+		<p>
+			Here is another scenario. Perhaps you want to have a static modal, with only a single toggle
+			trigger to close it. If you intend to provide that yourself, you can hide the default close
+			button with CSS such as this.
+		</p>
+
+		<pre><code>cta-modal[static="true"] {
+	--cta-modal-close-display: none;
+}</code></pre>
 	</body>
 </html>
