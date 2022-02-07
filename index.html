@@ -397,6 +397,40 @@ cta-modal [slot="modal"] {
 	--cta-modal-close-display: none;
 }</code></pre>
 
+		<h3>Dark mode</h3>
+
+		<p>
+			If you want to provide a different set of style overrides for users who prefer
+			<a href="https://css-tricks.com/dark-modes-with-css/">dark mode</a>, you can scope your
+			selector within a media query. This would make the modal background dark gray.
+		</p>
+
+		<pre><code>@media (prefers-color-scheme: dark) {
+	cta-modal {
+		--cta-modal-background-color: #333;
+
+		/* Dark mode overrides here. */
+	}
+}</code></pre>
+
+		<p>
+			Or, you could scope the selector to a specific extra attribute of your choosing. Let's say
+			some modals in your page need to be dark, whereas others do not. You might consider this
+			approach.
+		</p>
+
+		<pre><code>cta-modal {
+		--cta-modal-background-color: #fff;
+
+		/* Default overrides here. */
+}
+
+cta-modal[theme="dark"] {
+		--cta-modal-background-color: #333;
+
+		/* Dark mode overrides here. */
+}</code></pre>
+
 		<hr />
 
 		<p>
