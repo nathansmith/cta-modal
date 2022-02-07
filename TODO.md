@@ -1,3 +1,3 @@
-TODO list:
+- Write unit test
 
-- Maybe convert to TypeScript?
+- Write documentation in README.md
