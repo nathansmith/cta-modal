@@ -639,6 +639,9 @@ if ('customElements' in window) {
 			// Get delay.
 			const delay = isMotionOkay ? ANIMATION_DURATION : 0;
 
+			// Get scrollbar width.
+			const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
 			// Get active element.
 			const activeElement = document.activeElement as HTMLElement;
 
@@ -652,11 +655,16 @@ if ('customElements' in window) {
 			// =============
 
 			if (this.isActive) {
-				// Hide scrollbar.
-				document.body.style.overflow = HIDDEN;
-
 				// Show modal.
 				this.modalScroll.style.display = BLOCK;
+
+				// Hide scrollbar.
+				document.documentElement.style.overflow = HIDDEN;
+
+				// Add placeholder?
+				if (scrollbarWidth) {
+					document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+				}
 
 				// Set flag.
 				if (isMotionOkay) {
@@ -715,7 +723,10 @@ if ('customElements' in window) {
 					this.modalScroll.style.display = NONE;
 
 					// Show scrollbar.
-					document.body.style.overflow = EMPTY_STRING;
+					document.documentElement.style.overflow = EMPTY_STRING;
+
+					// Remove placeholder.
+					document.documentElement.style.paddingRight = EMPTY_STRING;
 
 					// Fire callback?
 					if (typeof f === 'function') {
