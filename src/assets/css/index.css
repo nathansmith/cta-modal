@@ -277,3 +277,32 @@ pre {
 	padding: 1em;
 	tab-size: 2;
 }
+
+/*
+==========================
+Scrolling "too tall" area.
+==========================
+*/
+
+.too-tall-grizzly {
+	border-color: blue;
+	border-style: dashed;
+	border-width: 2px;
+
+	margin-bottom: 20px;
+	height: 100vh;
+
+	position: relative;
+}
+
+.too-tall-grizzly:before {
+	content: '🐻';
+
+	font-size: 100px;
+	line-height: 1;
+
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
