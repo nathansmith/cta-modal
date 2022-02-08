@@ -18,7 +18,7 @@ describe('index.ts', () => {
 	let fakeKeyEventInvalid: KeyboardEvent;
 	let fakeKeyEventTab: KeyboardEvent;
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// eslint-disable-next-line
 	let instance: any;
 
 	// ================
@@ -176,11 +176,11 @@ describe('index.ts', () => {
 		expect(instance.modal.getAttribute('aria-labelledby')).toBe(instance.heading?.id);
 	});
 
-	// =======================
-	// Test attribute changes.
-	// =======================
+	// ======================================
+	// Test `attributeChangedCallback` Event.
+	// ======================================
 
-	test('handles attribute changes', () => {
+	test('handles `attributeChangedCallback` event', () => {
 		// Apply changes.
 		instance.setAttribute('active', String(false));
 		instance.setAttribute('animated', String(false));
@@ -206,6 +206,18 @@ describe('index.ts', () => {
 		expect(instance.buttonClose.getAttribute('title')).toBe('CLOSE_VALUE_2');
 	});
 
+	// ==========================
+	// Test `focusElement` event.
+	// ==========================
+
+	test('handles `focusElement` event', () => {
+		// Apply changes.
+		instance.focusElement(fakeFocusElement);
+
+		// Test assertions.
+		expect(fakeFocusElement.focus).toBeCalled();
+	});
+
 	// ========================
 	// Test `focusModal` event.
 	// ========================
@@ -224,82 +236,6 @@ describe('index.ts', () => {
 		// Test assertions.
 		expect(focus).toBeCalled();
 		expect(instance.modalScroll.scrollTo).toBeCalledWith(0, 0);
-	});
-
-	// ==================================
-	// Test `isOutsideModal` calculation.
-	// ==================================
-
-	test('handles `isOutsideModal` calculation', () => {
-		// Overrides.
-		instance.isActive = true;
-
-		// Test assertions.
-		expect(instance.isOutsideModal(undefined)).toBe(false);
-		expect(instance.isOutsideModal(instance.buttonClose)).toBe(false);
-		expect(instance.isOutsideModal(document.createElement('div'))).toBe(true);
-	});
-
-	// ==========================
-	// Test `focusElement` event.
-	// ==========================
-
-	test('handles `focusElement` event', () => {
-		// Apply changes.
-		instance.focusElement(fakeFocusElement);
-
-		// Test assertions.
-		expect(fakeFocusElement.focus).toBeCalled();
-	});
-
-	// ===============================
-	// Test `handleClickToggle` event.
-	// ===============================
-
-	test('handles `handleClickToggle` event', () => {
-		// Apply changes.
-		instance.handleClickToggle();
-		instance.handleClickToggle(fakeClickEventButton);
-		instance.handleClickToggle(fakeKeyEventEnter);
-		instance.handleClickToggle(fakeKeyEventInvalid);
-
-		// Test assertions.
-		expect(fakeClickEventButton.preventDefault).toBeCalled();
-		expect(fakeKeyEventEnter.preventDefault).toBeCalled();
-		expect((fakeKeyEventEnter.target as HTMLElement).classList.contains).toBeCalled();
-		expect((fakeKeyEventEnter.target as HTMLElement).closest).toBeCalled();
-	});
-
-	// ===========================
-	// Test `handleKeyDown` event.
-	// ===========================
-
-	test('handles `handleKeyDown` event', () => {
-		// Spy.
-		const handleClickToggle = jest.spyOn(instance, 'handleClickToggle');
-		const handleFocusIn = jest.spyOn(instance, 'handleFocusIn');
-
-		// Overrides.
-		instance.isActive = false;
-
-		// Apply changes.
-		instance.handleKeyDown(fakeKeyEventTab);
-		instance.handleKeyDown(fakeKeyEventEscape);
-
-		// Test assertions.
-		expect(handleClickToggle).not.toBeCalled();
-		expect(handleFocusIn).not.toBeCalled();
-
-		// Overrides.
-		instance.isActive = true;
-
-		// Apply changes.
-		instance.handleKeyDown(fakeKeyEventTab);
-		instance.handleKeyDown(fakeKeyEventEscape);
-
-		// Test assertions.
-		expect(handleClickToggle).toBeCalled();
-		expect(handleFocusIn).toBeCalled();
 	});
 
 	// ================================
@@ -327,6 +263,24 @@ describe('index.ts', () => {
 
 		// Test assertions.
 		expect(handleClickToggle).toBeCalled();
+	});
+
+	// ===============================
+	// Test `handleClickToggle` event.
+	// ===============================
+
+	test('handles `handleClickToggle` event', () => {
+		// Apply changes.
+		instance.handleClickToggle();
+		instance.handleClickToggle(fakeClickEventButton);
+		instance.handleClickToggle(fakeKeyEventEnter);
+		instance.handleClickToggle(fakeKeyEventInvalid);
+
+		// Test assertions.
+		expect(fakeClickEventButton.preventDefault).toBeCalled();
+		expect(fakeKeyEventEnter.preventDefault).toBeCalled();
+		expect((fakeKeyEventEnter.target as HTMLElement).classList.contains).toBeCalled();
+		expect((fakeKeyEventEnter.target as HTMLElement).closest).toBeCalled();
 	});
 
 	// ===========================
@@ -371,15 +325,61 @@ describe('index.ts', () => {
 		expect(focusElement).toBeCalledWith(expect.any(Object));
 	});
 
-	// ==========================
-	// Test `isMotionOkay` event.
-	// ==========================
+	// ===========================
+	// Test `handleKeyDown` event.
+	// ===========================
 
-	test('handles `isMotionOkay` event', () => {
+	test('handles `handleKeyDown` event', () => {
+		// Spy.
+		const handleClickToggle = jest.spyOn(instance, 'handleClickToggle');
+		const handleFocusIn = jest.spyOn(instance, 'handleFocusIn');
+
+		// Overrides.
+		instance.isActive = false;
+
+		// Apply changes.
+		instance.handleKeyDown(fakeKeyEventTab);
+		instance.handleKeyDown(fakeKeyEventEscape);
+
+		// Test assertions.
+		expect(handleClickToggle).not.toBeCalled();
+		expect(handleFocusIn).not.toBeCalled();
+
+		// Overrides.
+		instance.isActive = true;
+
+		// Apply changes.
+		instance.handleKeyDown(fakeKeyEventTab);
+		instance.handleKeyDown(fakeKeyEventEscape);
+
+		// Test assertions.
+		expect(handleClickToggle).toBeCalled();
+		expect(handleFocusIn).toBeCalled();
+	});
+
+	// ================================
+	// Test `isMotionOkay` calculation.
+	// ================================
+
+	test('handles `isMotionOkay` calculation', () => {
 		// Overrides.
 		instance.isAnimated = true;
 
 		// Test assertion.
 		expect(instance.isMotionOkay()).toBe(true);
+	});
+
+	// ==================================
+	// Test `isOutsideModal` calculation.
+	// ==================================
+
+	test('handles `isOutsideModal` calculation', () => {
+		// Overrides.
+		instance.isActive = true;
+
+		// Test assertions.
+		expect(instance.isOutsideModal(undefined)).toBe(false);
+		expect(instance.isOutsideModal(instance.buttonClose)).toBe(false);
+		expect(instance.isOutsideModal(document.createElement('div'))).toBe(true);
 	});
 });
