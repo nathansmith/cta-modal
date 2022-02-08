@@ -14,8 +14,9 @@ let CLI_COMMAND = `
     terser
     ./dist/index.js
     --compress
-    --mangle
     --ecma 2018
+    --mangle
+    --mangle-props regex=/^_/
     --output ./dist/index.js
 `;
 
