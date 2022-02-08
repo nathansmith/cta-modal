@@ -29,15 +29,22 @@
 		"prebuild-html": "rimraf ./html",
 		"prepublishOnly": "npm run build",
 		"prepare": "node ./scripts/prepare.js",
-		"start": "vite --config vite.config.js"
+		"start": "vite --config vite.config.js",
+		"test": "jest",
+		"test-coverage": "jest --coverage"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.17.0",
+		"@babel/preset-env": "^7.16.11",
+		"@babel/preset-typescript": "^7.16.7",
+		"@types/jest": "^27.4.0",
 		"@typescript-eslint/eslint-plugin": "^5.10.2",
 		"eslint": "^8.6.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
 		"html-minifier": "^4.0.0",
 		"husky": "^7.0.4",
+		"jest": "^27.5.0",
 		"lint-staged": "^12.1.7",
 		"prettier": "^2.3.0",
 		"rimraf": "^3.0.2",
@@ -47,5 +54,11 @@
 	},
 	"lint-staged": {
 		"*.{css,html,js,json,md,scss,ts}": "prettier --write"
+	},
+	"jest": {
+		"collectCoverageFrom": [
+			"<rootDir>/src/**/*"
+		],
+		"testEnvironment": "jsdom"
 	}
 }

@@ -2,6 +2,7 @@
 # Directories.
 # ============
 
+coverage/
 dist/
 html/
 node_modules/

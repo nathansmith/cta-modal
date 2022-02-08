@@ -31,6 +31,7 @@ if ('customElements' in window) {
 	const SPACE = ' ';
 	const STATIC = 'static';
 	const TAB = 'tab';
+	const TEMPLATE = 'template';
 	const TITLE = 'title';
 
 	const FOCUSABLE_SELECTORS = [
@@ -46,7 +47,7 @@ if ('customElements' in window) {
 	// Style.
 	// ======
 
-	const style = `
+	const STYLE = `
 		<style>
 			*,
 			*:after,
@@ -239,7 +240,7 @@ if ('customElements' in window) {
 	// Template.
 	// =========
 
-	const focusTrap = `
+	const FOCUS_TRAP = `
 		<span
 			aria-hidden="true"
 			class="cta-modal__focus-trap"
@@ -247,11 +248,11 @@ if ('customElements' in window) {
 		></span>
 	`;
 
-	const modal = `
+	const MODAL = `
 		<slot name="button"></slot>
 
 		<div class="cta-modal__scroll" style="display:none">
-			${focusTrap}
+			${FOCUS_TRAP}
 
 			<div class="cta-modal__overlay">
 				<div
@@ -269,12 +270,15 @@ if ('customElements' in window) {
 				</div>
 			</div>
 
-			${focusTrap}
+			${FOCUS_TRAP}
 		</div>
 	`;
 
-	const markup = [style, modal].join(EMPTY_STRING).trim().replace(/\s+/g, SPACE);
-	const template = document.createElement('template');
+	// Get markup.
+	const markup = [STYLE, MODAL].join(EMPTY_STRING).trim().replace(/\s+/g, SPACE);
+
+	// Get template.
+	const template = document.createElement(TEMPLATE);
 	template.innerHTML = markup;
 
 	// ==========
@@ -282,27 +286,25 @@ if ('customElements' in window) {
 	// ==========
 
 	class CtaModal extends HTMLElement {
-		// Private & read-only types.
-		private readonly buttonClose: HTMLElement;
-		private readonly modal: HTMLElement;
-		private readonly modalOverlay: HTMLElement;
-		private readonly modalScroll: HTMLElement;
-		private readonly slotForButton: HTMLElement | null;
-		private readonly slotForModal: HTMLElement;
-
 		// Read-only types.
-		readonly shadowRoot: ShadowRoot;
+		readonly buttonClose: HTMLElement;
+		readonly heading: HTMLElement | null;
+		readonly modal: HTMLElement;
+		readonly modalOverlay: HTMLElement;
+		readonly modalScroll: HTMLElement;
+		readonly shadow: ShadowRoot;
+		readonly slotForButton: HTMLElement | null;
+		readonly slotForModal: HTMLElement;
 
-		// Private types.
-		private activeElement: HTMLElement | null = null;
-		private focusTrapList: NodeListOf<HTMLElement>;
-		private heading: HTMLElement | null;
-		private isActive = false;
-		private isAnimated = true;
-		private isHideShow = false;
-		private isStatic = false;
-		private timerForHide: number | undefined;
-		private timerForShow: number | undefined;
+		// Normal types.
+		activeElement: HTMLElement | null = null;
+		focusTrapList: NodeListOf<HTMLElement>;
+		isActive = false;
+		isAnimated = true;
+		isHideShow = false;
+		isStatic = false;
+		timerForHide: number | undefined;
+		timerForShow: number | undefined;
 
 		// =======================
 		// Lifecycle: constructor.
@@ -316,10 +318,10 @@ if ('customElements' in window) {
 			this.bind();
 
 			// Shadow DOM.
-			this.shadowRoot = this.attachShadow({ mode: 'open' });
+			this.shadow = this.attachShadow({ mode: 'closed' });
 
 			// Add template.
-			this.shadowRoot.appendChild(
+			this.shadow.appendChild(
 				// Clone node.
 				template.content.cloneNode(true)
 			);
@@ -332,15 +334,15 @@ if ('customElements' in window) {
 			this.heading = this.querySelector('h1, h2, h3, h4, h5, h6');
 
 			// Get shadow elements.
-			this.buttonClose = this.shadowRoot.querySelector('.cta-modal__close') as HTMLElement;
-			this.focusTrapList = this.shadowRoot.querySelectorAll('.cta-modal__focus-trap');
-			this.modal = this.shadowRoot.querySelector('.cta-modal') as HTMLElement;
-			this.modalOverlay = this.shadowRoot.querySelector('.cta-modal__overlay') as HTMLElement;
-			this.modalScroll = this.shadowRoot.querySelector('.cta-modal__scroll') as HTMLElement;
+			this.buttonClose = this.shadow.querySelector('.cta-modal__close') as HTMLElement;
+			this.focusTrapList = this.shadow.querySelectorAll('.cta-modal__focus-trap');
+			this.modal = this.shadow.querySelector('.cta-modal') as HTMLElement;
+			this.modalOverlay = this.shadow.querySelector('.cta-modal__overlay') as HTMLElement;
+			this.modalScroll = this.shadow.querySelector('.cta-modal__scroll') as HTMLElement;
 
 			// Early exit.
 			if (!this.slotForModal) {
-				throw new Error('Required [slot="modal"] not found inside <cta-modal>.');
+				window.console.error('Required [slot="modal"] not found inside <cta-modal>.');
 			}
 
 			// Set animation flag.
@@ -360,9 +362,9 @@ if ('customElements' in window) {
 			NOTE:
 			=====
 
-				We set this flag last, because the UI visuals within
-				are contingent on some of the other flags being set.
-			*/
+			We set this flag last, because the UI visuals within
+			are contingent on some of the other flags being set.
+		*/
 
 			// Set active flag.
 			this.setActiveFlag();
@@ -422,7 +424,7 @@ if ('customElements' in window) {
 		// Helper: bind `this` context.
 		// ============================
 
-		private bind() {
+		bind() {
 			// Get property names.
 			const propertyNames = Object.getOwnPropertyNames(
 				// Get prototype.
@@ -434,23 +436,23 @@ if ('customElements' in window) {
 				// Bind functions.
 				if (typeof this[name] === 'function') {
 					/*
-					=====
-					NOTE:
-					=====
+				=====
+				NOTE:
+				=====
 
-						Why use "@ts-expect-error" here?
+					Why use "@ts-expect-error" here?
 
-						Calling `*.bind(this)` is a standard practice
-						when using JavaScript classes. It is necessary
-						for functions that might change context because
-						they are interacting directly with DOM elements.
+					Calling `*.bind(this)` is a standard practice
+					when using JavaScript classes. It is necessary
+					for functions that might change context because
+					they are interacting directly with DOM elements.
 
-						Basically, I am telling TypeScript:
+					Basically, I am telling TypeScript:
 
-						"Let me live my life!"
+					"Let me live my life!"
 
-						😎
-					*/
+					😎
+				*/
 
 					// @ts-expect-error bind
 					this[name] = this[name].bind(this);
@@ -462,7 +464,7 @@ if ('customElements' in window) {
 		// Helper: add events.
 		// ===================
 
-		private addEvents() {
+		addEvents() {
 			// Prevent doubles.
 			this.removeEvents();
 
@@ -487,7 +489,7 @@ if ('customElements' in window) {
 		// Helper: remove events.
 		// ======================
 
-		private removeEvents() {
+		removeEvents() {
 			document.removeEventListener(FOCUSIN, this.handleFocusIn);
 			document.removeEventListener(KEYDOWN, this.handleKeyDown);
 
@@ -509,7 +511,7 @@ if ('customElements' in window) {
 		// Helper: set animation flag.
 		// ===========================
 
-		private setAnimationFlag() {
+		setAnimationFlag() {
 			this.isAnimated = this.getAttribute(ANIMATED) !== String(false);
 		}
 
@@ -517,7 +519,7 @@ if ('customElements' in window) {
 		// Helper: add close text.
 		// =======================
 
-		private setCloseTitle() {
+		setCloseTitle() {
 			// Get title.
 			const title = this.getAttribute(CLOSE) || CLOSE_TITLE;
 
@@ -529,7 +531,7 @@ if ('customElements' in window) {
 		// Helper: add heading ID.
 		// =======================
 
-		private setHeadingId() {
+		setHeadingId() {
 			// Add a11y heading.
 			if (this.heading) {
 				// Get ID.
@@ -545,7 +547,7 @@ if ('customElements' in window) {
 		// Helper: set active flag.
 		// ========================
 
-		private setActiveFlag() {
+		setActiveFlag() {
 			// Get flag.
 			const isActive = this.getAttribute(ACTIVE) === String(true);
 
@@ -565,7 +567,7 @@ if ('customElements' in window) {
 		// Helper: set static flag.
 		// ========================
 
-		private setStaticFlag() {
+		setStaticFlag() {
 			this.isStatic = this.getAttribute(STATIC) === String(true);
 		}
 
@@ -573,7 +575,7 @@ if ('customElements' in window) {
 		// Helper: focus element.
 		// ======================
 
-		private focusElement(element: HTMLElement) {
+		focusElement(element: HTMLElement) {
 			window.requestAnimationFrame(() => {
 				if (typeof element.focus === 'function') {
 					element.focus();
@@ -585,7 +587,7 @@ if ('customElements' in window) {
 		// Helper: focus modal.
 		// ====================
 
-		private focusModal() {
+		focusModal() {
 			window.requestAnimationFrame(() => {
 				this.modal.focus();
 				this.modalScroll.scrollTo(0, 0);
@@ -596,7 +598,7 @@ if ('customElements' in window) {
 		// Helper: detect outside modal.
 		// =============================
 
-		private isOutsideModal(element: HTMLElement) {
+		isOutsideModal(element?: HTMLElement) {
 			// Early exit.
 			if (!this.isActive || !element) {
 				return false;
@@ -616,7 +618,7 @@ if ('customElements' in window) {
 		// Helper: detect motion pref.
 		// ===========================
 
-		private isMotionOkay() {
+		isMotionOkay() {
 			// Get pref.
 			const { matches } = window.matchMedia(MEDIA_QUERY_FOR_MOTION);
 
@@ -628,7 +630,7 @@ if ('customElements' in window) {
 		// Helper: toggle modal.
 		// =====================
 
-		private toggleModalDisplay(f: unknown) {
+		toggleModalDisplay(f: unknown) {
 			// Set attribute.
 			this.setAttribute(ACTIVE, String(this.isActive));
 
@@ -742,7 +744,7 @@ if ('customElements' in window) {
 		// Event: overlay click.
 		// =====================
 
-		private handleClickOverlay(event: MouseEvent) {
+		handleClickOverlay(event: MouseEvent) {
 			// Early exit.
 			if (this.isHideShow || this.isStatic) {
 				return;
@@ -761,7 +763,7 @@ if ('customElements' in window) {
 		// Event: toggle modal.
 		// ====================
 
-		private handleClickToggle(event?: MouseEvent | KeyboardEvent) {
+		handleClickToggle(event?: MouseEvent | KeyboardEvent) {
 			// Set later.
 			let key = EMPTY_STRING;
 			let target = null;
@@ -833,7 +835,7 @@ if ('customElements' in window) {
 		// Event: focus in document.
 		// =========================
 
-		private handleFocusIn() {
+		handleFocusIn() {
 			// Early exit.
 			if (!this.isActive) {
 				return;
@@ -842,7 +844,7 @@ if ('customElements' in window) {
 			// prettier-ignore
 			const activeElement = (
 				// Get active element.
-				this.shadowRoot.activeElement ||
+				this.shadow.activeElement ||
 				document.activeElement
 			) as HTMLElement;
 
@@ -885,7 +887,7 @@ if ('customElements' in window) {
 		// Event: key press.
 		// =================
 
-		private handleKeyDown({ key }: KeyboardEvent) {
+		handleKeyDown({ key }: KeyboardEvent) {
 			// Early exit.
 			if (!this.isActive) {
 				return;
