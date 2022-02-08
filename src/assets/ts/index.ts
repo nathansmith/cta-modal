@@ -362,9 +362,9 @@ if ('customElements' in window) {
 			NOTE:
 			=====
 
-			We set this flag last, because the UI visuals within
-			are contingent on some of the other flags being set.
-		*/
+				We set this flag last, because the UI visuals within
+				are contingent on some of the other flags being set.
+			*/
 
 			// Set active flag.
 			this._setActiveFlag();
@@ -436,23 +436,23 @@ if ('customElements' in window) {
 				// Bind functions.
 				if (typeof this[name] === 'function') {
 					/*
-				=====
-				NOTE:
-				=====
+					=====
+					NOTE:
+					=====
 
-					Why use "@ts-expect-error" here?
+						Why use "@ts-expect-error" here?
 
-					Calling `*.bind(this)` is a standard practice
-					when using JavaScript classes. It is necessary
-					for functions that might change context because
-					they are interacting directly with DOM elements.
+						Calling `*.bind(this)` is a standard practice
+						when using JavaScript classes. It is necessary
+						for functions that might change context because
+						they are interacting directly with DOM elements.
 
-					Basically, I am telling TypeScript:
+						Basically, I am telling TypeScript:
 
-					"Let me live my life!"
+						"Let me live my life!"
 
-					😎
-				*/
+						😎
+					*/
 
 					// @ts-expect-error bind
 					this[name] = this[name].bind(this);
