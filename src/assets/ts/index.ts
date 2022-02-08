@@ -294,7 +294,7 @@ if ('customElements' in window) {
 		readonly modalScroll: HTMLElement;
 		readonly shadow: ShadowRoot;
 		readonly slotForButton: HTMLElement | null;
-		readonly slotForModal: HTMLElement;
+		readonly slotForModal: HTMLElement | null;
 
 		// Normal types.
 		activeElement: HTMLElement | null = null;
@@ -328,7 +328,7 @@ if ('customElements' in window) {
 
 			// Get slots.
 			this.slotForButton = this.querySelector('[slot="button"');
-			this.slotForModal = this.querySelector('[slot="modal"]') as HTMLElement;
+			this.slotForModal = this.querySelector('[slot="modal"]');
 
 			// Get elements.
 			this.heading = this.querySelector('h1, h2, h3, h4, h5, h6');
@@ -342,8 +342,7 @@ if ('customElements' in window) {
 
 			// Early exit.
 			if (!this.slotForModal) {
-				// istanbul ignore next
-				throw new Error('Required [slot="modal"] not found inside <cta-modal>.');
+				window.console.error('Required [slot="modal"] not found inside <cta-modal>.');
 			}
 
 			// Set animation flag.
@@ -853,10 +852,16 @@ if ('customElements' in window) {
 			const isFocusTrap1 = activeElement === this.focusTrapList[0];
 			const isFocusTrap2 = activeElement === this.focusTrapList[1];
 
-			// Get "real" elements.
-			const focusListReal = Array.from(
-				this.slotForModal.querySelectorAll(FOCUSABLE_SELECTORS)
-			) as HTMLElement[];
+			// Set later.
+			let focusListReal: HTMLElement[] = [];
+
+			// Slot exists?
+			if (this.slotForModal) {
+				// Get "real" elements.
+				focusListReal = Array.from(
+					this.slotForModal.querySelectorAll(FOCUSABLE_SELECTORS)
+				) as HTMLElement[];
+			}
 
 			// Get "shadow" elements.
 			const focusListShadow = Array.from(

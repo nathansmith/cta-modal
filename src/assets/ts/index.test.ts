@@ -38,6 +38,15 @@ describe('index.ts', () => {
 	// =================
 
 	beforeEach(() => {
+		// =========================
+		// Shim for `console.error`.
+		// =========================
+
+		Object.defineProperty(window.console, 'error', {
+			writable: true,
+			value: jest.fn(),
+		});
+
 		// ======================
 		// Shim for `matchMedia`.
 		// ======================
@@ -404,5 +413,22 @@ describe('index.ts', () => {
 		expect(instance.isOutsideModal(undefined)).toBe(false);
 		expect(instance.isOutsideModal(instance.buttonClose)).toBe(false);
 		expect(instance.isOutsideModal(document.createElement('div'))).toBe(true);
+	});
+
+	// ====================================
+	// Test missing [slot="modal"] element.
+	// ====================================
+
+	test('handles missing [slot="modal"] element', () => {
+		// Test assertions.
+		expect(window.console.error).not.toBeCalled();
+
+		// Initialize without [slot="modal"] element.
+		document.body.innerHTML = `<cta-modal></cta-modal>`;
+
+		// Test assertions.
+		expect(window.console.error).toBeCalledWith(
+			'Required [slot="modal"] not found inside <cta-modal>.'
+		);
 	});
 });
