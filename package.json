@@ -19,7 +19,7 @@
 		"url": "git@github.com:nathansmith/cta-modal.git"
 	},
 	"scripts": {
-		"build": "npm run build-dist && npm run build-html",
+		"build": "npm run test-coverage && npm run build-dist && npm run build-html",
 		"build-html": "vite build --base=./ --config vite.config.js",
 		"build-dist": "tsc --project tsconfig.json",
 		"format": "prettier --write ./*.{css,html,js,json,md,scss} **/*.{css,html,js,json,md,scss}",

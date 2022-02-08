@@ -218,6 +218,29 @@ describe('index.ts', () => {
 		expect(fakeFocusElement.focus).toBeCalled();
 	});
 
+	// ==================================================
+	// Test `focusElement` with `activeElement` selected.
+	// ==================================================
+
+	test('handles `focusElement` with `activeElement` selected', () => {
+		// Get buttons.
+		const buttonClose = instance.slotForModal.querySelector('button');
+		const buttonOpen = instance.slotForButton.querySelector('button');
+
+		// Overrides.
+		instance.isActive = true;
+		instance.modalScroll.style.display = 'block';
+
+		// Apply changes.
+		buttonClose.click();
+
+		// Overrides.
+		instance.activeElement = buttonOpen;
+
+		// Run timers.
+		jest.runAllTimers();
+	});
+
 	// ========================
 	// Test `focusModal` event.
 	// ========================
