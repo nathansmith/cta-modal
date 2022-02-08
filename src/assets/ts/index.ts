@@ -342,7 +342,8 @@ if ('customElements' in window) {
 
 			// Early exit.
 			if (!this.slotForModal) {
-				window.console.error('Required [slot="modal"] not found inside <cta-modal>.');
+				// istanbul ignore next
+				throw new Error('Required [slot="modal"] not found inside <cta-modal>.');
 			}
 
 			// Set animation flag.
