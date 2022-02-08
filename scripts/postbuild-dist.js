@@ -12,10 +12,11 @@ const { minifyWebComponent } = require('./minifyWebComponent');
 
 let CLI_COMMAND = `
     terser
+    ./dist/index.js
     --compress
     --mangle
+    --ecma 2018
     --output ./dist/index.js
-    -- ./dist/index.js
 `;
 
 CLI_COMMAND = CLI_COMMAND.trim().replace(/\s+/g, ' ');
