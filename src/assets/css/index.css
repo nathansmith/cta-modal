@@ -297,7 +297,7 @@ Scrolling "too tall" area.
 
 .too-tall-grizzly:before {
 	content: '🦒';
-	font-size: 200px;
+	font-size: 100px;
 	line-height: 1;
 
 	transform: translate(-50%, -50%);
