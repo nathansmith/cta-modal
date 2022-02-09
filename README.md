@@ -19,9 +19,9 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 	<div slot="button">
 		<p>
 			<button
-                class="cta-modal-toggle"
-                type="button"
-            >Open modal</button>
+				class="cta-modal-toggle"
+				type="button"
+			>Open modal</button>
 		</p>
 	</div>
 
@@ -30,9 +30,9 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 		<p>Modal content</p>
 		<p>
 			<button
-                class="cta-modal-toggle"
-                type="button"
-            >Close modal</button>
+				class="cta-modal-toggle"
+				type="button"
+			>Close modal</button>
 		</p>
 	</div>
 
@@ -58,10 +58,10 @@ There are a few optional attributes that can be set on the `<cta-modal>` tag.
 <!-- prettier-ignore -->
 ```html
 <cta-modal
-    active="true"
-    animated="false"
-    close="Get outta here!"
-    static="true"
+	active="true"
+	animated="false"
+	close="Get outta here!"
+	static="true"
 >
 	<!-- etc. -->
 </cta-modal>
