@@ -10,9 +10,53 @@ CTA Modal is a self-contained call to action [ARIA modal](https://www.w3.org/TR/
 
 ---
 
+## How to use: install
+
+If you are using [Node](https://nodejs.org/en/) with [NPM](https://www.npmjs.com/) (or [Yarn](https://yarnpkg.com/)) the install would look something like this.
+
+```bash
+# NPM.
+npm install cta-modal
+```
+
+```bash
+# Yarn.
+yarn add cta-modal
+```
+
+Then simply import it into your own `*.js` or `*.ts` file.
+
+```javascript
+// Node.
+require('cta-modal');
+```
+
+```javascript
+// ES6.
+import 'cta-modal';
+```
+
+---
+
+## How to use: flat file
+
+If you are building a site where you want to include the `*.js` file directly, then download [this file](https://host.sonspring.com/cta-modal/dist/index.js) and reference it within your `*.html` file.
+
+```html
+<head>
+  <script src="/path/to/cta-modal.js"></script>
+</head>
+```
+
+**Note:** Alternatively, you can put the `script` at the end of your page, before the closing `</body>` tag.
+
+But you may see a flash of unstyled content, before the JS is parsed and attaches to the `<cta-modal>` tag. Placing it in the `<head>` ensures that the JS is parsed _ahead_ of time (no pun intended).
+
+---
+
 ## How to use: basics
 
-Just include a reference to the `*.js` file somewhere in your page. After that, all you need to do is type HTML like so.
+After ensuring the JS file is loaded in your code, all you need to do is type HTML like so.
 
 The rest of the details are abstracted away. Additional accessibility hooks are added automatically.
 
