@@ -78,22 +78,29 @@ describe('index.ts', () => {
     // ==================
 
     document.body.innerHTML = `
-            <cta-modal>
-                <div slot="button">
-                    <p>
-                        <button class="cta-modal-toggle" type="button">Toggle modal</button>
-                    </p>
-                </div>
+      <cta-modal>
 
-                <div slot="modal">
-                    <h2>Hello world</h2>
+        <div slot="button">
+          <p>
+            <button
+              class="cta-modal-toggle"
+              type="button"
+            >Toggle modal</button>
+          </p>
+        </div>
 
-                    <p>
-                        <button class="cta-modal-toggle" type="button">Toggle modal</button>
-                    </p>
-                </div>
-            </cta-modal>
-        `;
+        <div slot="modal">
+          <h2>Hello world</h2>
+          <p>
+            <button
+              class="cta-modal-toggle"
+              type="button"
+            >Toggle modal</button>
+          </p>
+        </div>
+
+      </cta-modal>
+    `;
 
     // =========================
     // Get instance of CtaModal.
