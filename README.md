@@ -16,25 +16,25 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 ```html
 <cta-modal>
 
-	<div slot="button">
-		<p>
-			<button
-				class="cta-modal-toggle"
-				type="button"
-			>Open modal</button>
-		</p>
-	</div>
+  <div slot="button">
+    <p>
+      <button
+        class="cta-modal-toggle"
+        type="button"
+      >Open modal</button>
+    </p>
+  </div>
 
-	<div slot="modal">
-		<h2>Modal title</h2>
-		<p>Modal content</p>
-		<p>
-			<button
-				class="cta-modal-toggle"
-				type="button"
-			>Close modal</button>
-		</p>
-	</div>
+  <div slot="modal">
+    <h2>Modal title</h2>
+    <p>Modal content</p>
+    <p>
+      <button
+        class="cta-modal-toggle"
+        type="button"
+      >Close modal</button>
+    </p>
+  </div>
 
 </cta-modal>
 ```
@@ -58,12 +58,15 @@ There are a few optional attributes that can be set on the `<cta-modal>` tag.
 <!-- prettier-ignore -->
 ```html
 <cta-modal
-	active="true"
-	animated="false"
-	close="Get outta here!"
-	static="true"
+  active="true"
+
+  animated="false"
+
+  close="Get outta here!"
+
+  static="true"
 >
-	<!-- etc. -->
+  <!-- etc. -->
 </cta-modal>
 ```
 
@@ -101,38 +104,38 @@ The following variables have been set to their default values. Feel free to twea
 
 ```css
 cta-modal {
-	/* Modal overlay. */
-	--cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
-	--cta-modal-overlay-padding-top: 20px;
-	--cta-modal-overlay-padding-left: 20px;
-	--cta-modal-overlay-padding-right: 20px;
-	--cta-modal-overlay-padding-bottom: 20px;
+  /* Modal overlay. */
+  --cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
+  --cta-modal-overlay-padding-top: 20px;
+  --cta-modal-overlay-padding-left: 20px;
+  --cta-modal-overlay-padding-right: 20px;
+  --cta-modal-overlay-padding-bottom: 20px;
 
-	/* Modal window. */
-	--cta-modal-background-color: #fff;
-	--cta-modal-border-radius: 5px;
-	--cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
-	--cta-modal-padding-top: 20px;
-	--cta-modal-padding-left: 20px;
-	--cta-modal-padding-right: 20px;
-	--cta-modal-padding-bottom: 20px;
-	--cta-modal-width: 500px;
+  /* Modal window. */
+  --cta-modal-background-color: #fff;
+  --cta-modal-border-radius: 5px;
+  --cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+  --cta-modal-padding-top: 20px;
+  --cta-modal-padding-left: 20px;
+  --cta-modal-padding-right: 20px;
+  --cta-modal-padding-bottom: 20px;
+  --cta-modal-width: 500px;
 
-	/* Modal close button. */
-	--cta-modal-close-color: #fff;
-	--cta-modal-close-background-color: #000;
-	--cta-modal-close-border-radius: 50%;
-	--cta-modal-close-box-shadow: 0 0 0 1px #fff;
-	--cta-modal-close-display: block;
-	--cta-modal-close-font-family: 'Arial', sans-serif;
-	--cta-modal-close-font-size: 23px;
-	--cta-modal-close-line-height: 26px;
-	--cta-modal-close-width: 26px;
+  /* Modal close button. */
+  --cta-modal-close-color: #fff;
+  --cta-modal-close-background-color: #000;
+  --cta-modal-close-border-radius: 50%;
+  --cta-modal-close-box-shadow: 0 0 0 1px #fff;
+  --cta-modal-close-display: block;
+  --cta-modal-close-font-family: 'Arial', sans-serif;
+  --cta-modal-close-font-size: 23px;
+  --cta-modal-close-line-height: 26px;
+  --cta-modal-close-width: 26px;
 
-	/* Modal close button - hover. */
-	--cta-modal-close-color-hover: #000;
-	--cta-modal-close-background-color-hover: #fff;
-	--cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
+  /* Modal close button - hover. */
+  --cta-modal-close-color-hover: #000;
+  --cta-modal-close-background-color-hover: #fff;
+  --cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
 }
 ```
 
@@ -144,11 +147,11 @@ For instance: Let's say you want to make all content within the `slot="button"` 
 
 ```css
 cta-modal [slot='button'] {
-	color: blue;
+  color: blue;
 }
 
 cta-modal [slot='modal'] {
-	color: red;
+  color: red;
 }
 ```
 
@@ -158,7 +161,7 @@ Here is another scenario. Perhaps you want to have a static modal, with only a s
 
 ```css
 cta-modal[static='true'] {
-	--cta-modal-close-display: none;
+  --cta-modal-close-display: none;
 }
 ```
 
@@ -168,11 +171,11 @@ If you want to provide a different set of style overrides for users who prefer [
 
 ```css
 @media (prefers-color-scheme: dark) {
-	cta-modal {
-		--cta-modal-background-color: #333;
+  cta-modal {
+    --cta-modal-background-color: #333;
 
-		/* Dark mode overrides here. */
-	}
+    /* Dark mode overrides here. */
+  }
 }
 ```
 
@@ -180,15 +183,15 @@ Or, you could scope the selector to a specific extra attribute of your choosing.
 
 ```css
 cta-modal {
-	--cta-modal-background-color: #fff;
+  --cta-modal-background-color: #fff;
 
-	/* Default overrides here. */
+  /* Default overrides here. */
 }
 
 cta-modal[theme='dark'] {
-	--cta-modal-background-color: #333;
+  --cta-modal-background-color: #333;
 
-	/* Dark mode overrides here. */
+  /* Dark mode overrides here. */
 }
 ```
 

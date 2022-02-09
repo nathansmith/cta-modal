@@ -1,21 +1,21 @@
 {
-	"compilerOptions": {
-		"esModuleInterop": true,
-		"lib": ["es2018", "dom"],
-		"module": "es6",
-		"moduleResolution": "node",
-		"noEmit": false,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"outDir": "./dist",
-		"removeComments": true,
-		"resolveJsonModule": true,
-		"sourceMap": false,
-		"strict": true,
-		"target": "es2018",
-		"useDefineForClassFields": true
-	},
-	"exclude": ["**/*.test.ts"],
-	"include": ["./src/**/*"]
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "lib": ["es2018", "dom"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2018",
+    "useDefineForClassFields": true
+  },
+  "exclude": ["**/*.test.ts"],
+  "include": ["./src/**/*"]
 }

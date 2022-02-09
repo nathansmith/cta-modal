@@ -14,42 +14,42 @@ Modal overrides.
 */
 
 cta-modal {
-	/* Modal overlay. */
-	--cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
-	--cta-modal-overlay-padding-top: 20px;
-	--cta-modal-overlay-padding-left: 20px;
-	--cta-modal-overlay-padding-right: 20px;
-	--cta-modal-overlay-padding-bottom: 20px;
+  /* Modal overlay. */
+  --cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
+  --cta-modal-overlay-padding-top: 20px;
+  --cta-modal-overlay-padding-left: 20px;
+  --cta-modal-overlay-padding-right: 20px;
+  --cta-modal-overlay-padding-bottom: 20px;
 
-	/* Modal window. */
-	--cta-modal-background-color: #fff;
-	--cta-modal-border-radius: 5px;
-	--cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
-	--cta-modal-padding-top: 20px;
-	--cta-modal-padding-left: 20px;
-	--cta-modal-padding-right: 20px;
-	--cta-modal-padding-bottom: 20px;
-	--cta-modal-width: 500px;
+  /* Modal window. */
+  --cta-modal-background-color: #fff;
+  --cta-modal-border-radius: 5px;
+  --cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+  --cta-modal-padding-top: 20px;
+  --cta-modal-padding-left: 20px;
+  --cta-modal-padding-right: 20px;
+  --cta-modal-padding-bottom: 20px;
+  --cta-modal-width: 500px;
 
-	/* Modal close button. */
-	--cta-modal-close-color: #fff;
-	--cta-modal-close-background-color: #000;
-	--cta-modal-close-border-radius: 50%;
-	--cta-modal-close-box-shadow: 0 0 0 1px #fff;
-	--cta-modal-close-display: block;
-	--cta-modal-close-font-family: 'Arial', sans-serif;
-	--cta-modal-close-font-size: 23px;
-	--cta-modal-close-line-height: 26px;
-	--cta-modal-close-width: 26px;
+  /* Modal close button. */
+  --cta-modal-close-color: #fff;
+  --cta-modal-close-background-color: #000;
+  --cta-modal-close-border-radius: 50%;
+  --cta-modal-close-box-shadow: 0 0 0 1px #fff;
+  --cta-modal-close-display: block;
+  --cta-modal-close-font-family: 'Arial', sans-serif;
+  --cta-modal-close-font-size: 23px;
+  --cta-modal-close-line-height: 26px;
+  --cta-modal-close-width: 26px;
 
-	/* Modal close button - hover. */
-	--cta-modal-close-color-hover: #000;
-	--cta-modal-close-background-color-hover: #fff;
-	--cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
+  /* Modal close button - hover. */
+  --cta-modal-close-color-hover: #000;
+  --cta-modal-close-background-color-hover: #fff;
+  --cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
 }
 
 cta-modal [slot='modal'] > *:last-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /*
@@ -69,8 +69,8 @@ Reset.
 */
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -80,21 +80,21 @@ Root.
 */
 
 html {
-	color: #333;
-	background-color: #fff;
-	font-family: sans-serif;
-	line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  font-family: sans-serif;
+  line-height: 1.5;
 }
 
 body {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 50em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50em;
 
-	padding-top: 20px;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
 }
 
 /*
@@ -114,7 +114,7 @@ ol,
 p,
 pre,
 ul {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /*
@@ -124,27 +124,27 @@ Headings.
 */
 
 h1 {
-	font-size: calc(1rem + 12px);
+  font-size: calc(1rem + 12px);
 }
 
 h2 {
-	font-size: calc(1rem + 10px);
+  font-size: calc(1rem + 10px);
 }
 
 h3 {
-	font-size: calc(1rem + 8px);
+  font-size: calc(1rem + 8px);
 }
 
 h4 {
-	font-size: calc(1rem + 6px);
+  font-size: calc(1rem + 6px);
 }
 
 h5 {
-	font-size: calc(1rem + 4px);
+  font-size: calc(1rem + 4px);
 }
 
 h6 {
-	font-size: calc(1rem + 2px);
+  font-size: calc(1rem + 2px);
 }
 
 /*
@@ -154,11 +154,11 @@ Horizontal rule.
 */
 
 hr {
-	border: 0;
-	border-top-color: #ccc;
-	border-top-style: solid;
-	border-top-width: 1px;
-	clear: both;
+  border: 0;
+  border-top-color: #ccc;
+  border-top-style: solid;
+  border-top-width: 1px;
+  clear: both;
 }
 
 /*
@@ -168,13 +168,13 @@ Links.
 */
 
 a {
-	color: blue;
-	cursor: pointer;
-	text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 a:hover {
-	color: orangered;
+  color: orangered;
 }
 
 /*
@@ -184,13 +184,13 @@ Lists.
 */
 
 ol {
-	list-style-type: decimal;
-	padding-left: 1.25em;
+  list-style-type: decimal;
+  padding-left: 1.25em;
 }
 
 ul {
-	list-style-type: disc;
-	padding-left: 1.25em;
+  list-style-type: disc;
+  padding-left: 1.25em;
 }
 
 /*
@@ -200,62 +200,62 @@ Form elements.
 */
 
 [disabled] {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 [tabindex='0'],
 a[href='#'],
 button,
 input[type='button'] {
-	user-select: none;
+  user-select: none;
 }
 
 button,
 input[type='button'] {
-	appearance: none;
-	color: #333;
-	background-color: #eee;
+  appearance: none;
+  color: #333;
+  background-color: #eee;
 
-	border: 0;
-	border-radius: 5px;
+  border: 0;
+  border-radius: 5px;
 
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
 
-	line-height: 2.5em;
-	padding-left: 0.75em;
-	padding-right: 0.75em;
+  line-height: 2.5em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
 }
 
 button:not([disabled]),
 input[type='button']:not([disabled]) {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 button:not([disabled]):hover,
 input[type='button']:not([disabled]):hover {
-	background-color: #ddd;
+  background-color: #ddd;
 }
 
 input:not([type]),
 input[type='email'],
 input[type='text'] {
-	color: #333;
-	background-color: #fff;
+  color: #333;
+  background-color: #fff;
 
-	border-color: #999;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px;
+  border-color: #999;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
 
-	font-family: inherit;
-	font-size: inherit;
+  font-family: inherit;
+  font-size: inherit;
 
-	line-height: 2.5em;
-	padding-left: 0.75em;
-	padding-right: 0.75em;
-	width: 100%;
+  line-height: 2.5em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  width: 100%;
 }
 
 /*
@@ -265,17 +265,17 @@ Code.
 */
 
 *:not(pre) > code {
-	background-color: #ffd;
+  background-color: #ffd;
 }
 
 pre {
-	border-radius: 5px;
-	color: #fff;
-	background-color: #345;
-	overflow-x: auto;
-	overflow-y: hidden;
-	padding: 1em;
-	tab-size: 2;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #345;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1em;
+  tab-size: 2;
 }
 
 /*
@@ -285,23 +285,23 @@ Scrolling "too tall" area.
 */
 
 .too-tall-grizzly {
-	border-color: blue;
-	border-style: dashed;
-	border-width: 2px;
+  border-color: blue;
+  border-style: dashed;
+  border-width: 2px;
 
-	margin-bottom: 20px;
-	height: 100vh;
+  margin-bottom: 20px;
+  height: 100vh;
 
-	position: relative;
+  position: relative;
 }
 
 .too-tall-grizzly:before {
-	content: '🦒';
-	font-size: 100px;
-	line-height: 1;
+  content: '🦒';
+  font-size: 100px;
+  line-height: 1;
 
-	transform: translate(-50%, -50%);
-	position: absolute;
-	top: 50%;
-	left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }

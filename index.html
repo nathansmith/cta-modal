@@ -1,458 +1,458 @@
 <!DOCTYPE html>
 <html lang="en-us">
-	<head>
-		<meta charset="utf-8" />
-		<title>CTA Modal - Web Component</title>
-		<meta
-			name="viewport"
-			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"
-		/>
-		<link rel="stylesheet" href="./src/assets/css/sanitize.css" />
-		<link rel="stylesheet" href="./src/assets/css/index.css" />
-		<script type="module" src="./src/assets/ts/index.ts"></script>
-		<script>
-			/*
-			=====
-			NOTE:
-			=====
+  <head>
+    <meta charset="utf-8" />
+    <title>CTA Modal - Web Component</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"
+    />
+    <link rel="stylesheet" href="./src/assets/css/sanitize.css" />
+    <link rel="stylesheet" href="./src/assets/css/index.css" />
+    <script type="module" src="./src/assets/ts/index.ts"></script>
+    <script>
+      /*
+      =====
+      NOTE:
+      =====
 
-				This is not needed for the typical Web Component
-				use case. It exists simply to show how "external"
-				triggers can still control toggling the modal.
-			*/
+        This is not needed for the typical Web Component
+        use case. It exists simply to show how "external"
+        triggers can still control toggling the modal.
+      */
 
-			function toggleModal(id) {
-				// Get modal.
-				const modal = document.getElementById(id);
+      function toggleModal(id) {
+        // Get modal.
+        const modal = document.getElementById(id);
 
-				// Modal exists?
-				if (modal) {
-					// Get flag.
-					const bool = modal.getAttribute('active') === String(true);
+        // Modal exists?
+        if (modal) {
+          // Get flag.
+          const bool = modal.getAttribute('active') === String(true);
 
-					// Set flag.
-					modal.setAttribute('active', !bool);
-				}
-			}
-		</script>
-	</head>
-	<body>
-		<h1>CTA Modal 🦒</h1>
+          // Set flag.
+          modal.setAttribute('active', !bool);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>CTA Modal 🦒</h1>
 
-		<p>
-			CTA Modal is a self-contained call to action
-			<a href="https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html"
-				>ARIA modal</a
-			>, built as a
-			<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Web Component</a>. It
-			has zero runtime dependencies beyond a single JavaScript file, and only requires authoring
-			HTML to use.
-		</p>
+    <p>
+      CTA Modal is a self-contained call to action
+      <a href="https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html"
+        >ARIA modal</a
+      >, built as a
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Web Component</a>. It
+      has zero runtime dependencies beyond a single JavaScript file, and only requires authoring
+      HTML to use.
+    </p>
 
-		<ul>
-			<li>
-				<p>
-					All the TypeScript code is well tested, with 💯
-					<a href="./coverage/index.ts.html">coverage</a>.
-				</p>
-			</li>
+    <ul>
+      <li>
+        <p>
+          All the TypeScript code is well tested, with 💯
+          <a href="./coverage/index.ts.html">coverage</a>.
+        </p>
+      </li>
 
-			<li>
-				<p>The compiled <a href="./dist/index.js">JS file</a> itself is less than 10 kilobytes.</p>
-			</li>
-		</ul>
+      <li>
+        <p>The compiled <a href="./dist/index.js">JS file</a> itself is less than 10 kilobytes.</p>
+      </li>
+    </ul>
 
-		<hr />
+    <hr />
 
-		<h2>Example: modal form</h2>
+    <h2>Example: modal form</h2>
 
-		<p>The following toggle triggers are located within a <code>&lt;cta-modal&gt;</code> tag.</p>
+    <p>The following toggle triggers are located within a <code>&lt;cta-modal&gt;</code> tag.</p>
 
-		<cta-modal id="ID_FOR_CTA_MODAL">
-			<div slot="button">
-				<p>
-					<a class="cta-modal-toggle" href="#">Toggle modal (href="#")</a>
-				</p>
+    <cta-modal id="ID_FOR_CTA_MODAL">
+      <div slot="button">
+        <p>
+          <a class="cta-modal-toggle" href="#">Toggle modal (href="#")</a>
+        </p>
 
-				<p>
-					<a class="cta-modal-toggle" role="button" tabindex="0">Toggle modal (role="button")</a>
-				</p>
+        <p>
+          <a class="cta-modal-toggle" role="button" tabindex="0">Toggle modal (role="button")</a>
+        </p>
 
-				<p>
-					<button class="cta-modal-toggle" type="button">Toggle modal (button)</button>
-				</p>
+        <p>
+          <button class="cta-modal-toggle" type="button">Toggle modal (button)</button>
+        </p>
 
-				<p>
-					<input class="cta-modal-toggle" type="button" value="Toggle modal (input)" />
-				</p>
+        <p>
+          <input class="cta-modal-toggle" type="button" value="Toggle modal (input)" />
+        </p>
 
-				<p>
-					<button class="cta-modal-toggle" type="button" disabled>
-						Toggle modal (disabled button)
-					</button>
-				</p>
+        <p>
+          <button class="cta-modal-toggle" type="button" disabled>
+            Toggle modal (disabled button)
+          </button>
+        </p>
 
-				<p>
-					<input
-						class="cta-modal-toggle"
-						type="button"
-						disabled
-						value="Toggle modal (disabled input)"
-					/>
-				</p>
-			</div>
+        <p>
+          <input
+            class="cta-modal-toggle"
+            type="button"
+            disabled
+            value="Toggle modal (disabled input)"
+          />
+        </p>
+      </div>
 
-			<div slot="modal">
-				<h2>Hello world</h2>
+      <div slot="modal">
+        <h2>Hello world</h2>
 
-				<p>
-					<label for="ID_FOR_INPUT_NAME">Name</label>
-					<input type="text" id="ID_FOR_INPUT_NAME" />
-				</p>
+        <p>
+          <label for="ID_FOR_INPUT_NAME">Name</label>
+          <input type="text" id="ID_FOR_INPUT_NAME" />
+        </p>
 
-				<p>
-					<label for="ID_FOR_INPUT_EMAIL">Email</label>
-					<input type="email" id="ID_FOR_INPUT_EMAIL" />
-				</p>
+        <p>
+          <label for="ID_FOR_INPUT_EMAIL">Email</label>
+          <input type="email" id="ID_FOR_INPUT_EMAIL" />
+        </p>
 
-				<p>
-					<button type="button">Submit</button>
-					&nbsp;
-					<a class="cta-modal-toggle" role="button" tabindex="0">Cancel</a>
-				</p>
-			</div>
-		</cta-modal>
+        <p>
+          <button type="button">Submit</button>
+          &nbsp;
+          <a class="cta-modal-toggle" role="button" tabindex="0">Cancel</a>
+        </p>
+      </div>
+    </cta-modal>
 
-		<hr />
+    <hr />
 
-		<h2>Example: modal scroll</h2>
+    <h2>Example: modal scroll</h2>
 
-		<p>The following toggle triggers are located within a <code>&lt;cta-modal&gt;</code> tag.</p>
+    <p>The following toggle triggers are located within a <code>&lt;cta-modal&gt;</code> tag.</p>
 
-		<cta-modal>
-			<div slot="button">
-				<p>
-					<a class="cta-modal-toggle" href="#">Toggle modal (href="#")</a>
-				</p>
+    <cta-modal>
+      <div slot="button">
+        <p>
+          <a class="cta-modal-toggle" href="#">Toggle modal (href="#")</a>
+        </p>
 
-				<p>
-					<a class="cta-modal-toggle" role="button" tabindex="0">Toggle modal (role="button")</a>
-				</p>
+        <p>
+          <a class="cta-modal-toggle" role="button" tabindex="0">Toggle modal (role="button")</a>
+        </p>
 
-				<p>
-					<button class="cta-modal-toggle" type="button">Toggle modal (button)</button>
-				</p>
+        <p>
+          <button class="cta-modal-toggle" type="button">Toggle modal (button)</button>
+        </p>
 
-				<p>
-					<input class="cta-modal-toggle" type="button" value="Toggle modal (input)" />
-				</p>
+        <p>
+          <input class="cta-modal-toggle" type="button" value="Toggle modal (input)" />
+        </p>
 
-				<p>
-					<button class="cta-modal-toggle" type="button" disabled>
-						Toggle modal (disabled button)
-					</button>
-				</p>
+        <p>
+          <button class="cta-modal-toggle" type="button" disabled>
+            Toggle modal (disabled button)
+          </button>
+        </p>
 
-				<p>
-					<input
-						class="cta-modal-toggle"
-						type="button"
-						disabled
-						value="Toggle modal (disabled input)"
-					/>
-				</p>
-			</div>
+        <p>
+          <input
+            class="cta-modal-toggle"
+            type="button"
+            disabled
+            value="Toggle modal (disabled input)"
+          />
+        </p>
+      </div>
 
-			<div slot="modal">
-				<h2>This is a tall tale</h2>
+      <div slot="modal">
+        <h2>This is a tall tale</h2>
 
-				<p>The modal container will scroll, if necessary.</p>
+        <p>The modal container will scroll, if necessary.</p>
 
-				<p
-					>Here is a <code>&lt;div&gt;</code> tag that is
-					<a href="https://berenstainbears.fandom.com/wiki/Too-Tall_Grizzly">too tall</a>.</p
-				>
+        <p
+          >Here is a <code>&lt;div&gt;</code> tag that is
+          <a href="https://berenstainbears.fandom.com/wiki/Too-Tall_Grizzly">too tall</a>.</p
+        >
 
-				<div class="too-tall-grizzly"></div>
+        <div class="too-tall-grizzly"></div>
 
-				<p>You have reached the end.</p>
-			</div>
-		</cta-modal>
+        <p>You have reached the end.</p>
+      </div>
+    </cta-modal>
 
-		<hr />
+    <hr />
 
-		<h2>Example: external trigger</h2>
+    <h2>Example: external trigger</h2>
 
-		<p>
-			The following toggle trigger is <i>not</i> located within a
-			<code>&lt;cta-modal&gt;</code> tag.
-		</p>
+    <p>
+      The following toggle trigger is <i>not</i> located within a
+      <code>&lt;cta-modal&gt;</code> tag.
+    </p>
 
-		<p>Rather, it changes the <code>active="true"</code> attribute of its modal directly.</p>
+    <p>Rather, it changes the <code>active="true"</code> attribute of its modal directly.</p>
 
-		<p>
-			<button onclick="toggleModal('ID_FOR_CTA_MODAL')" type="button">External trigger</button>
-		</p>
+    <p>
+      <button onclick="toggleModal('ID_FOR_CTA_MODAL')" type="button">External trigger</button>
+    </p>
 
-		<hr />
+    <hr />
 
-		<h2>How to use: basics</h2>
+    <h2>How to use: basics</h2>
 
-		<p>
-			Just include a reference to the <code>*.js</code> file somewhere in your page. After that, all
-			you need to do is type HTML like so.
-		</p>
+    <p>
+      Just include a reference to the <code>*.js</code> file somewhere in your page. After that, all
+      you need to do is type HTML like so.
+    </p>
 
-		<p>
-			The rest of the details are abstracted away. Additional accessibility hooks are added
-			automatically.
-		</p>
+    <p>
+      The rest of the details are abstracted away. Additional accessibility hooks are added
+      automatically.
+    </p>
 
-		<pre><code>&lt;cta-modal&gt;
+    <pre><code>&lt;cta-modal&gt;
 
-	&lt;div slot="button"&gt;
-		&lt;p&gt;
-			&lt;button
-				class="cta-modal-toggle"
-				type="button"
-			&gt;Open modal&lt;/button&gt;
-		&lt;/p&gt;
-	&lt;/div&gt;
+  &lt;div slot="button"&gt;
+    &lt;p&gt;
+      &lt;button
+        class="cta-modal-toggle"
+        type="button"
+      &gt;Open modal&lt;/button&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
 
-	&lt;div slot="modal"&gt;
-		&lt;h2&gt;Modal title&lt;/h2&gt;
-		&lt;p&gt;Modal content&lt;/p&gt;
-		&lt;p&gt;
-			&lt;button
-				class="cta-modal-toggle"
-				type="button"
-			&gt;Close modal&lt;/button&gt;
-		&lt;/p&gt;
-	&lt;/div&gt;
+  &lt;div slot="modal"&gt;
+    &lt;h2&gt;Modal title&lt;/h2&gt;
+    &lt;p&gt;Modal content&lt;/p&gt;
+    &lt;p&gt;
+      &lt;button
+        class="cta-modal-toggle"
+        type="button"
+      &gt;Close modal&lt;/button&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
 
 &lt;/cta-modal&gt;</code></pre>
 
-		<p>
-			<b>Note:</b> The inner tags with <code>slot</code> attributes yield specific functionality.
-			Beyond that, any markup you want can go inside each of them.
-		</p>
+    <p>
+      <b>Note:</b> The inner tags with <code>slot</code> attributes yield specific functionality.
+      Beyond that, any markup you want can go inside each of them.
+    </p>
 
-		<ul>
-			<li>
-				<p> <code>&lt;div slot="button"&gt;</code> is <b>optional</b>. </p>
+    <ul>
+      <li>
+        <p> <code>&lt;div slot="button"&gt;</code> is <b>optional</b>. </p>
 
-				<p> It contains anything you want shown in the <i>page</i> (not in the <i>modal</i>). </p>
-			</li>
+        <p> It contains anything you want shown in the <i>page</i> (not in the <i>modal</i>). </p>
+      </li>
 
-			<li>
-				<p> <code>&lt;div slot="modal"&gt;</code> is <b>required</b>. </p>
+      <li>
+        <p> <code>&lt;div slot="modal"&gt;</code> is <b>required</b>. </p>
 
-				<p> It contains anything you want shown in the <i>modal</i> (not in the <i>page</i>). </p>
-			</li>
-		</ul>
+        <p> It contains anything you want shown in the <i>modal</i> (not in the <i>page</i>). </p>
+      </li>
+    </ul>
 
-		<p>
-			If you do not include a <code>slot="button"</code> element, then you will need to manually
-			control setting the <code>&lt;cta-modal active="true"&gt;</code> attribute yourself.
-		</p>
+    <p>
+      If you do not include a <code>slot="button"</code> element, then you will need to manually
+      control setting the <code>&lt;cta-modal active="true"&gt;</code> attribute yourself.
+    </p>
 
-		<hr />
+    <hr />
 
-		<h2>How to use: extras</h2>
+    <h2>How to use: extras</h2>
 
-		<p>
-			There are a few optional attributes that can be set on the
-			<code>&lt;cta-modal&gt;</code> tag.
-		</p>
+    <p>
+      There are a few optional attributes that can be set on the
+      <code>&lt;cta-modal&gt;</code> tag.
+    </p>
 
-		<pre><code>&lt;cta-modal
-	active="true"
+    <pre><code>&lt;cta-modal
+  active="true"
 
-	animated="false"
+  animated="false"
 
-	close="Get outta here!"
+  close="Get outta here!"
 
-	static="true"
+  static="true"
 &gt;
-	&lt;!-- etc. --&gt;
+  &lt;!-- etc. --&gt;
 &lt;/cta-modal&gt;</code></pre>
 
-		<ul>
-			<li>
-				<p> <code>active="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
+    <ul>
+      <li>
+        <p> <code>active="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
 
-				<p> You can use this to force a modal to display, without a user clicking anything. </p>
+        <p> You can use this to force a modal to display, without a user clicking anything. </p>
 
-				<p>
-					I suggest using this sparingly, because we all know that unexpected modals can be
-					annoying.
-				</p>
-			</li>
+        <p>
+          I suggest using this sparingly, because we all know that unexpected modals can be
+          annoying.
+        </p>
+      </li>
 
-			<li>
-				<p> <code>animated="false"</code> &mdash; Implicitly <code>true</code> by default. </p>
+      <li>
+        <p> <code>animated="false"</code> &mdash; Implicitly <code>true</code> by default. </p>
 
-				<p> This will cause the modal to hide/show immediately, without a fade animation. </p>
+        <p> This will cause the modal to hide/show immediately, without a fade animation. </p>
 
-				<p>
-					If a user has their operating system's preference set for
-					<code>prefers-reduced-motion</code> the animation will be disabled regardless of the flag.
-				</p>
-			</li>
+        <p>
+          If a user has their operating system's preference set for
+          <code>prefers-reduced-motion</code> the animation will be disabled regardless of the flag.
+        </p>
+      </li>
 
-			<li>
-				<p> <code>close="TEXT HERE"</code> &mdash; Implicitly <code>"Close"</code> by default. </p>
+      <li>
+        <p> <code>close="TEXT HERE"</code> &mdash; Implicitly <code>"Close"</code> by default. </p>
 
-				<p>
-					You can use this attribute to localize the text string shown in the close button's
-					<code>title="Close"</code> tooltip.
-				</p>
+        <p>
+          You can use this attribute to localize the text string shown in the close button's
+          <code>title="Close"</code> tooltip.
+        </p>
 
-				<p>
-					Whatever you put here will be shown on mouse hover, and will be read aloud to
-					<a href="https://en.wikipedia.org/wiki/Screen_reader">screen readers</a>.
-				</p>
-			</li>
+        <p>
+          Whatever you put here will be shown on mouse hover, and will be read aloud to
+          <a href="https://en.wikipedia.org/wiki/Screen_reader">screen readers</a>.
+        </p>
+      </li>
 
-			<li>
-				<p> <code>static="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
+      <li>
+        <p> <code>static="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
 
-				<p> This will prevent clicks on the page overlay from triggering a modal close. </p>
+        <p> This will prevent clicks on the page overlay from triggering a modal close. </p>
 
-				<p>
-					Additionally, the <code>escape</code> key will be ignored. Whereas, normally that key
-					would also dismiss the modal.
-				</p>
-			</li>
-		</ul>
+        <p>
+          Additionally, the <code>escape</code> key will be ignored. Whereas, normally that key
+          would also dismiss the modal.
+        </p>
+      </li>
+    </ul>
 
-		<hr />
+    <hr />
 
-		<h2>How to use: styling</h2>
+    <h2>How to use: styling</h2>
 
-		<p>
-			If you want to override the default styles of the modal, that needs to be done via CSS
-			variables.
-		</p>
+    <p>
+      If you want to override the default styles of the modal, that needs to be done via CSS
+      variables.
+    </p>
 
-		<p>
-			The reason for this is Web Components use the "shadow DOM" which does not inherit styles from
-			the parent page.
-		</p>
+    <p>
+      The reason for this is Web Components use the "shadow DOM" which does not inherit styles from
+      the parent page.
+    </p>
 
-		<p>
-			The following variables have been set to their default values. Feel free to tweak them to your
-			liking.
-		</p>
+    <p>
+      The following variables have been set to their default values. Feel free to tweak them to your
+      liking.
+    </p>
 
-		<pre><code>cta-modal {
-	/* Modal overlay. */
-	--cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
-	--cta-modal-overlay-padding-top: 20px;
-	--cta-modal-overlay-padding-left: 20px;
-	--cta-modal-overlay-padding-right: 20px;
-	--cta-modal-overlay-padding-bottom: 20px;
+    <pre><code>cta-modal {
+  /* Modal overlay. */
+  --cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
+  --cta-modal-overlay-padding-top: 20px;
+  --cta-modal-overlay-padding-left: 20px;
+  --cta-modal-overlay-padding-right: 20px;
+  --cta-modal-overlay-padding-bottom: 20px;
 
-	/* Modal window. */
-	--cta-modal-background-color: #fff;
-	--cta-modal-border-radius: 5px;
-	--cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
-	--cta-modal-padding-top: 20px;
-	--cta-modal-padding-left: 20px;
-	--cta-modal-padding-right: 20px;
-	--cta-modal-padding-bottom: 20px;
-	--cta-modal-width: 500px;
+  /* Modal window. */
+  --cta-modal-background-color: #fff;
+  --cta-modal-border-radius: 5px;
+  --cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+  --cta-modal-padding-top: 20px;
+  --cta-modal-padding-left: 20px;
+  --cta-modal-padding-right: 20px;
+  --cta-modal-padding-bottom: 20px;
+  --cta-modal-width: 500px;
 
-	/* Modal close button. */
-	--cta-modal-close-color: #fff;
-	--cta-modal-close-background-color: #000;
-	--cta-modal-close-border-radius: 50%;
-	--cta-modal-close-box-shadow: 0 0 0 1px #fff;
-	--cta-modal-close-display: block;
-	--cta-modal-close-font-family: 'Arial', sans-serif;
-	--cta-modal-close-font-size: 23px;
-	--cta-modal-close-line-height: 26px;
-	--cta-modal-close-width: 26px;
+  /* Modal close button. */
+  --cta-modal-close-color: #fff;
+  --cta-modal-close-background-color: #000;
+  --cta-modal-close-border-radius: 50%;
+  --cta-modal-close-box-shadow: 0 0 0 1px #fff;
+  --cta-modal-close-display: block;
+  --cta-modal-close-font-family: 'Arial', sans-serif;
+  --cta-modal-close-font-size: 23px;
+  --cta-modal-close-line-height: 26px;
+  --cta-modal-close-width: 26px;
 
-	/* Modal close button - hover. */
-	--cta-modal-close-color-hover: #000;
-	--cta-modal-close-background-color-hover: #fff;
-	--cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
+  /* Modal close button - hover. */
+  --cta-modal-close-color-hover: #000;
+  --cta-modal-close-background-color-hover: #fff;
+  --cta-modal-close-box-shadow-hover: 0 0 0 1px #000;
 }</code></pre>
 
-		<h3>Styling content</h3>
+    <h3>Styling content</h3>
 
-		<p
-			>If you want to target content that is displayed <i>within</i> a modal, you can use a
-			descendant selector scoped to the context of the <code>cta-modal</code> tag.</p
-		>
+    <p
+      >If you want to target content that is displayed <i>within</i> a modal, you can use a
+      descendant selector scoped to the context of the <code>cta-modal</code> tag.</p
+    >
 
-		<p
-			>For instance: Let's say you want to make all content within the
-			<code>slot="button"</code> area blue, and wanted to make all the content within the
-			<code>slot="modal"</code> area red. That would look something like this.</p
-		>
+    <p
+      >For instance: Let's say you want to make all content within the
+      <code>slot="button"</code> area blue, and wanted to make all the content within the
+      <code>slot="modal"</code> area red. That would look something like this.</p
+    >
 
-		<pre><code>cta-modal [slot="button"] {
-	color: blue;
+    <pre><code>cta-modal [slot="button"] {
+  color: blue;
 }
 
 cta-modal [slot="modal"] {
-	color: red;
+  color: red;
 }</code></pre>
 
-		<h3>No close button</h3>
+    <h3>No close button</h3>
 
-		<p>
-			Here is another scenario. Perhaps you want to have a static modal, with only a single toggle
-			trigger to close it. If you intend to provide that yourself, you can hide the default close
-			button with CSS such as this.
-		</p>
+    <p>
+      Here is another scenario. Perhaps you want to have a static modal, with only a single toggle
+      trigger to close it. If you intend to provide that yourself, you can hide the default close
+      button with CSS such as this.
+    </p>
 
-		<pre><code>cta-modal[static="true"] {
-	--cta-modal-close-display: none;
+    <pre><code>cta-modal[static="true"] {
+  --cta-modal-close-display: none;
 }</code></pre>
 
-		<h3>Dark mode</h3>
+    <h3>Dark mode</h3>
 
-		<p>
-			If you want to provide a different set of style overrides for users who prefer
-			<a href="https://css-tricks.com/dark-modes-with-css/">dark mode</a>, you can scope your
-			selector within a media query. This would make the modal background dark gray.
-		</p>
+    <p>
+      If you want to provide a different set of style overrides for users who prefer
+      <a href="https://css-tricks.com/dark-modes-with-css/">dark mode</a>, you can scope your
+      selector within a media query. This would make the modal background dark gray.
+    </p>
 
-		<pre><code>@media (prefers-color-scheme: dark) {
-	cta-modal {
-		--cta-modal-background-color: #333;
+    <pre><code>@media (prefers-color-scheme: dark) {
+  cta-modal {
+    --cta-modal-background-color: #333;
 
-		/* Dark mode overrides here. */
-	}
+    /* Dark mode overrides here. */
+  }
 }</code></pre>
 
-		<p>
-			Or, you could scope the selector to a specific extra attribute of your choosing. Let's say
-			some modals in your page need to be dark, whereas others do not. You might consider this
-			approach.
-		</p>
+    <p>
+      Or, you could scope the selector to a specific extra attribute of your choosing. Let's say
+      some modals in your page need to be dark, whereas others do not. You might consider this
+      approach.
+    </p>
 
-		<pre><code>cta-modal {
-	--cta-modal-background-color: #fff;
+    <pre><code>cta-modal {
+  --cta-modal-background-color: #fff;
 
-	/* Default overrides here. */
+  /* Default overrides here. */
 }
 
 cta-modal[theme="dark"] {
-	--cta-modal-background-color: #333;
+  --cta-modal-background-color: #333;
 
-	/* Dark mode overrides here. */
+  /* Dark mode overrides here. */
 }</code></pre>
 
-		<hr />
+    <hr />
 
-		<p>
-			Created by <a href="http://twitter.com/nathansmith">Nathan Smith</a>. Licensed under
-			<a href="https://en.wikipedia.org/wiki/MIT_License">MIT</a> and
-			<a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GPL</a>.
-		</p>
-	</body>
+    <p>
+      Created by <a href="http://twitter.com/nathansmith">Nathan Smith</a>. Licensed under
+      <a href="https://en.wikipedia.org/wiki/MIT_License">MIT</a> and
+      <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GPL</a>.
+    </p>
+  </body>
 </html>

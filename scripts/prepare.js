@@ -24,8 +24,8 @@ const CLI_HUSKY = 'npx husky install';
 // ==============
 
 if (!existsSync(FILE_HUSKY)) {
-	global.console.log(CLI_HUSKY);
-	execSync(CLI_HUSKY);
+  global.console.log(CLI_HUSKY);
+  execSync(CLI_HUSKY);
 }
 
 // ====================
@@ -33,6 +33,6 @@ if (!existsSync(FILE_HUSKY)) {
 // ====================
 
 if (!existsSync(FILE_COMMIT)) {
-	global.console.log(CLI_COMMIT);
-	execSync(CLI_COMMIT);
+  global.console.log(CLI_COMMIT);
+  execSync(CLI_COMMIT);
 }

@@ -10,68 +10,68 @@ const { readdirSync, readFileSync, writeFileSync } = require('fs');
 // =============================================
 
 const minifyWebComponent = (pathToAssets) => {
-	// Get files.
-	const files = readdirSync(pathToAssets);
+  // Get files.
+  const files = readdirSync(pathToAssets);
 
-	// Loop through.
-	files.forEach((file) => {
-		// Encoding.
-		const encoding = 'utf8';
-		const options = { encoding };
+  // Loop through.
+  files.forEach((file) => {
+    // Encoding.
+    const encoding = 'utf8';
+    const options = { encoding };
 
-		// JS file?
-		if (file.match(/.js$/)) {
-			// Get file path.
-			const pathToFile = join(pathToAssets, file);
+    // JS file?
+    if (file.match(/.js$/)) {
+      // Get file path.
+      const pathToFile = join(pathToAssets, file);
 
-			// Get file text.
-			let fileText = readFileSync(pathToFile, options);
+      // Get file text.
+      let fileText = readFileSync(pathToFile, options);
 
-			// Minify whitespace.
-			fileText = fileText.trim();
-			fileText = fileText.replace(/\\t/g, '');
-			fileText = fileText.replace(/\\n/g, ' ');
-			fileText = fileText.replace(/\s+/g, ' ');
+      // Minify whitespace.
+      fileText = fileText.trim();
+      fileText = fileText.replace(/\\t/g, '');
+      fileText = fileText.replace(/\\n/g, ' ');
+      fileText = fileText.replace(/\s+/g, ' ');
 
-			// Trim multi-line strings.
-			fileText = fileText.replace(/`\s+/g, '`');
-			fileText = fileText.replace(/\s+`/g, '`');
+      // Trim multi-line strings.
+      fileText = fileText.replace(/`\s+/g, '`');
+      fileText = fileText.replace(/\s+`/g, '`');
 
-			// Trim "less than" brackets.
-			fileText = fileText.replace(/<\s+/g, '<');
-			fileText = fileText.replace(/\s+</g, '<');
+      // Trim "less than" brackets.
+      fileText = fileText.replace(/<\s+/g, '<');
+      fileText = fileText.replace(/\s+</g, '<');
 
-			// Trim "greater than" brackets.
-			fileText = fileText.replace(/>\s+/g, '>');
-			fileText = fileText.replace(/\s+>/g, '>');
+      // Trim "greater than" brackets.
+      fileText = fileText.replace(/>\s+/g, '>');
+      fileText = fileText.replace(/\s+>/g, '>');
 
-			// Trim commas.
-			fileText = fileText.replace(/,\s+/g, ',');
-			fileText = fileText.replace(/\s+,/g, ',');
+      // Trim commas.
+      fileText = fileText.replace(/,\s+/g, ',');
+      fileText = fileText.replace(/\s+,/g, ',');
 
-			// Trim colons.
-			fileText = fileText.replace(/:\s+/g, ':');
-			fileText = fileText.replace(/\s+:/g, ':');
+      // Trim colons.
+      fileText = fileText.replace(/:\s+/g, ':');
+      fileText = fileText.replace(/\s+:/g, ':');
 
-			// Trim semicolons.
-			fileText = fileText.replace(/;\s+/g, ';');
-			fileText = fileText.replace(/\s+;/g, ';');
+      // Trim semicolons.
+      fileText = fileText.replace(/;\s+/g, ';');
+      fileText = fileText.replace(/\s+;/g, ';');
 
-			// Trim "open" curly brackets.
-			fileText = fileText.replace(/\s+{/g, '{');
-			fileText = fileText.replace(/{\s+/g, '{');
+      // Trim "open" curly brackets.
+      fileText = fileText.replace(/\s+{/g, '{');
+      fileText = fileText.replace(/{\s+/g, '{');
 
-			// Trim "close" curly brackets.
-			fileText = fileText.replace(/\s+}/g, '}');
-			fileText = fileText.replace(/}\s+/g, '}');
+      // Trim "close" curly brackets.
+      fileText = fileText.replace(/\s+}/g, '}');
+      fileText = fileText.replace(/}\s+/g, '}');
 
-			// Trim unnecessary "use strict".
-			fileText = fileText.replace(/"use strict";/g, '');
+      // Trim unnecessary "use strict".
+      fileText = fileText.replace(/"use strict";/g, '');
 
-			// Write new file.
-			writeFileSync(pathToFile, fileText, options);
-		}
-	});
+      // Write new file.
+      writeFileSync(pathToFile, fileText, options);
+    }
+  });
 };
 
 // =======

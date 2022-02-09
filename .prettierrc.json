@@ -1,6 +1,7 @@
 {
-	"htmlWhitespaceSensitivity": "strict",
-	"printWidth": 100,
-	"singleQuote": true,
-	"useTabs": true
+  "htmlWhitespaceSensitivity": "strict",
+  "printWidth": 100,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false
 }
