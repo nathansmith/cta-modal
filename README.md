@@ -12,11 +12,16 @@ Just include a reference to the `*.js` file somewhere in your page. After that, 
 
 The rest of the details are abstracted away. Additional accessibility hooks are added automatically.
 
+<!-- prettier-ignore -->
 ```html
 <cta-modal>
+
 	<div slot="button">
 		<p>
-			<button class="cta-modal-toggle" type="button">Open modal</button>
+			<button
+                class="cta-modal-toggle"
+                type="button"
+            >Open modal</button>
 		</p>
 	</div>
 
@@ -24,9 +29,13 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 		<h2>Modal title</h2>
 		<p>Modal content</p>
 		<p>
-			<button class="cta-modal-toggle" type="button">Close modal</button>
+			<button
+                class="cta-modal-toggle"
+                type="button"
+            >Close modal</button>
 		</p>
 	</div>
+
 </cta-modal>
 ```
 
@@ -46,8 +55,14 @@ If you do not include a `slot="button"` element, then you will need to manually 
 
 There are a few optional attributes that can be set on the `<cta-modal>` tag.
 
+<!-- prettier-ignore -->
 ```html
-<cta-modal active="true" animated="false" close="Get outta here!" static="true">
+<cta-modal
+    active="true"
+    animated="false"
+    close="Get outta here!"
+    static="true"
+>
 	<!-- etc. -->
 </cta-modal>
 ```
