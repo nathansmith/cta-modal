@@ -95,7 +95,7 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 
   It contains anything you want shown in the _page_ (not in the _modal_).
 
-- `<div slot="modal">` is required.
+- `<div slot="modal">` is **required**.
 
   It contains anything you want shown in the _modal_ (not in the _page_).
 
