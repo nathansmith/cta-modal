@@ -136,7 +136,7 @@ cta-modal {
 }
 ```
 
-## Styling content
+### Styling content
 
 If you want to target content that is displayed within a modal, you can use a descendant selector scoped to the context of the `cta-modal` tag.
 
@@ -152,7 +152,7 @@ cta-modal [slot='modal'] {
 }
 ```
 
-## No close button
+### No close button
 
 Here is another scenario. Perhaps you want to have a static modal, with only a single toggle trigger to close it. If you intend to provide that yourself, you can hide the default close button with CSS such as this.
 
@@ -162,7 +162,7 @@ cta-modal[static='true'] {
 }
 ```
 
-## Dark mode
+### Dark mode
 
 If you want to provide a different set of style overrides for users who prefer [dark mode](https://css-tricks.com/dark-modes-with-css/), you can scope your selector within a media query. This would make the modal background dark gray.
 
