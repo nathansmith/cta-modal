@@ -8,6 +8,8 @@ CTA Modal is a self-contained call to action [ARIA modal](https://www.w3.org/TR/
 
 - You can view the source code on [GitHub](https://github.com/nathansmith/cta-modal).
 
+---
+
 ## How to use: basics
 
 Just include a reference to the `*.js` file somewhere in your page. After that, all you need to do is type HTML like so.
@@ -53,6 +55,8 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 
 If you do not include a `slot="button"` element, then you will need to manually control setting the `<cta-modal active="true">` attribute yourself.
 
+---
+
 ## How to use: extras
 
 There are a few optional attributes that can be set on the `<cta-modal>` tag.
@@ -95,6 +99,8 @@ There are a few optional attributes that can be set on the `<cta-modal>` tag.
   This will prevent clicks on the page overlay from triggering a modal close.
 
   Additionally, the `escape` key will be ignored. Whereas, normally that key would also dismiss the modal.
+
+---
 
 ## How to use: styling
 
