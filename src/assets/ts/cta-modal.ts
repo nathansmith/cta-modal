@@ -345,7 +345,7 @@ if ('customElements' in window) {
       // Set animation flag.
       this._setAnimationFlag();
 
-      // Set close text.
+      // Set close title.
       this._setCloseTitle();
 
       // Set heading ID.
