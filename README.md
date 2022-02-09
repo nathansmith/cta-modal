@@ -2,9 +2,11 @@
 
 CTA Modal is a self-contained call to action [ARIA modal](https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html), built as a [Web Component](https://developer.mozilla.org/en-US/docs/Web/Web_Components). It has zero runtime dependencies beyond a single JavaScript file, and only requires authoring HTML to use.
 
-- All the TypeScript code is well tested, with 💯 coverage.
+- All the TypeScript code is well tested, with 💯 [coverage](https://host.sonspring.com/cta-modal/coverage/index.ts.html).
 
-- The compiled JS file itself is less than 10 kilobytes.
+- The compiled [JS file](https://host.sonspring.com/cta-modal/dist/index.js) itself is less than 10 kilobytes.
+
+- You can view the source code on [GitHub](https://github.com/nathansmith/cta-modal).
 
 ## How to use: basics
 
