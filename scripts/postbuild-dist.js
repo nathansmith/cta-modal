@@ -12,12 +12,12 @@ const { minifyWebComponent } = require('./minifyWebComponent');
 
 let CLI_COMMAND = `
     terser
-    ./dist/index.js
+    ./dist/cta-modal.js
     --compress
     --ecma 2018
     --mangle
     --mangle-props regex=/^_/
-    --output ./dist/index.js
+    --output ./dist/cta-modal.js
 `;
 
 CLI_COMMAND = CLI_COMMAND.trim().replace(/\s+/g, ' ');

@@ -9,7 +9,7 @@
     />
     <link rel="stylesheet" href="./src/assets/css/sanitize.css" />
     <link rel="stylesheet" href="./src/assets/css/index.css" />
-    <script type="module" src="./src/assets/ts/index.ts"></script>
+    <script type="module" src="./src/assets/ts/cta-modal.ts"></script>
     <script>
       /*
       =====
@@ -60,8 +60,8 @@
       <li>
         <p
           >The compiled
-          <a href="https://host.sonspring.com/cta-modal/dist/index.js">JS file</a> itself is less
-          than 10 kilobytes.</p
+          <a href="https://host.sonspring.com/cta-modal/dist/cta-modal.js">JS file</a> itself is
+          less than 10 kilobytes.</p
         >
       </li>
 
@@ -207,11 +207,60 @@
 
     <hr />
 
+    <h2>How to use: install</h2>
+
+    <p>
+      If you are using <a href="https://nodejs.org/en/">Node</a> with
+      <a href="https://www.npmjs.com/">NPM</a> (or <a href="https://yarnpkg.com/">Yarn</a>) the
+      install would look something like this.
+    </p>
+
+    <pre><code># NPM.
+npm install cta-modal</code></pre>
+
+    <pre><code># Yarn.
+yarn add cta-modal</code></pre>
+
+    <p>Then simply import it into your own <code>*.js</code> or <code>*.ts</code> file.</p>
+
+    <pre><code>// Node.
+require('cta-modal');</code></pre>
+
+    <pre><code>// ES6.
+import 'cta-modal';</code></pre>
+
+    <hr />
+
+    <h2>How to use: flat file</h2>
+
+    <p>
+      If you are building a site where you want to include CTA Modal directly, then download the
+      <a href="https://host.sonspring.com/cta-modal/dist/cta-modal.js">cta-modal.js</a> file and
+      reference it within your <code>*.html</code> file.
+    </p>
+
+    <pre><code>&lt;head&gt;
+  &lt;script src="/path/to/cta-modal.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+
+    <p>
+      <b>Note:</b> Alternatively, you can put the <code>script</code> at the end of your page,
+      before the closing <code>&lt;/body&gt;</code> tag.
+    </p>
+
+    <p>
+      But you may see a flash of unstyled content, before the JS is parsed and attaches to the
+      <code>&lt;cta-modal&gt;</code> tag. Placing it in the <code>&lt;head&gt;</code> ensures that
+      the JS is parsed <i>ahead</i> of time (no pun intended).
+    </p>
+
+    <hr />
+
     <h2>How to use: basics</h2>
 
     <p>
-      Just include a reference to the <code>*.js</code> file somewhere in your page. After that, all
-      you need to do is type HTML like so.
+      Just include a reference to the <code>cta-modal.js</code> file somewhere in your page. After
+      that, all you need to do is type HTML like so.
     </p>
 
     <p>

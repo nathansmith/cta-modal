@@ -3,7 +3,7 @@
   "name": "cta-modal",
   "version": "1.0.0",
   "description": "Web Component call-to-action modal",
-  "main": "dist/index.js",
+  "main": "dist/cta-modal.js",
   "author": "Nathan Smith",
   "license": "MIT",
   "homepage": "https://github.com/nathansmith/cta-modal#readme",

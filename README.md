@@ -4,7 +4,7 @@ CTA Modal is a self-contained call to action [ARIA modal](https://www.w3.org/TR/
 
 - All the TypeScript code is well tested, with 💯 [coverage](https://host.sonspring.com/cta-modal/coverage/index.ts.html).
 
-- The compiled [JS file](https://host.sonspring.com/cta-modal/dist/index.js) itself is less than 10 kilobytes.
+- The compiled [cta-modal.js](https://host.sonspring.com/cta-modal/dist/cta-modal.js) itself is less than 10 kilobytes.
 
 - You can view the source code on [GitHub](https://github.com/nathansmith/cta-modal).
 
@@ -40,7 +40,7 @@ import 'cta-modal';
 
 ## How to use: flat file
 
-If you are building a site where you want to include the `*.js` file directly, then download [this file](https://host.sonspring.com/cta-modal/dist/index.js) and reference it within your `*.html` file.
+If you are building a site where you want to include CTA Modal directly, then download the [cta-modal.js](https://host.sonspring.com/cta-modal/dist/cta-modal.js) file and reference it within your own `*.html` file.
 
 ```html
 <head>

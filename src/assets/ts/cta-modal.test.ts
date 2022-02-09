@@ -1,5 +1,5 @@
 // Test subject.
-import './';
+import './cta-modal';
 
 // ====================
 // Describe `fileName`.
