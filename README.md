@@ -56,7 +56,7 @@ But you may see a flash of unstyled content, before the JS is parsed and attache
 
 ## How to use: basics
 
-After ensuring the JS file is loaded in your code, all you need to do is type HTML like so.
+After ensuring the CTA Modal is loaded in your code, all you need to do is type HTML like so.
 
 The rest of the details are abstracted away. Additional accessibility hooks are added automatically.
 
