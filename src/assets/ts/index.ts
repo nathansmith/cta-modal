@@ -23,8 +23,6 @@ if ('customElements' in window) {
 	const ESCAPE = 'escape';
 	const FOCUSIN = 'focusin';
 	const HIDDEN = 'hidden';
-	const ID = 'id';
-	const ID_FOR_CTA_MODAL_HEADING = 'ID_FOR_CTA_MODAL_HEADING';
 	const KEYDOWN = 'keydown';
 	const MEDIA_QUERY_FOR_MOTION = '(prefers-reduced-motion: no-preference)';
 	const NONE = 'none';
@@ -32,7 +30,6 @@ if ('customElements' in window) {
 	const STATIC = 'static';
 	const TAB = 'tab';
 	const TEMPLATE = 'template';
-	const TITLE = 'title';
 
 	const FOCUSABLE_SELECTORS = [
 		'a:not([disabled])',
@@ -524,7 +521,7 @@ if ('customElements' in window) {
 			const title = this.getAttribute(CLOSE) || CLOSE_TITLE;
 
 			// Set title.
-			this._buttonClose.setAttribute(TITLE, title);
+			this._buttonClose.title = title;
 		}
 
 		// =======================
@@ -535,10 +532,10 @@ if ('customElements' in window) {
 			// Add a11y heading.
 			if (this._heading) {
 				// Get ID.
-				const id = this._heading.id || ID_FOR_CTA_MODAL_HEADING;
+				const id = this._heading.id || `ID_${Math.random()}`;
 
 				// Set ID.
-				this._heading.setAttribute(ID, id);
+				this._heading.id = id;
 				this._modal.setAttribute(ARIA_LABELLEDBY, id);
 			}
 		}
