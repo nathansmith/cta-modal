@@ -22,6 +22,7 @@ if ('customElements' in window) {
   const EMPTY_STRING = '';
   const ENTER = 'enter';
   const ESCAPE = 'escape';
+  const FALSE = 'false';
   const FOCUSIN = 'focusin';
   const HIDDEN = 'hidden';
   const KEYDOWN = 'keydown';
@@ -31,6 +32,7 @@ if ('customElements' in window) {
   const STATIC = 'static';
   const TAB = 'tab';
   const TEMPLATE = 'template';
+  const TRUE = 'true';
 
   const FOCUSABLE_SELECTORS = [
     'a:not([disabled])',
@@ -381,24 +383,27 @@ if ('customElements' in window) {
     // ==============================
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-      // Changed active="…" value?
-      if (name === ACTIVE && oldValue !== newValue) {
-        this._setActiveFlag();
-      }
+      // Different old/new values?
+      if (oldValue !== newValue) {
+        // Changed active="…" value?
+        if (name === ACTIVE) {
+          this._setActiveFlag();
+        }
 
-      // Changed animated="…" value?
-      if (name === ANIMATED && oldValue !== newValue) {
-        this._setAnimationFlag();
-      }
+        // Changed animated="…" value?
+        if (name === ANIMATED) {
+          this._setAnimationFlag();
+        }
 
-      // Changed close="…" value?
-      if (name === CLOSE && oldValue !== newValue) {
-        this._setCloseTitle();
-      }
+        // Changed close="…" value?
+        if (name === CLOSE) {
+          this._setCloseTitle();
+        }
 
-      // Changed static="…" value?
-      if (name === STATIC && oldValue !== newValue) {
-        this._setStaticFlag();
+        // Changed static="…" value?
+        if (name === STATIC) {
+          this._setStaticFlag();
+        }
       }
     }
 
@@ -510,7 +515,7 @@ if ('customElements' in window) {
     // ===========================
 
     _setAnimationFlag() {
-      this._isAnimated = this.getAttribute(ANIMATED) !== String(false);
+      this._isAnimated = this.getAttribute(ANIMATED) !== FALSE;
     }
 
     // =======================
@@ -548,7 +553,7 @@ if ('customElements' in window) {
 
     _setActiveFlag() {
       // Get flag.
-      const isActive = this.getAttribute(ACTIVE) === String(true);
+      const isActive = this.getAttribute(ACTIVE) === TRUE;
 
       // Set flag.
       this._isActive = isActive;
@@ -567,7 +572,7 @@ if ('customElements' in window) {
     // ========================
 
     _setStaticFlag() {
-      this._isStatic = this.getAttribute(STATIC) === String(true);
+      this._isStatic = this.getAttribute(STATIC) === TRUE;
     }
 
     // ======================
@@ -670,7 +675,7 @@ if ('customElements' in window) {
         // Set flag.
         if (isMotionOkay) {
           this._isHideShow = true;
-          this._modalScroll.setAttribute(DATA_IS_SHOW, String(true));
+          this._modalScroll.setAttribute(DATA_IS_SHOW, TRUE);
         }
 
         // Fire callback?
@@ -708,7 +713,7 @@ if ('customElements' in window) {
         // Set flag.
         if (isMotionOkay) {
           this._isHideShow = true;
-          this._modalScroll.setAttribute(DATA_IS_HIDE, String(true));
+          this._modalScroll.setAttribute(DATA_IS_HIDE, TRUE);
         }
 
         // Await CSS animation.
@@ -796,7 +801,7 @@ if ('customElements' in window) {
       }
 
       // Get booleans.
-      const isValidEvent = event && typeof event.preventDefault === 'function';
+      const isValidEvent = !!(event && typeof event.preventDefault === 'function');
       const isValidClick = !!(button && isValidEvent && !key);
       const isValidKey = !!(button && isValidEvent && [ENTER, SPACE].includes(key));
 
