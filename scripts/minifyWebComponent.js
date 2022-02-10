@@ -33,6 +33,14 @@ const minifyWebComponent = (pathToAssets) => {
       fileText = fileText.replace(/\\n/g, ' ');
       fileText = fileText.replace(/\s+/g, ' ');
 
+      // Trim exclamation point.
+      fileText = fileText.replace(/\s+!/g, '!');
+      fileText = fileText.replace(/!\s+/g, '!');
+
+      // Trim pound sign.
+      fileText = fileText.replace(/\s+#/g, '#');
+      fileText = fileText.replace(/#\s+/g, '#');
+
       // Trim multi-line strings.
       fileText = fileText.replace(/`\s+/g, '`');
       fileText = fileText.replace(/\s+`/g, '`');
@@ -64,6 +72,14 @@ const minifyWebComponent = (pathToAssets) => {
       // Trim "close" curly brackets.
       fileText = fileText.replace(/\s+}/g, '}');
       fileText = fileText.replace(/}\s+/g, '}');
+
+      // Trim "open" parenthesis.
+      fileText = fileText.replace(/\s+\(/g, '(');
+      fileText = fileText.replace(/\(\s+/g, '(');
+
+      // Trim "close" parenthesis.
+      fileText = fileText.replace(/\s+\)/g, ')');
+      fileText = fileText.replace(/\)\s+/g, ')');
 
       // Trim unnecessary "use strict".
       fileText = fileText.replace(/"use strict";/g, '');

@@ -341,7 +341,7 @@ if ('customElements' in window) {
 
       // Early exit.
       if (!this._slotForModal) {
-        window.console.error('Required [slot="modal"] not found inside <cta-modal>.');
+        window.console.error('Required [slot="modal"] not found inside cta-modal.');
       }
 
       // Set animation flag.
