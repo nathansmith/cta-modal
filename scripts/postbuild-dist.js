@@ -13,7 +13,7 @@ const { minifyWebComponent } = require('./minifyWebComponent');
 let CLI_COMMAND = `
     terser
     ./dist/cta-modal.js
-    --compress
+    --compress booleans_as_integers=true
     --ecma 2018
     --mangle
     --mangle-props regex=/^_/
