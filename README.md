@@ -6,7 +6,7 @@ CTA Modal is a self-contained call to action [ARIA modal](https://www.w3.org/TR/
 
 - All the TypeScript code is well tested, with 💯 [coverage](https://host.sonspring.com/cta-modal/coverage/cta-modal.ts.html).
 
-- The compiled [cta-modal.js](https://host.sonspring.com/cta-modal/dist/cta-modal.js) file is less than 10 kilobytes.
+- The compiled [cta-modal.js](https://host.sonspring.com/cta-modal/dist/cta-modal.js) file is less than **9** kilobytes.
 
 - You can view the source code on [GitHub](https://github.com/nathansmith/cta-modal).
 

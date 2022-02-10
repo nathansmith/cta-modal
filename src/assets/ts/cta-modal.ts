@@ -18,7 +18,6 @@ if ('customElements' in window) {
   const CLOSE_TITLE = 'Close';
   const DATA_IS_HIDE = 'data-cta-modal-is-hide';
   const DATA_IS_SHOW = 'data-cta-modal-is-show';
-  const DOM_CONTENT_LOADED = 'DOMContentLoaded';
   const EMPTY_STRING = '';
   const ENTER = 'enter';
   const ESCAPE = 'escape';
@@ -922,7 +921,7 @@ if ('customElements' in window) {
   // Define element.
   // ===============
 
-  window.addEventListener(DOM_CONTENT_LOADED, () => {
+  window.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('cta-modal', CtaModal);
   });
 }

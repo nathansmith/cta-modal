@@ -11,13 +11,13 @@ const { minifyWebComponent } = require('./minifyWebComponent');
 // =========
 
 let CLI_COMMAND = `
-    terser
-    ./dist/cta-modal.js
-    --compress booleans_as_integers=true
-    --ecma 2018
-    --mangle
-    --mangle-props regex=/^_/
-    --output ./dist/cta-modal.js
+  terser
+  ./dist/cta-modal.js
+  --compress booleans_as_integers=true
+  --ecma 2020
+  --mangle
+  --mangle-props regex=/^_/
+  --output ./dist/cta-modal.js
 `;
 
 CLI_COMMAND = CLI_COMMAND.trim().replace(/\s+/g, ' ');

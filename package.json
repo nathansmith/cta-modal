@@ -1,6 +1,6 @@
 {
   "name": "cta-modal",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Web Component call-to-action modal",
   "author": "Nathan Smith",
   "license": "MIT",
@@ -22,20 +22,20 @@
     "url": "git@github.com:nathansmith/cta-modal.git"
   },
   "scripts": {
-    "build": "npm run test-coverage && npm run build-dist && npm run build-html",
-    "build-html": "vite build --base=./ --config vite.config.js",
-    "build-dist": "tsc --project tsconfig.json",
-    "format": "prettier --write ./*.{css,html,js,json,md,scss,ts} **/*.{css,html,js,json,md,scss,ts}",
-    "postbuild": "node ./scripts/postbuild.js",
-    "postbuild-dist": "node ./scripts/postbuild-dist.js",
-    "postbuild-html": "node ./scripts/postbuild-html.js",
+    "build": "node ./scripts/build",
+    "build-html": "node ./scripts/build-html",
+    "build-dist": "node ./scripts/build-dist",
+    "format": "node ./scripts/format",
+    "postbuild": "node ./scripts/postbuild",
+    "postbuild-dist": "node ./scripts/postbuild-dist",
+    "postbuild-html": "node ./scripts/postbuild-html",
     "prebuild-dist": "rimraf ./dist",
     "prebuild-html": "rimraf ./html",
     "prepublishOnly": "npm run build",
-    "prepare": "node ./scripts/prepare.js",
-    "start": "vite --config vite.config.js",
+    "prepare": "node ./scripts/prepare",
+    "start": "vite",
     "test": "jest",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage --silent"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
@@ -43,6 +43,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "esbuild": "^0.14.21",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
