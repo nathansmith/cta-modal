@@ -801,13 +801,13 @@ if ('customElements' in window) {
       }
 
       // Get booleans.
-      const isValidEvent = !!(event && typeof event.preventDefault === 'function');
-      const isValidClick = !!(button && isValidEvent && !key);
-      const isValidKey = !!(button && isValidEvent && [ENTER, SPACE].includes(key));
+      const isValidEvent = event && typeof event.preventDefault === 'function';
+      const isValidClick = button && isValidEvent && !key;
+      const isValidKey = button && isValidEvent && [ENTER, SPACE].includes(key);
 
-      const isButtonDisabled = !!(button && button.disabled);
-      const isButtonMissing = !!(isValidEvent && !button);
-      const isWrongKeyEvent = !!(key && !isValidKey);
+      const isButtonDisabled = button && button.disabled;
+      const isButtonMissing = isValidEvent && !button;
+      const isWrongKeyEvent = key && !isValidKey;
 
       // Early exit.
       if (isButtonDisabled || isButtonMissing || isWrongKeyEvent) {
