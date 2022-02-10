@@ -265,7 +265,7 @@ import 'cta-modal';</code></pre>
 
     <h2>How to use: basics</h2>
 
-    <p> After ensuring the JS is loaded in your code, all you need to do is type HTML like so. </p>
+    <p>After ensuring the JS is loaded in your code, all you need to do is type HTML like so.</p>
 
     <p>
       The rest of the details are abstracted away. Additional accessibility hooks are added
@@ -303,15 +303,15 @@ import 'cta-modal';</code></pre>
 
     <ul>
       <li>
-        <p> <code>&lt;div slot="button"&gt;</code> is <b>optional</b>. </p>
+        <p><code>&lt;div slot="button"&gt;</code> is <b>optional</b>.</p>
 
-        <p> It contains anything you want shown in the <i>page</i> (not in the <i>modal</i>). </p>
+        <p>It contains anything you want shown in the <i>page</i> (not in the <i>modal</i>).</p>
       </li>
 
       <li>
-        <p> <code>&lt;div slot="modal"&gt;</code> is <b>required</b>. </p>
+        <p><code>&lt;div slot="modal"&gt;</code> is <b>required</b>.</p>
 
-        <p> It contains anything you want shown in the <i>modal</i> (not in the <i>page</i>). </p>
+        <p>It contains anything you want shown in the <i>modal</i> (not in the <i>page</i>).</p>
       </li>
     </ul>
 
@@ -343,9 +343,9 @@ import 'cta-modal';</code></pre>
 
     <ul>
       <li>
-        <p> <code>active="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
+        <p><code>active="true"</code> &mdash; Implicitly <code>false</code> by default.</p>
 
-        <p> You can use this to force a modal to display, without a user clicking anything. </p>
+        <p>You can use this to force a modal to display, without a user clicking anything.</p>
 
         <p>
           I suggest using this sparingly, because we all know that unexpected modals can be
@@ -354,9 +354,9 @@ import 'cta-modal';</code></pre>
       </li>
 
       <li>
-        <p> <code>animated="false"</code> &mdash; Implicitly <code>true</code> by default. </p>
+        <p><code>animated="false"</code> &mdash; Implicitly <code>true</code> by default.</p>
 
-        <p> This will cause the modal to hide/show immediately, without a fade animation. </p>
+        <p>This will cause the modal to hide/show immediately, without a fade animation.</p>
 
         <p>
           If a user has their operating system's preference set for
@@ -365,7 +365,7 @@ import 'cta-modal';</code></pre>
       </li>
 
       <li>
-        <p> <code>close="TEXT HERE"</code> &mdash; Implicitly <code>"Close"</code> by default. </p>
+        <p><code>close="TEXT HERE"</code> &mdash; Implicitly <code>"Close"</code> by default.</p>
 
         <p>
           You can use this attribute to localize the text string shown in the close button's
@@ -379,9 +379,9 @@ import 'cta-modal';</code></pre>
       </li>
 
       <li>
-        <p> <code>static="true"</code> &mdash; Implicitly <code>false</code> by default. </p>
+        <p><code>static="true"</code> &mdash; Implicitly <code>false</code> by default.</p>
 
-        <p> This will prevent clicks on the page overlay from triggering a modal close. </p>
+        <p>This will prevent clicks on the page overlay from triggering a modal close.</p>
 
         <p>
           Additionally, the <code>escape</code> key will be ignored. Whereas, normally that key
@@ -396,11 +396,7 @@ import 'cta-modal';</code></pre>
 
     <p>
       If you want to override the default styles of the modal, that needs to be done via CSS
-      variables.
-    </p>
-
-    <p>
-      The reason for this is Web Components use the
+      variables. The reason for this is Web Components use the
       <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM"
         >shadow DOM</a
       >

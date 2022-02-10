@@ -150,9 +150,7 @@ There are a few optional attributes that can be set on the `<cta-modal>` tag.
 
 ## How to use: styling
 
-If you want to override the default styles of the modal, that needs to be done via CSS variables.
-
-The reason for this is Web Components use the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) which does not inherit styles from the parent page.
+If you want to override the default styles of the modal, that needs to be done via CSS variables. The reason for this is Web Components use the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) which does not inherit styles from the parent page.
 
 The following variables have been set to their default values. Feel free to tweak them to your liking.
 
