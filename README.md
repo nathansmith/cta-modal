@@ -89,7 +89,7 @@ The rest of the details are abstracted away. Additional accessibility hooks are 
 </cta-modal>
 ```
 
-**Note:** The inner tags with slot attributes yield specific functionality. Beyond that, any markup you want can go inside each of them.
+**Note:** The inner tags with `slot` attributes yield specific functionality. Beyond that, any markup you want can go inside each of them.
 
 - `<div slot="button">` is **optional**.
 
@@ -158,6 +158,9 @@ The following variables have been set to their default values. Feel free to twea
 
 ```css
 cta-modal {
+  /* Modal scroll backdrop. */
+  --cta-modal-scroll-z-index: 100000;
+
   /* Modal overlay. */
   --cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
   --cta-modal-overlay-padding-top: 20px;
