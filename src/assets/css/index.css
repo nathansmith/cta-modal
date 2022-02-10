@@ -20,6 +20,7 @@ cta-modal {
   --cta-modal-overlay-padding-left: 20px;
   --cta-modal-overlay-padding-right: 20px;
   --cta-modal-overlay-padding-bottom: 20px;
+  --cta-modal-overlay-z-index: 100000;
 
   /* Modal window. */
   --cta-modal-background-color: #fff;

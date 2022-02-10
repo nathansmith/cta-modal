@@ -156,15 +156,13 @@ The following variables have been set to their default values. Feel free to twea
 
 ```css
 cta-modal {
-  /* Modal scroll backdrop. */
-  --cta-modal-scroll-z-index: 100000;
-
   /* Modal overlay. */
   --cta-modal-overlay-background-color: rgba(0, 0, 0, 0.5);
   --cta-modal-overlay-padding-top: 20px;
   --cta-modal-overlay-padding-left: 20px;
   --cta-modal-overlay-padding-right: 20px;
   --cta-modal-overlay-padding-bottom: 20px;
+  --cta-modal-overlay-z-index: 100000;
 
   /* Modal window. */
   --cta-modal-background-color: #fff;

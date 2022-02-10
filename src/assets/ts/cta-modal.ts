@@ -123,7 +123,7 @@ if ('customElements' in window) {
         width: 100%;
         height: 100%;
 
-        z-index: var(--cta-modal-scroll-z-index, 100000);
+        z-index: var(--cta-modal-overlay-z-index, 100000);
         position: fixed;
         top: 0;
         left: 0;
