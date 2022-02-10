@@ -208,6 +208,7 @@ describe('index.ts', () => {
     expect(instance._isAnimated).toBe(false);
     expect(instance._isStatic).toBe(false);
     expect(instance._buttonClose.getAttribute('title')).toBe('CLOSE_VALUE_1');
+    expect(instance._buttonClose.getAttribute('aria-label')).toBe('CLOSE_VALUE_1');
 
     // Apply changes.
     instance.setAttribute('active', String(true));
@@ -220,6 +221,7 @@ describe('index.ts', () => {
     expect(instance._isAnimated).toBe(true);
     expect(instance._isStatic).toBe(true);
     expect(instance._buttonClose.getAttribute('title')).toBe('CLOSE_VALUE_2');
+    expect(instance._buttonClose.getAttribute('aria-label')).toBe('CLOSE_VALUE_2');
   });
 
   // ==========================

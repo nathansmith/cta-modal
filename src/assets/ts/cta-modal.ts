@@ -10,6 +10,7 @@ if ('customElements' in window) {
   const ACTIVE = 'active';
   const ANIMATED = 'animated';
   const ANIMATION_DURATION = 250;
+  const ARIA_LABEL = 'aria-label';
   const ARIA_LABELLEDBY = 'aria-labelledby';
   const BLOCK = 'block';
   const CLICK = 'click';
@@ -522,6 +523,7 @@ if ('customElements' in window) {
 
       // Set title.
       this._buttonClose.title = title;
+      this._buttonClose.setAttribute(ARIA_LABEL, title);
     }
 
     // =======================
