@@ -437,7 +437,7 @@ describe('index.ts', () => {
 
     // Test assertions.
     expect(window.console.error).toBeCalledWith(
-      'Required [slot="modal"] not found inside <cta-modal>.'
+      'Required [slot="modal"] not found inside cta-modal.'
     );
   });
 });
