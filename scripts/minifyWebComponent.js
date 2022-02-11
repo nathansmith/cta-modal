@@ -36,6 +36,12 @@ const minifyWebComponent = (pathToAssets) => {
       fileText = fileText.replace(/\\n/g, ' ');
       fileText = fileText.replace(/\s+/g, ' ');
 
+      // Minify CSS animation names.
+      fileText = fileText.replace(/HIDE-DIALOG/g, 'd0');
+      fileText = fileText.replace(/SHOW-DIALOG/g, 'd1');
+      fileText = fileText.replace(/HIDE-OVERLAY/g, 'o0');
+      fileText = fileText.replace(/SHOW-OVERLAY/g, 'o1');
+
       // Minify CSS class names.
       fileText = fileText.replace(/cta-modal__close/g, 'c');
       fileText = fileText.replace(/cta-modal__dialog/g, 'd');
@@ -43,11 +49,21 @@ const minifyWebComponent = (pathToAssets) => {
       fileText = fileText.replace(/cta-modal__overlay/g, 'o');
       fileText = fileText.replace(/cta-modal__scroll/g, 's');
 
-      // Minify CSS animation names.
-      fileText = fileText.replace(/HIDE-DIALOG/g, 'HD');
-      fileText = fileText.replace(/SHOW-DIALOG/g, 'SD');
-      fileText = fileText.replace(/HIDE-OVERLAY/g, 'HO');
-      fileText = fileText.replace(/SHOW-OVERLAY/g, 'SO');
+      // Minify attributes.
+      fileText = fileText.replace(/='-1'/g, '=-1');
+      fileText = fileText.replace(/='0'/g, '=0');
+      fileText = fileText.replace(/='c'/g, '=c');
+      fileText = fileText.replace(/='d'/g, '=d');
+      fileText = fileText.replace(/='f'/g, '=f');
+      fileText = fileText.replace(/='o'/g, '=o');
+      fileText = fileText.replace(/='s'/g, '=s');
+      fileText = fileText.replace(/='button'/g, '=button');
+      fileText = fileText.replace(/='dialog'/g, '=dialog');
+      fileText = fileText.replace(/='display:none'/g, '=display:none');
+      fileText = fileText.replace(/='false'/g, '=false');
+      fileText = fileText.replace(/='hidden'/g, '=hidden');
+      fileText = fileText.replace(/='modal'/g, '=modal');
+      fileText = fileText.replace(/='true'/g, '=true');
 
       // Minify last CSS semi-colon.
       fileText = fileText.replace(/;}/g, '}');

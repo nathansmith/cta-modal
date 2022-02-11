@@ -35,7 +35,7 @@ if ('customElements' in window) {
   const FOCUSABLE_SELECTORS = [
     'a:not([disabled])',
     'button:not([disabled])',
-    'input:not([disabled]):not([type="hidden"])',
+    "input:not([disabled]):not([type='hidden'])",
     'select:not([disabled])',
     'textarea:not([disabled])',
     '[tabindex="0"]:not([disabled])',
@@ -240,31 +240,31 @@ if ('customElements' in window) {
 
   const FOCUS_TRAP = `
     <span
-      aria-hidden="true"
-      class="cta-modal__focus-trap"
-      tabindex="0"
+      aria-hidden='true'
+      class='cta-modal__focus-trap'
+      tabindex='0'
     ></span>
   `;
 
   const MODAL = `
-    <slot name="button"></slot>
+    <slot name='button'></slot>
 
-    <div class="cta-modal__scroll" style="display:none">
+    <div class='cta-modal__scroll' style='display:none'>
       ${FOCUS_TRAP}
 
-      <div class="cta-modal__overlay">
+      <div class='cta-modal__overlay'>
         <div
-          aria-modal="true"
-          class="cta-modal__dialog"
-          role="dialog"
-          tabindex="-1"
+          aria-modal='true'
+          class='cta-modal__dialog'
+          role='dialog'
+          tabindex='-1'
         >
           <button
-            class="cta-modal__close"
-            type="button"
+            class='cta-modal__close'
+            type='button'
           >&times;</button>
 
-          <slot name="modal"></slot>
+          <slot name='modal'></slot>
         </div>
       </div>
 
@@ -325,8 +325,8 @@ if ('customElements' in window) {
       );
 
       // Get slots.
-      this._slotForButton = this.querySelector('[slot="button"');
-      this._slotForModal = this.querySelector('[slot="modal"]');
+      this._slotForButton = this.querySelector("[slot='button']");
+      this._slotForModal = this.querySelector("[slot='modal']");
 
       // Get elements.
       this._heading = this.querySelector('h1, h2, h3, h4, h5, h6');
@@ -383,22 +383,22 @@ if ('customElements' in window) {
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
       // Different old/new values?
       if (oldValue !== newValue) {
-        // Changed active="…" value?
+        // Changed [active="…"] value?
         if (name === ACTIVE) {
           this._setActiveFlag();
         }
 
-        // Changed animated="…" value?
+        // Changed [animated="…"] value?
         if (name === ANIMATED) {
           this._setAnimationFlag();
         }
 
-        // Changed close="…" value?
+        // Changed [close="…"] value?
         if (name === CLOSE) {
           this._setCloseTitle();
         }
 
-        // Changed static="…" value?
+        // Changed [static="…"] value?
         if (name === STATIC) {
           this._setStaticFlag();
         }
@@ -537,7 +537,7 @@ if ('customElements' in window) {
       // Add a11y heading.
       if (this._heading) {
         // Get ID.
-        const id = this._heading.id || `ID_${Math.random()}`;
+        const id = this._heading.id || `id_${Math.random()}`;
 
         // Set ID.
         this._heading.id = id;
@@ -704,7 +704,7 @@ if ('customElements' in window) {
 
           The reason is that another `<cta-modal>` in
           the page might have been pre-rendered with an
-          `active="true"` attribute. If so, we want to
+          [active="true"] attribute. If so, we want to
           leave the body's overflow value alone.
         */
       } else if (isModalVisible) {
