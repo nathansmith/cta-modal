@@ -26,7 +26,7 @@ if ('customElements' in window) {
   const FUNCTION = 'function';
   const HIDDEN = 'hidden';
   const KEYDOWN = 'keydown';
-  const MEDIA_QUERY_FOR_MOTION = '(prefers-reduced-motion: reduce)';
+  const PREFERS_REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
   const NONE = 'none';
   const SPACE = ' ';
   const STATIC = 'static';
@@ -57,7 +57,7 @@ if ('customElements' in window) {
         padding: 0;
       }
 
-      @media ${MEDIA_QUERY_FOR_MOTION} {
+      @media ${PREFERS_REDUCED_MOTION} {
         *,
         *:after,
         *:before {
@@ -539,10 +539,12 @@ if ('customElements' in window) {
       // Add a11y heading.
       if (this._heading) {
         // Get ID.
-        const id = this._heading.id || `id_${Math.random()}`;
+        const id = this._heading.id || Math.random();
 
-        // Set ID.
+        // @ts-expect-error number
         this._heading.id = id;
+
+        // @ts-expect-error number
         this._modal.setAttribute(ARIA_LABELLEDBY, id);
       }
     }
@@ -624,7 +626,7 @@ if ('customElements' in window) {
 
     _isMotionOkay() {
       // Get pref.
-      const { matches } = window.matchMedia(MEDIA_QUERY_FOR_MOTION);
+      const { matches } = window.matchMedia(PREFERS_REDUCED_MOTION);
 
       // Expose boolean.
       return this._isAnimated && !matches;
@@ -635,8 +637,8 @@ if ('customElements' in window) {
     // =====================
 
     _toggleModalDisplay(callback: () => void) {
-      // Set attribute.
-      this.setAttribute(ACTIVE, String(this._isActive));
+      // @ts-expect-error boolean
+      this.setAttribute(ACTIVE, this._isActive);
 
       // Get booleans.
       const isModalVisible = this._modalScroll.style.display === BLOCK;

@@ -37,10 +37,10 @@ const minifyWebComponent = (pathToAssets) => {
       fileText = fileText.replace(/\s+/g, ' ');
 
       // Minify CSS animation names.
-      fileText = fileText.replace(/HIDE-DIALOG/g, 'd0');
-      fileText = fileText.replace(/SHOW-DIALOG/g, 'd1');
-      fileText = fileText.replace(/HIDE-OVERLAY/g, 'o0');
-      fileText = fileText.replace(/SHOW-OVERLAY/g, 'o1');
+      fileText = fileText.replace(/HIDE-DIALOG/g, 'a');
+      fileText = fileText.replace(/SHOW-DIALOG/g, 'b');
+      fileText = fileText.replace(/HIDE-OVERLAY/g, 'c');
+      fileText = fileText.replace(/SHOW-OVERLAY/g, 'd');
 
       // Minify CSS class names.
       fileText = fileText.replace(/cta-modal__close/g, 'c');

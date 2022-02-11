@@ -55,7 +55,7 @@ describe('index.ts', () => {
       writable: true,
       value: () => {
         return {
-          matches: true,
+          matches: false,
         };
       },
     });
