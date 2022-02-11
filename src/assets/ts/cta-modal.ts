@@ -702,12 +702,12 @@ if ('customElements' in window) {
 
           We want to ensure that the modal is currently
           visible, because we do not want to put scroll
-          back on the `<body>` unnecessarily.
+          back on the `<html>` element unnecessarily.
 
           The reason is that another `<cta-modal>` in
           the page might have been pre-rendered with an
           [active="true"] attribute. If so, we want to
-          leave the body's overflow value alone.
+          leave the page's overflow value alone.
         */
       } else if (isModalVisible) {
         // Set flag.
