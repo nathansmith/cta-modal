@@ -27,11 +27,18 @@ const minifyWebComponent = (pathToAssets) => {
       // Get file text.
       let fileText = readFileSync(pathToFile, options);
 
+      // Raw globals, without `window` prefix.
+      fileText = fileText.replace(/window\./g, '');
+
       // Minify whitespace.
       fileText = fileText.trim();
       fileText = fileText.replace(/\\t/g, '');
       fileText = fileText.replace(/\\n/g, ' ');
       fileText = fileText.replace(/\s+/g, ' ');
+
+      // Trim last CSS semi-colon.
+      fileText = fileText.replace(/;}/g, '}');
+      fileText = fileText.replace(/;\s+}/g, '}');
 
       // Trim exclamation point.
       fileText = fileText.replace(/\s+!/g, '!');
@@ -80,9 +87,6 @@ const minifyWebComponent = (pathToAssets) => {
       // Trim "close" parenthesis.
       fileText = fileText.replace(/\s+\)/g, ')');
       fileText = fileText.replace(/\)\s+/g, ')');
-
-      // Trim unnecessary "use strict".
-      fileText = fileText.replace(/"use strict";/g, '');
 
       // Write new file.
       writeFileSync(pathToFile, fileText, options);

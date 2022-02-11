@@ -25,7 +25,6 @@ if ('customElements' in window) {
   const FOCUSIN = 'focusin';
   const HIDDEN = 'hidden';
   const KEYDOWN = 'keydown';
-  const MEDIA_QUERY_FOR_MOTION = '(prefers-reduced-motion: no-preference)';
   const NONE = 'none';
   const SPACE = ' ';
   const STATIC = 'static';
@@ -623,7 +622,7 @@ if ('customElements' in window) {
 
     _isMotionOkay() {
       // Get pref.
-      const { matches } = window.matchMedia(MEDIA_QUERY_FOR_MOTION);
+      const { matches } = window.matchMedia('(prefers-reduced-motion: no-preference)');
 
       // Expose boolean.
       return this._isAnimated && matches;
