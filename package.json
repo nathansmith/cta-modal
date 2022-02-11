@@ -22,7 +22,7 @@
     "url": "git@github.com:nathansmith/cta-modal.git"
   },
   "scripts": {
-    "build": "node ./scripts/build",
+    "build": "npm run test-coverage && node ./scripts/build",
     "build-html": "node ./scripts/build-html",
     "build-dist": "node ./scripts/build-dist",
     "format": "node ./scripts/format",

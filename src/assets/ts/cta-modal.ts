@@ -23,8 +23,10 @@ if ('customElements' in window) {
   const ESCAPE = 'escape';
   const FALSE = 'false';
   const FOCUSIN = 'focusin';
+  const FUNCTION = 'function';
   const HIDDEN = 'hidden';
   const KEYDOWN = 'keydown';
+  const MEDIA_QUERY_FOR_MOTION = '(prefers-reduced-motion: reduce)';
   const NONE = 'none';
   const SPACE = ' ';
   const STATIC = 'static';
@@ -55,7 +57,7 @@ if ('customElements' in window) {
         padding: 0;
       }
 
-      @media (prefers-reduced-motion: reduce) {
+      @media ${MEDIA_QUERY_FOR_MOTION} {
         *,
         *:after,
         *:before {
@@ -435,7 +437,7 @@ if ('customElements' in window) {
       // Loop through.
       propertyNames.forEach((name) => {
         // Bind functions.
-        if (typeof this[name] === 'function') {
+        if (typeof this[name] === FUNCTION) {
           /*
           =====
           NOTE:
@@ -579,7 +581,7 @@ if ('customElements' in window) {
 
     _focusElement(element: HTMLElement) {
       window.requestAnimationFrame(() => {
-        if (typeof element.focus === 'function') {
+        if (typeof element.focus === FUNCTION) {
           element.focus();
         }
       });
@@ -622,17 +624,17 @@ if ('customElements' in window) {
 
     _isMotionOkay() {
       // Get pref.
-      const { matches } = window.matchMedia('(prefers-reduced-motion: no-preference)');
+      const { matches } = window.matchMedia(MEDIA_QUERY_FOR_MOTION);
 
       // Expose boolean.
-      return this._isAnimated && matches;
+      return this._isAnimated && !matches;
     }
 
     // =====================
     // Helper: toggle modal.
     // =====================
 
-    _toggleModalDisplay(f: unknown) {
+    _toggleModalDisplay(callback: () => void) {
       // Set attribute.
       this.setAttribute(ACTIVE, String(this._isActive));
 
@@ -676,10 +678,8 @@ if ('customElements' in window) {
           this._modalScroll.setAttribute(DATA_SHOW, TRUE);
         }
 
-        // Fire callback?
-        if (typeof f === 'function') {
-          f();
-        }
+        // Fire callback.
+        callback();
 
         // Await CSS animation.
         this._timerForShow = window.setTimeout(() => {
@@ -715,9 +715,7 @@ if ('customElements' in window) {
         }
 
         // Fire callback?
-        if (typeof f === 'function') {
-          f();
-        }
+        callback();
 
         // Await CSS animation.
         this._timerForHide = window.setTimeout(() => {
@@ -793,13 +791,13 @@ if ('customElements' in window) {
           button = target as HTMLButtonElement;
 
           // Delegated click.
-        } else if (typeof target.closest === 'function') {
+        } else if (typeof target.closest === FUNCTION) {
           button = target.closest('.cta-modal-toggle') as HTMLButtonElement;
         }
       }
 
       // Get booleans.
-      const isValidEvent = event && typeof event.preventDefault === 'function';
+      const isValidEvent = event && typeof event.preventDefault === FUNCTION;
       const isValidClick = button && isValidEvent && !key;
       const isValidKey = button && isValidEvent && [ENTER, SPACE].includes(key);
 

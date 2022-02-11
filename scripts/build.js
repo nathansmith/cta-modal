@@ -9,10 +9,6 @@ const { execSync } = require('child_process');
 // =========
 
 let CLI_COMMAND = `
-  npm run test-coverage
-
-  &&
-
   npm run build-dist
 
   &&
