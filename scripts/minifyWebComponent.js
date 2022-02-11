@@ -36,55 +36,68 @@ const minifyWebComponent = (pathToAssets) => {
       fileText = fileText.replace(/\\n/g, ' ');
       fileText = fileText.replace(/\s+/g, ' ');
 
-      // Trim last CSS semi-colon.
+      // Minify CSS class names.
+      fileText = fileText.replace(/cta-modal__close/g, 'c');
+      fileText = fileText.replace(/cta-modal__dialog/g, 'd');
+      fileText = fileText.replace(/cta-modal__focus-trap/g, 'f');
+      fileText = fileText.replace(/cta-modal__overlay/g, 'o');
+      fileText = fileText.replace(/cta-modal__scroll/g, 's');
+
+      // Minify CSS animation names.
+      fileText = fileText.replace(/HIDE-DIALOG/g, 'HD');
+      fileText = fileText.replace(/SHOW-DIALOG/g, 'SD');
+      fileText = fileText.replace(/HIDE-OVERLAY/g, 'HO');
+      fileText = fileText.replace(/SHOW-OVERLAY/g, 'SO');
+
+      // Minify last CSS semi-colon.
       fileText = fileText.replace(/;}/g, '}');
       fileText = fileText.replace(/;\s+}/g, '}');
 
-      // Trim exclamation point.
+      // Minify exclamation point.
       fileText = fileText.replace(/\s+!/g, '!');
       fileText = fileText.replace(/!\s+/g, '!');
 
-      // Trim pound sign.
+      // Minify pound sign.
       fileText = fileText.replace(/\s+#/g, '#');
       fileText = fileText.replace(/#\s+/g, '#');
 
-      // Trim multi-line strings.
+      // Minify multi-line strings.
       fileText = fileText.replace(/`\s+/g, '`');
       fileText = fileText.replace(/\s+`/g, '`');
 
-      // Trim "less than" brackets.
+      // Minify "less than" brackets.
       fileText = fileText.replace(/<\s+/g, '<');
       fileText = fileText.replace(/\s+</g, '<');
 
-      // Trim "greater than" brackets.
+      // Minify "greater than" brackets.
       fileText = fileText.replace(/>\s+/g, '>');
       fileText = fileText.replace(/\s+>/g, '>');
 
-      // Trim commas.
+      // Minify commas.
       fileText = fileText.replace(/,\s+/g, ',');
       fileText = fileText.replace(/\s+,/g, ',');
 
-      // Trim colons.
+      // Minify colons.
       fileText = fileText.replace(/:\s+/g, ':');
       fileText = fileText.replace(/\s+:/g, ':');
 
-      // Trim semicolons.
+      // Minify semicolons.
       fileText = fileText.replace(/;\s+/g, ';');
       fileText = fileText.replace(/\s+;/g, ';');
 
-      // Trim "open" curly brackets.
+      // Minify "open" curly brackets.
       fileText = fileText.replace(/\s+{/g, '{');
       fileText = fileText.replace(/{\s+/g, '{');
 
-      // Trim "close" curly brackets.
+      // Minify "close" curly brackets.
       fileText = fileText.replace(/\s+}/g, '}');
       fileText = fileText.replace(/}\s+/g, '}');
 
-      // Trim "open" parenthesis.
+      // Minify "open" parenthesis.
       fileText = fileText.replace(/\s+\(/g, '(');
       fileText = fileText.replace(/\(\s+/g, '(');
 
-      // Trim "close" parenthesis.
+      // Minify "close" parenthesis.
       fileText = fileText.replace(/\s+\)/g, ')');
       fileText = fileText.replace(/\)\s+/g, ')');
 

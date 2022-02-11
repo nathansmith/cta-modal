@@ -165,14 +165,14 @@ cta-modal {
   --cta-modal-overlay-z-index: 100000;
 
   /* Modal window. */
-  --cta-modal-background-color: #fff;
-  --cta-modal-border-radius: 5px;
-  --cta-modal-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
-  --cta-modal-padding-top: 20px;
-  --cta-modal-padding-left: 20px;
-  --cta-modal-padding-right: 20px;
-  --cta-modal-padding-bottom: 20px;
-  --cta-modal-width: 500px;
+  --cta-modal-dialog-background-color: #fff;
+  --cta-modal-dialog-border-radius: 5px;
+  --cta-modal-dialog-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+  --cta-modal-dialog-padding-top: 20px;
+  --cta-modal-dialog-padding-left: 20px;
+  --cta-modal-dialog-padding-right: 20px;
+  --cta-modal-dialog-padding-bottom: 20px;
+  --cta-modal-dialog-width: 500px;
 
   /* Modal close button. */
   --cta-modal-close-color: #fff;
@@ -225,7 +225,7 @@ If you want to provide a different set of style overrides for users who prefer [
 ```css
 @media (prefers-color-scheme: dark) {
   cta-modal {
-    --cta-modal-background-color: #333;
+    --cta-modal-dialog-background-color: #333;
 
     /* Dark mode overrides here. */
   }
@@ -236,13 +236,13 @@ Or, you could scope the selector to a specific extra attribute of your choosing.
 
 ```css
 cta-modal {
-  --cta-modal-background-color: #fff;
+  --cta-modal-dialog-background-color: #fff;
 
   /* Default overrides here. */
 }
 
 cta-modal[theme='dark'] {
-  --cta-modal-background-color: #333;
+  --cta-modal-dialog-background-color: #333;
 
   /* Dark mode overrides here. */
 }

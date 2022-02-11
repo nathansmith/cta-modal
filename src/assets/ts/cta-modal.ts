@@ -16,8 +16,8 @@ if ('customElements' in window) {
   const CLICK = 'click';
   const CLOSE = 'close';
   const CLOSE_TITLE = 'Close';
-  const DATA_IS_HIDE = 'data-cta-modal-is-hide';
-  const DATA_IS_SHOW = 'data-cta-modal-is-show';
+  const DATA_HIDE = 'data-cta-modal-hide';
+  const DATA_SHOW = 'data-cta-modal-show';
   const EMPTY_STRING = '';
   const ENTER = 'enter';
   const ESCAPE = 'escape';
@@ -64,7 +64,7 @@ if ('customElements' in window) {
         }
       }
 
-      @keyframes ANIMATION-SHOW-cta-modal-overlay {
+      @keyframes SHOW-OVERLAY {
         0% {
           opacity: 0;
         }
@@ -74,7 +74,7 @@ if ('customElements' in window) {
         }
       }
 
-      @keyframes ANIMATION-SHOW-cta-modal {
+      @keyframes SHOW-DIALOG {
         0% {
           transform: scale(0.95);
         }
@@ -84,7 +84,7 @@ if ('customElements' in window) {
         }
       }
 
-      @keyframes ANIMATION-HIDE-cta-modal-overlay {
+      @keyframes HIDE-OVERLAY {
         0% {
           opacity: 1;
         }
@@ -94,7 +94,7 @@ if ('customElements' in window) {
         }
       }
 
-      @keyframes ANIMATION-HIDE-cta-modal {
+      @keyframes HIDE-DIALOG {
         0% {
           transform: scale(1);
         }
@@ -144,41 +144,41 @@ if ('customElements' in window) {
         min-height: 100%;
       }
 
-      .cta-modal {
-        background-color: var(--cta-modal-background-color, #fff);
-        border-radius: var(--cta-modal-border-radius, 5px);
-        box-shadow: var(--cta-modal-box-shadow, 0 2px 5px 0 rgba(0, 0, 0, 0.5));
+      .cta-modal__dialog {
+        background-color: var(--cta-modal-dialog-background-color, #fff);
+        border-radius: var(--cta-modal-dialog-border-radius, 5px);
+        box-shadow: var(--cta-modal-dialog-box-shadow, 0 2px 5px 0 rgba(0, 0, 0, 0.5));
 
-        padding-top: var(--cta-modal-padding-top, 20px);
-        padding-left: var(--cta-modal-padding-left, 20px);
-        padding-right: var(--cta-modal-padding-right, 20px);
-        padding-bottom: var(--cta-modal-padding-bottom, 20px);
+        padding-top: var(--cta-modal-dialog-padding-top, 20px);
+        padding-left: var(--cta-modal-dialog-padding-left, 20px);
+        padding-right: var(--cta-modal-dialog-padding-right, 20px);
+        padding-bottom: var(--cta-modal-dialog-padding-bottom, 20px);
 
-        width: var(--cta-modal-width, 500px);
+        width: var(--cta-modal-dialog-width, 500px);
         max-width: 100%;
 
         position: relative;
       }
 
-      [${DATA_IS_SHOW}='true'] .cta-modal__overlay {
+      [${DATA_SHOW}='true'] .cta-modal__overlay {
         animation-duration: ${ANIMATION_DURATION}ms;
-        animation-name: ANIMATION-SHOW-cta-modal-overlay;
+        animation-name: SHOW-OVERLAY;
       }
 
-      [${DATA_IS_SHOW}='true'] .cta-modal {
+      [${DATA_SHOW}='true'] .cta-modal__dialog {
         animation-duration: ${ANIMATION_DURATION}ms;
-        animation-name: ANIMATION-SHOW-cta-modal;
+        animation-name: SHOW-DIALOG;
       }
 
-      [${DATA_IS_HIDE}='true'] .cta-modal__overlay {
+      [${DATA_HIDE}='true'] .cta-modal__overlay {
         animation-duration: ${ANIMATION_DURATION}ms;
-        animation-name: ANIMATION-HIDE-cta-modal-overlay;
+        animation-name: HIDE-OVERLAY;
         opacity: 0;
       }
 
-      [${DATA_IS_HIDE}='true'] .cta-modal {
+      [${DATA_HIDE}='true'] .cta-modal__dialog {
         animation-duration: ${ANIMATION_DURATION}ms;
-        animation-name: ANIMATION-HIDE-cta-modal;
+        animation-name: HIDE-DIALOG;
         transform: scale(0.95);
       }
 
@@ -255,7 +255,7 @@ if ('customElements' in window) {
       <div class="cta-modal__overlay">
         <div
           aria-modal="true"
-          class="cta-modal"
+          class="cta-modal__dialog"
           role="dialog"
           tabindex="-1"
         >
@@ -334,7 +334,7 @@ if ('customElements' in window) {
       // Get shadow elements.
       this._buttonClose = this._shadow.querySelector('.cta-modal__close') as HTMLElement;
       this._focusTrapList = this._shadow.querySelectorAll('.cta-modal__focus-trap');
-      this._modal = this._shadow.querySelector('.cta-modal') as HTMLElement;
+      this._modal = this._shadow.querySelector('.cta-modal__dialog') as HTMLElement;
       this._modalOverlay = this._shadow.querySelector('.cta-modal__overlay') as HTMLElement;
       this._modalScroll = this._shadow.querySelector('.cta-modal__scroll') as HTMLElement;
 
@@ -673,7 +673,7 @@ if ('customElements' in window) {
         // Set flag.
         if (isMotionOkay) {
           this._isHideShow = true;
-          this._modalScroll.setAttribute(DATA_IS_SHOW, TRUE);
+          this._modalScroll.setAttribute(DATA_SHOW, TRUE);
         }
 
         // Fire callback?
@@ -688,7 +688,7 @@ if ('customElements' in window) {
 
           // Remove flag.
           this._isHideShow = false;
-          this._modalScroll.removeAttribute(DATA_IS_SHOW);
+          this._modalScroll.removeAttribute(DATA_SHOW);
 
           // Delay.
         }, delay);
@@ -711,7 +711,7 @@ if ('customElements' in window) {
         // Set flag.
         if (isMotionOkay) {
           this._isHideShow = true;
-          this._modalScroll.setAttribute(DATA_IS_HIDE, TRUE);
+          this._modalScroll.setAttribute(DATA_HIDE, TRUE);
         }
 
         // Await CSS animation.
@@ -721,7 +721,7 @@ if ('customElements' in window) {
 
           // Remove flag.
           this._isHideShow = false;
-          this._modalScroll.removeAttribute(DATA_IS_HIDE);
+          this._modalScroll.removeAttribute(DATA_HIDE);
 
           // Hide modal.
           this._modalScroll.style.display = NONE;
