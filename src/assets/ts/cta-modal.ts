@@ -714,6 +714,11 @@ if ('customElements' in window) {
           this._modalScroll.setAttribute(DATA_HIDE, TRUE);
         }
 
+        // Fire callback?
+        if (typeof f === 'function') {
+          f();
+        }
+
         // Await CSS animation.
         this._timerForHide = window.setTimeout(() => {
           // Clear.
@@ -731,11 +736,6 @@ if ('customElements' in window) {
 
           // Remove placeholder.
           document.documentElement.style.paddingRight = EMPTY_STRING;
-
-          // Fire callback?
-          if (typeof f === 'function') {
-            f();
-          }
 
           // Delay.
         }, delay);
