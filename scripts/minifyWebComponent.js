@@ -5,6 +5,13 @@
 const { join } = require('path');
 const { readdirSync, readFileSync, writeFileSync } = require('fs');
 
+// ==========
+// Constants.
+// ==========
+
+const EMPTY_STRING = '';
+const SPACE = ' ';
+
 // =============================================
 // Helper: minify CSS & HTML in a Web Component.
 // =============================================
@@ -28,13 +35,13 @@ const minifyWebComponent = (pathToAssets) => {
       let fileText = readFileSync(pathToFile, options);
 
       // Raw globals, without `window` prefix.
-      fileText = fileText.replace(/window\./g, '');
+      fileText = fileText.replace(/window\./g, EMPTY_STRING);
 
       // Minify whitespace.
       fileText = fileText.trim();
-      fileText = fileText.replace(/\\t/g, '');
-      fileText = fileText.replace(/\\n/g, ' ');
-      fileText = fileText.replace(/\s+/g, ' ');
+      fileText = fileText.replace(/\\t/g, EMPTY_STRING);
+      fileText = fileText.replace(/\\n/g, SPACE);
+      fileText = fileText.replace(/\s+/g, SPACE);
 
       // Minify CSS animation names.
       fileText = fileText.replace(/HIDE-DIALOG/g, 'a');
@@ -64,10 +71,6 @@ const minifyWebComponent = (pathToAssets) => {
       fileText = fileText.replace(/='hidden'/g, '=hidden');
       fileText = fileText.replace(/='modal'/g, '=modal');
       fileText = fileText.replace(/='true'/g, '=true');
-
-      // Minify last CSS semi-colon.
-      fileText = fileText.replace(/;}/g, '}');
-      fileText = fileText.replace(/;\s+}/g, '}');
 
       // Minify exclamation point.
       fileText = fileText.replace(/\s+!/g, '!');
@@ -116,6 +119,9 @@ const minifyWebComponent = (pathToAssets) => {
       // Minify "close" parenthesis.
       fileText = fileText.replace(/\s+\)/g, ')');
       fileText = fileText.replace(/\)\s+/g, ')');
+
+      // Minify last semicolon per block.
+      fileText = fileText.replace(/;}/g, '}');
 
       // Write new file.
       writeFileSync(pathToFile, fileText, options);
