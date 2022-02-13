@@ -340,7 +340,7 @@ if ('customElements' in window) {
       this._modalOverlay = this._shadow.querySelector('.cta-modal__overlay') as HTMLElement;
       this._modalScroll = this._shadow.querySelector('.cta-modal__scroll') as HTMLElement;
 
-      // Early exit.
+      // Missing slot?
       if (!this._slotForModal) {
         window.console.error('Required [slot="modal"] not found inside cta-modal.');
       }

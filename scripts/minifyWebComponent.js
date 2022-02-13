@@ -32,99 +32,99 @@ const minifyWebComponent = (pathToAssets) => {
       const pathToFile = join(pathToAssets, file);
 
       // Get file text.
-      let fileText = readFileSync(pathToFile, options);
+      let t = readFileSync(pathToFile, options);
 
-      // Raw globals, without `window` prefix.
-      fileText = fileText.replace(/window\./g, EMPTY_STRING);
+      // Globals without `window` prefix.
+      t = t.replace(/window\./g, EMPTY_STRING);
 
-      // Minify whitespace.
-      fileText = fileText.trim();
-      fileText = fileText.replace(/\\t/g, EMPTY_STRING);
-      fileText = fileText.replace(/\\n/g, SPACE);
-      fileText = fileText.replace(/\s+/g, SPACE);
+      // Whitespace.
+      t = t.trim();
+      t = t.replace(/\\t/g, EMPTY_STRING);
+      t = t.replace(/\\n/g, SPACE);
+      t = t.replace(/\s+/g, SPACE);
 
-      // Minify CSS animation names.
-      fileText = fileText.replace(/HIDE-DIALOG/g, 'a');
-      fileText = fileText.replace(/SHOW-DIALOG/g, 'b');
-      fileText = fileText.replace(/HIDE-OVERLAY/g, 'c');
-      fileText = fileText.replace(/SHOW-OVERLAY/g, 'd');
+      // CSS animation names.
+      t = t.replace(/HIDE-DIALOG/g, 'a');
+      t = t.replace(/SHOW-DIALOG/g, 'b');
+      t = t.replace(/HIDE-OVERLAY/g, 'c');
+      t = t.replace(/SHOW-OVERLAY/g, 'd');
 
-      // Minify CSS class names.
-      fileText = fileText.replace(/cta-modal__close/g, 'c');
-      fileText = fileText.replace(/cta-modal__dialog/g, 'd');
-      fileText = fileText.replace(/cta-modal__focus-trap/g, 'f');
-      fileText = fileText.replace(/cta-modal__overlay/g, 'o');
-      fileText = fileText.replace(/cta-modal__scroll/g, 's');
+      // CSS class names.
+      t = t.replace(/cta-modal__close/g, 'c');
+      t = t.replace(/cta-modal__dialog/g, 'd');
+      t = t.replace(/cta-modal__focus-trap/g, 'f');
+      t = t.replace(/cta-modal__overlay/g, 'o');
+      t = t.replace(/cta-modal__scroll/g, 's');
 
-      // Minify attributes.
-      fileText = fileText.replace(/='-1'/g, '=-1');
-      fileText = fileText.replace(/='0'/g, '=0');
-      fileText = fileText.replace(/='c'/g, '=c');
-      fileText = fileText.replace(/='d'/g, '=d');
-      fileText = fileText.replace(/='f'/g, '=f');
-      fileText = fileText.replace(/='o'/g, '=o');
-      fileText = fileText.replace(/='s'/g, '=s');
-      fileText = fileText.replace(/='button'/g, '=button');
-      fileText = fileText.replace(/='dialog'/g, '=dialog');
-      fileText = fileText.replace(/='display:none'/g, '=display:none');
-      fileText = fileText.replace(/='false'/g, '=false');
-      fileText = fileText.replace(/='hidden'/g, '=hidden');
-      fileText = fileText.replace(/='modal'/g, '=modal');
-      fileText = fileText.replace(/='true'/g, '=true');
+      // Attributes.
+      t = t.replace(/='-1'/g, '=-1');
+      t = t.replace(/='0'/g, '=0');
+      t = t.replace(/='c'/g, '=c');
+      t = t.replace(/='d'/g, '=d');
+      t = t.replace(/='f'/g, '=f');
+      t = t.replace(/='o'/g, '=o');
+      t = t.replace(/='s'/g, '=s');
+      t = t.replace(/='button'/g, '=button');
+      t = t.replace(/='dialog'/g, '=dialog');
+      t = t.replace(/='display:none'/g, '=display:none');
+      t = t.replace(/='false'/g, '=false');
+      t = t.replace(/='hidden'/g, '=hidden');
+      t = t.replace(/='modal'/g, '=modal');
+      t = t.replace(/='true'/g, '=true');
 
-      // Minify exclamation point.
-      fileText = fileText.replace(/\s+!/g, '!');
-      fileText = fileText.replace(/!\s+/g, '!');
+      // Exclamation point.
+      t = t.replace(/\s+!/g, '!');
+      t = t.replace(/!\s+/g, '!');
 
-      // Minify pound sign.
-      fileText = fileText.replace(/\s+#/g, '#');
-      fileText = fileText.replace(/#\s+/g, '#');
+      // Pound sign.
+      t = t.replace(/\s+#/g, '#');
+      t = t.replace(/#\s+/g, '#');
 
-      // Minify multi-line strings.
-      fileText = fileText.replace(/`\s+/g, '`');
-      fileText = fileText.replace(/\s+`/g, '`');
+      // Multi-line strings.
+      t = t.replace(/`\s+/g, '`');
+      t = t.replace(/\s+`/g, '`');
 
-      // Minify "less than" brackets.
-      fileText = fileText.replace(/<\s+/g, '<');
-      fileText = fileText.replace(/\s+</g, '<');
+      // "Less than" brackets.
+      t = t.replace(/<\s+/g, '<');
+      t = t.replace(/\s+</g, '<');
 
-      // Minify "greater than" brackets.
-      fileText = fileText.replace(/>\s+/g, '>');
-      fileText = fileText.replace(/\s+>/g, '>');
+      // "Greater than" brackets.
+      t = t.replace(/>\s+/g, '>');
+      t = t.replace(/\s+>/g, '>');
 
-      // Minify commas.
-      fileText = fileText.replace(/,\s+/g, ',');
-      fileText = fileText.replace(/\s+,/g, ',');
+      // Commas.
+      t = t.replace(/,\s+/g, ',');
+      t = t.replace(/\s+,/g, ',');
 
-      // Minify colons.
-      fileText = fileText.replace(/:\s+/g, ':');
-      fileText = fileText.replace(/\s+:/g, ':');
+      // Colons.
+      t = t.replace(/:\s+/g, ':');
+      t = t.replace(/\s+:/g, ':');
 
-      // Minify semicolons.
-      fileText = fileText.replace(/;\s+/g, ';');
-      fileText = fileText.replace(/\s+;/g, ';');
+      // Semicolons.
+      t = t.replace(/;\s+/g, ';');
+      t = t.replace(/\s+;/g, ';');
 
-      // Minify "open" curly brackets.
-      fileText = fileText.replace(/\s+{/g, '{');
-      fileText = fileText.replace(/{\s+/g, '{');
+      // "Open" curly brackets.
+      t = t.replace(/\s+{/g, '{');
+      t = t.replace(/{\s+/g, '{');
 
-      // Minify "close" curly brackets.
-      fileText = fileText.replace(/\s+}/g, '}');
-      fileText = fileText.replace(/}\s+/g, '}');
+      // "Close" curly brackets.
+      t = t.replace(/\s+}/g, '}');
+      t = t.replace(/}\s+/g, '}');
 
-      // Minify "open" parenthesis.
-      fileText = fileText.replace(/\s+\(/g, '(');
-      fileText = fileText.replace(/\(\s+/g, '(');
+      // "Open" parenthesis.
+      t = t.replace(/\s+\(/g, '(');
+      t = t.replace(/\(\s+/g, '(');
 
-      // Minify "close" parenthesis.
-      fileText = fileText.replace(/\s+\)/g, ')');
-      fileText = fileText.replace(/\)\s+/g, ')');
+      // "Close" parenthesis.
+      t = t.replace(/\s+\)/g, ')');
+      t = t.replace(/\)\s+/g, ')');
 
-      // Minify last semicolon per block.
-      fileText = fileText.replace(/;}/g, '}');
+      // Last semicolon per block.
+      t = t.replace(/;}/g, '}');
 
-      // Write new file.
-      writeFileSync(pathToFile, fileText, options);
+      // Overwrite file.
+      writeFileSync(pathToFile, t, options);
     }
   });
 };
