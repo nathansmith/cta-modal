@@ -5,8 +5,5 @@ export default {
   },
   build: {
     outDir: 'html',
-    rollupOptions: {
-      input: 'index.html',
-    },
   },
 };
