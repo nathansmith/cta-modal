@@ -1,3 +1,16 @@
 {
-  "cSpell.ignoreWords": ["esbuild", "labelledby", "tabindex", "vite"]
+  "cSpell.ignoreWords": [
+    "esbuild",
+    "iframes",
+    "labelledby",
+    "lcov",
+    "nathansmith",
+    "outfile",
+    "postbuild",
+    "prebuild",
+    "tabindex",
+    "vite",
+    "webcomponent",
+    "webcomponents"
+  ]
 }
