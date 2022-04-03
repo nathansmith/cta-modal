@@ -111,8 +111,8 @@ describe('index.ts', () => {
     // Add `scrollTo` shim.
     instance._modalScroll.scrollTo = jest.fn();
 
-    // Set heading.
-    instance._setHeadingId();
+    // Set modal label.
+    instance._setModalLabel();
 
     // Re-connect.
     instance.connectedCallback();
@@ -188,8 +188,8 @@ describe('index.ts', () => {
   // Test [aria-labelledby="…"].
   // ===========================
 
-  test('handles [aria-labelledby="…"]', () => {
-    expect(instance._modal.getAttribute('aria-labelledby')).toBe(instance._heading?.id);
+  test('handles [aria-label="…"]', () => {
+    expect(instance._modal.getAttribute('aria-label')).toBe(instance._heading?.textContent);
   });
 
   // ======================================

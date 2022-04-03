@@ -11,7 +11,6 @@ if ('customElements' in window) {
   const ANIMATED = 'animated';
   const ANIMATION_DURATION = 250;
   const ARIA_LABEL = 'aria-label';
-  const ARIA_LABELLEDBY = 'aria-labelledby';
   const BLOCK = 'block';
   const CLICK = 'click';
   const CLOSE = 'close';
@@ -26,9 +25,11 @@ if ('customElements' in window) {
   const FUNCTION = 'function';
   const HIDDEN = 'hidden';
   const KEYDOWN = 'keydown';
-  const PREFERS_REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
+  const MODAL_LABEL_FALLBACK = 'modal';
   const NONE = 'none';
+  const PREFERS_REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
   const SPACE = ' ';
+  const SPACE_REGEX = /\s+/g;
   const STATIC = 'static';
   const TAB = 'tab';
   const TEMPLATE = 'template';
@@ -280,7 +281,7 @@ if ('customElements' in window) {
   `;
 
   // Get markup.
-  const markup = [STYLE, MODAL].join(EMPTY_STRING).trim().replace(/\s+/g, SPACE);
+  const markup = [STYLE, MODAL].join(EMPTY_STRING).trim().replace(SPACE_REGEX, SPACE);
 
   // Get template.
   const template = document.createElement(TEMPLATE);
@@ -356,8 +357,8 @@ if ('customElements' in window) {
       // Set close title.
       this._setCloseTitle();
 
-      // Set heading ID.
-      this._setHeadingId();
+      // Set modal label.
+      this._setModalLabel();
 
       // Set static flag.
       this._setStaticFlag();
@@ -536,22 +537,23 @@ if ('customElements' in window) {
       this._buttonClose.setAttribute(ARIA_LABEL, title);
     }
 
-    // =======================
-    // Helper: add heading ID.
-    // =======================
+    // ========================
+    // Helper: add modal label.
+    // ========================
 
-    _setHeadingId() {
-      // Add a11y heading.
+    _setModalLabel() {
+      // Set later.
+      let label = MODAL_LABEL_FALLBACK;
+
+      // Heading exists?
       if (this._heading) {
-        // Get ID.
-        const id = this._heading.id || Math.random();
-
-        // @ts-expect-error number
-        this._heading.id = id;
-
-        // @ts-expect-error number
-        this._modal.setAttribute(ARIA_LABELLEDBY, id);
+        // Get text.
+        label = this._heading.textContent || label;
+        label = label.trim().replace(SPACE_REGEX, SPACE);
       }
+
+      // Set label.
+      this._modal.setAttribute(ARIA_LABEL, label);
     }
 
     // ========================
