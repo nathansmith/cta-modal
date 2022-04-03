@@ -35,12 +35,17 @@ if ('customElements' in window) {
   const TRUE = 'true';
 
   const FOCUSABLE_SELECTORS = [
-    'a:not([disabled])',
+    '[contenteditable]',
+    '[tabindex="0"]:not([disabled])',
+    'a[href]',
+    'audio[controls]',
     'button:not([disabled])',
+    'iframe',
     "input:not([disabled]):not([type='hidden'])",
     'select:not([disabled])',
+    'summary',
     'textarea:not([disabled])',
-    '[tabindex="0"]:not([disabled])',
+    'video[controls]',
   ].join(',');
 
   // ======
