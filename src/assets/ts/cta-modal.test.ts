@@ -184,9 +184,9 @@ describe('index.ts', () => {
     jest.runAllTimers();
   });
 
-  // ===========================
-  // Test [aria-labelledby="…"].
-  // ===========================
+  // ======================
+  // Test [aria-label="…"].
+  // ======================
 
   test('handles [aria-label="…"]', () => {
     expect(instance._modal.getAttribute('aria-label')).toBe(instance._heading?.textContent);
