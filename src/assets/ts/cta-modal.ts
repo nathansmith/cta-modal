@@ -524,9 +524,9 @@ if ('customElements' in window) {
       this._isAnimated = this.getAttribute(ANIMATED) !== FALSE;
     }
 
-    // =======================
-    // Helper: add close text.
-    // =======================
+    // ========================
+    // Helper: add close title.
+    // ========================
 
     _setCloseTitle() {
       // Get title.
