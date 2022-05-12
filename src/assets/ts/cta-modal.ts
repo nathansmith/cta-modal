@@ -327,7 +327,7 @@ if ('customElements' in window) {
       this._shadow = this.attachShadow({ mode: 'closed' });
 
       // Add template.
-      this._shadow.appendChild(
+      this._shadow.append(
         // Clone node.
         template.content.cloneNode(true)
       );
