@@ -10,6 +10,8 @@ CTA Modal is a self-contained call to action [ARIA modal](https://www.w3.org/TR/
 
 - You can view the source code on [GitHub](https://github.com/nathansmith/cta-modal).
 
+- This [article](https://www.smashingmagazine.com/2022/04/cta-modal-build-web-component/) explains how it was built.
+
 ---
 
 ## How to use: install

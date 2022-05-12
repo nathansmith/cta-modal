@@ -52,13 +52,6 @@
     <ul>
       <li>
         <p>
-          To see it in action, check out the
-          <a href="https://host.sonspring.com/cta-modal/">demo page</a>.
-        </p>
-      </li>
-
-      <li>
-        <p>
           All the TypeScript code is well tested, with 💯
           <a href="https://host.sonspring.com/cta-modal/coverage/cta-modal.ts.html">coverage</a>.
         </p>
@@ -76,6 +69,16 @@
         <p>
           You can view the source code on
           <a href="https://github.com/nathansmith/cta-modal">GitHub</a>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          This
+          <a href="https://www.smashingmagazine.com/2022/04/cta-modal-build-web-component/"
+            >article</a
+          >
+          explains how it was built.
         </p>
       </li>
     </ul>
@@ -207,6 +210,11 @@
     </p>
 
     <p>Rather, it changes the <code>active="true"</code> attribute of its modal directly.</p>
+
+    <p>
+      That is handled by the <code>toggleModal</code> function in the
+      <a href="https://github.com/nathansmith/cta-modal/blob/main/index.html">index.html</a> file.
+    </p>
 
     <p>
       <button onclick="toggleModal('ID_FOR_CTA_MODAL')" type="button">External trigger</button>
