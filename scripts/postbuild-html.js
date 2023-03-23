@@ -40,7 +40,7 @@ execSync(CLI_COMMAND);
 // ============================
 
 // Get directory.
-const pathToAssets = join(__dirname, '../html/assets');
+const pathToFolder = join(__dirname, '../html/assets');
 
 // Minify JS.
-minifyWebComponent(pathToAssets);
+minifyWebComponent(pathToFolder);

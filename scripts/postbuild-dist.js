@@ -34,7 +34,7 @@ execSync(CLI_COMMAND);
 // ============================
 
 // Get directory.
-const pathToAssets = join(__dirname, '../dist');
+const pathToFolder = join(__dirname, '../dist');
 
 // Minify JS.
-minifyWebComponent(pathToAssets);
+minifyWebComponent(pathToFolder);

@@ -16,9 +16,9 @@ const SPACE = ' ';
 // Helper: minify CSS & HTML in a Web Component.
 // =============================================
 
-const minifyWebComponent = (pathToAssets) => {
+const minifyWebComponent = (pathToFolder) => {
   // Get files.
-  const files = readdirSync(pathToAssets);
+  const files = readdirSync(pathToFolder);
 
   // Loop through.
   files.forEach((file) => {
@@ -27,9 +27,9 @@ const minifyWebComponent = (pathToAssets) => {
     const options = { encoding };
 
     // JS file?
-    if (file.match(/.js$/)) {
+    if (file.match(/\.js$/)) {
       // Get file path.
-      const pathToFile = join(pathToAssets, file);
+      const pathToFile = join(pathToFolder, file);
 
       // Get file text.
       let t = readFileSync(pathToFile, options);
